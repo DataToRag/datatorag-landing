@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx shadcn@latest add:*)",
       "Bash(npm install:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(pnpm exec:*)",
+      "Bash(pnpm run:*)"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"

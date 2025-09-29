@@ -35,7 +35,7 @@ export function MarketingNav() {
           className={cn(
             "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
+              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5"
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
@@ -45,6 +45,7 @@ export function MarketingNav() {
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/datatorag-logo.svg"
                   alt="DatatoRAG"
@@ -94,19 +95,12 @@ export function MarketingNav() {
                 </ul>
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                >
+                <Button asChild variant="outline" size="sm">
                   <Link href="/login">
                     <span>Login</span>
                   </Link>
                 </Button>
-                <Button
-                  asChild
-                  size="sm"
-                >
+                <Button asChild size="sm">
                   <Link href="/dashboard">
                     <span>Dashboard</span>
                   </Link>

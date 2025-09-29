@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { MarketingNav } from "@/components/layout/marketing-nav";
@@ -19,7 +19,7 @@ const transitionVariants = {
       filter: "blur(0px)",
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         bounce: 0.3,
         duration: 1.5,
       },
@@ -73,6 +73,7 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
               }}
               className="absolute inset-0 -z-20"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/night-background.jpg"
                 alt="background"
@@ -115,7 +116,8 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
                     Convert documents, databases, and knowledge bases into
                     powerful RAG systems that understand context and deliver
-                    precise answers. Build intelligent AI applications effortlessly.
+                    precise answers. Build intelligent AI applications
+                    effortlessly.
                   </p>
                 </AnimatedGroup>
 
@@ -154,10 +156,15 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     variant="ghost"
                     className="h-10.5 rounded-xl px-5"
                   >
-                    <a href="#demo-iframe" onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById('demo-iframe')?.scrollIntoView({ behavior: 'smooth' });
-                    }}>
+                    <a
+                      href="#demo-iframe"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document
+                          .getElementById("demo-iframe")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    >
                       <span className="text-nowrap">See Live Demo</span>
                     </a>
                   </Button>
@@ -185,7 +192,10 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                   />
                 )}
-                <div id="demo-iframe" className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-2 shadow-lg shadow-zinc-950/15 ring-1">
+                <div
+                  id="demo-iframe"
+                  className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-2 shadow-lg shadow-zinc-950/15 ring-1"
+                >
                   <iframe
                     src="/demo-placeholder"
                     className="w-full h-[600px] md:h-[700px] lg:h-[800px] rounded-xl border-0"

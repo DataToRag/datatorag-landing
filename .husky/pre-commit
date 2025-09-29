@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged for code formatting and linting
+pnpm exec lint-staged
+
+# Run TypeScript type checking
+echo "Running TypeScript type check..."
+pnpm exec tsc --noEmit
+
+# Run Next.js build to catch any build errors
+echo "Running Next.js build check..."
+pnpm run build
