@@ -1,48 +1,48 @@
 import {
-  BrainCircuit,
-  Code2,
-  Database,
-  Palette,
-  BarChart3,
-  FileText,
+  MessageSquare,
+  Users,
+  Shield,
+  Link2,
+  TrendingDown,
+  Zap,
 } from "lucide-react";
 
 const features = [
   {
-    icon: BrainCircuit,
-    title: "Advanced RAG Processing",
+    icon: MessageSquare,
+    title: "Self-Service HR Knowledge Base",
     description:
-      "Intelligent document parsing and vector indexing that understands context, relationships, and semantic meaning.",
+      "Employees get instant answers to benefits, policy, and procedure questions without waiting for HR responses.",
   },
   {
-    icon: Code2,
-    title: "API-First Integration",
+    icon: Users,
+    title: "Consistent Onboarding Experience",
     description:
-      "RESTful APIs and SDKs for seamless integration into any application or workflow. Deploy in minutes.",
+      "Ensure every new hire gets the same high-quality onboarding, reducing 90-day attrition by up to 50%.",
   },
   {
-    icon: Database,
-    title: "Multi-Format Support",
+    icon: Shield,
+    title: "Multi-State Compliance Management",
     description:
-      "Process PDFs, documents, databases, websites, and structured data. Universal data ingestion capabilities.",
+      "Stay compliant across all locations with automated policy updates for pay transparency, AI regulations, and local laws.",
   },
   {
-    icon: Palette,
-    title: "Custom Embeddings",
+    icon: Link2,
+    title: "Seamless HRIS Integration",
     description:
-      "Fine-tune embeddings for your domain. Support for custom models and specialized vector spaces.",
+      "Connects directly with Salesforce, Workday, SharePoint, and Slack. No IT team required for setup.",
   },
   {
-    icon: BarChart3,
-    title: "Performance Analytics",
+    icon: TrendingDown,
+    title: "67% Reduction in HR Tickets",
     description:
-      "Real-time monitoring of query performance, accuracy metrics, and system optimization insights.",
+      "Free your HR team from repetitive questions. Track ticket volume reduction and employee satisfaction metrics.",
   },
   {
-    icon: FileText,
-    title: "Intelligent Chunking",
+    icon: Zap,
+    title: "No AI Expertise Needed",
     description:
-      "Smart document segmentation that preserves context and optimizes retrieval accuracy for better results.",
+      "Pre-built RAG infrastructure means you can deploy in days, not months. No ML engineers or data scientists required.",
   },
 ];
 
@@ -52,10 +52,11 @@ export function FeaturesSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Everything You Need for Production-Ready RAG
+            Built for HR Teams, Not Engineers
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Enterprise-grade features that make building intelligent RAG systems fast, reliable, and scalable.
+            Transform scattered HR information into a unified knowledge base
+            that saves 1.8 hours per employee daily.
           </p>
         </div>
 

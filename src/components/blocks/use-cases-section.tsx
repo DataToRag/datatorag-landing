@@ -1,48 +1,62 @@
-import {
-  Headphones,
-  BookOpen,
-  TrendingUp,
-  Users2,
-  ShoppingBag,
-} from "lucide-react";
+import { UserPlus, FileText, Shield, Globe, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const useCases = [
   {
-    icon: Headphones,
-    title: "Customer Support",
+    icon: UserPlus,
+    title: "Employee Onboarding",
     description:
-      "Build intelligent helpdesks that understand context from tickets, knowledge bases, and product documentation.",
-    features: ["Context-aware responses", "Multi-source knowledge", "Escalation handling"],
+      "Reduce 90-day attrition by 50% with consistent, intelligent onboarding that adapts to each role and location.",
+    features: [
+      "Day-one readiness",
+      "Role-specific training paths",
+      "Manager handoff automation",
+    ],
   },
   {
-    icon: BookOpen,
-    title: "Document Intelligence",
+    icon: FileText,
+    title: "Policy & Handbook Management",
     description:
-      "Transform legal documents, research papers, and technical manuals into queryable knowledge systems.",
-    features: ["Legal document analysis", "Research synthesis", "Technical Q&A"],
+      "Turn your employee handbook and policies into an AI assistant that provides instant, accurate answers.",
+    features: [
+      "Natural language queries",
+      "Policy version control",
+      "Compliance tracking",
+    ],
   },
   {
-    icon: TrendingUp,
-    title: "Business Intelligence",
+    icon: Shield,
+    title: "Compliance & Regulations",
     description:
-      "Query financial reports, market data, and business metrics using natural language for instant insights.",
-    features: ["Financial analysis", "Market research", "KPI monitoring"],
+      "Navigate pay transparency, AI regulations, and multi-state requirements with automated compliance updates.",
+    features: [
+      "State-specific policies",
+      "Regulatory alerts",
+      "Audit-ready documentation",
+    ],
   },
   {
-    icon: Users2,
-    title: "Knowledge Management",
+    icon: Globe,
+    title: "Remote Workforce Support",
     description:
-      "Create internal wikis and knowledge bases that employees can query naturally for company information.",
-    features: ["HR policies", "Process documentation", "Training materials"],
+      "Eliminate the 63% training gap for remote employees with 24/7 access to personalized HR support.",
+    features: [
+      "Time-zone aware assistance",
+      "Remote-specific resources",
+      "Cultural adaptation",
+    ],
   },
   {
-    icon: ShoppingBag,
-    title: "E-commerce Intelligence",
+    icon: Clock,
+    title: "Benefits & Time-off Management",
     description:
-      "Power product recommendations and customer queries using comprehensive product catalogs and user behavior.",
-    features: ["Product discovery", "Inventory insights", "Customer analytics"],
+      "Answer complex benefits questions instantly. Handle PTO requests, enrollment, and eligibility queries automatically.",
+    features: [
+      "Benefits calculator",
+      "PTO balance tracking",
+      "Open enrollment support",
+    ],
   },
 ];
 
@@ -52,10 +66,11 @@ export function UseCasesSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Built for Every Industry
+            Solve Your Biggest HR Challenges
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From enterprise knowledge management to AI-powered applications, DatatoRAG scales across use cases.
+            Join 50+ HR teams who&apos;ve reduced ticket volume by 67% and saved
+            1.8 hours per employee daily.
           </p>
         </div>
 
@@ -71,10 +86,15 @@ export function UseCasesSection() {
               <h3 className="text-xl font-semibold text-foreground mb-2">
                 {useCase.title}
               </h3>
-              <p className="text-muted-foreground mb-4">{useCase.description}</p>
+              <p className="text-muted-foreground mb-4">
+                {useCase.description}
+              </p>
               <ul className="space-y-2">
                 {useCase.features.map((feature) => (
-                  <li key={feature} className="flex items-center text-sm text-muted-foreground">
+                  <li
+                    key={feature}
+                    className="flex items-center text-sm text-muted-foreground"
+                  >
                     <svg
                       className="w-4 h-4 text-muted-foreground mr-2 flex-shrink-0"
                       fill="none"
@@ -98,12 +118,10 @@ export function UseCasesSection() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Need a custom RAG solution for your specific use case?
+            Ready to transform your HR operations with AI?
           </p>
           <Button asChild variant="ghost" className="font-semibold">
-            <Link href="/contact">
-              Schedule a consultation →
-            </Link>
+            <Link href="/contact">See ROI calculator →</Link>
           </Button>
         </div>
       </div>

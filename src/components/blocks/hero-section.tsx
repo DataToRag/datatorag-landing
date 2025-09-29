@@ -90,11 +90,11 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
               <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                 <AnimatedGroup variants={transitionVariants}>
                   <Link
-                    href="/blog/launch"
+                    href="/case-studies"
                     className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                   >
                     <span className="text-foreground text-sm">
-                      New: DatatoRAG is now live
+                      Trusted by 50+ HR teams to reduce ticket volume by 67%
                     </span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
@@ -111,13 +111,13 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                   </Link>
 
                   <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                    Transform Your Data Into Intelligent RAG Solutions
+                    Your HR Knowledge, Instantly Accessible
                   </h1>
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                    Convert documents, databases, and knowledge bases into
-                    powerful RAG systems that understand context and deliver
-                    precise answers. Build intelligent AI applications
-                    effortlessly.
+                    Stop losing 1.8 hours per day searching for HR information.
+                    Transform your policies, handbooks, and HRIS data into an
+                    AI-powered knowledge base that gives employees instant,
+                    accurate answers.
                   </p>
                 </AnimatedGroup>
 
@@ -145,7 +145,9 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                       className="rounded-xl px-5 text-base"
                     >
                       <Link href="/login">
-                        <span className="text-nowrap">Get Started Free</span>
+                        <span className="text-nowrap">
+                          See How It Works for HR
+                        </span>
                       </Link>
                     </Button>
                   </div>
@@ -165,7 +167,7 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
                     >
-                      <span className="text-nowrap">See Live Demo</span>
+                      <span className="text-nowrap">Calculate Your ROI</span>
                     </a>
                   </Button>
                 </AnimatedGroup>

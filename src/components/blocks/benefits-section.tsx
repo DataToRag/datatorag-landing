@@ -1,29 +1,29 @@
-import { TrendingDown, Clock, Zap, Users } from "lucide-react";
+import { TrendingDown, Clock, Target, DollarSign } from "lucide-react";
 
 const benefits = [
   {
-    icon: TrendingDown,
-    title: "Reduce Development Time by 80%",
-    description:
-      "Skip the complexity of building RAG from scratch. Focus on your application logic while we handle the infrastructure.",
-  },
-  {
     icon: Clock,
-    title: "Scale to Millions of Documents",
+    title: "Save 1.8 Hours Per Employee Daily",
     description:
-      "Enterprise-grade vector storage and retrieval that grows with your data. No performance degradation at scale.",
+      "Stop the endless search for information. Employees find answers instantly, boosting productivity across your organization.",
   },
   {
-    icon: Zap,
-    title: "Sub-second Query Response",
+    icon: Target,
+    title: "Reduce 90-Day Attrition by 50%",
     description:
-      "Lightning-fast semantic search and retrieval. Optimized vector operations deliver results in milliseconds.",
+      "Only 12% of employees rate onboarding as &apos;great.&apos; Our AI ensures consistent, engaging experiences that keep new hires.",
   },
   {
-    icon: Users,
-    title: "Production-Ready Infrastructure",
+    icon: TrendingDown,
+    title: "Cut HR Ticket Volume by 67%",
     description:
-      "Built for enterprise deployment with monitoring, security, and reliability features out of the box.",
+      "Free your HR team from repetitive questions about benefits, policies, and procedures. Focus on strategic initiatives instead.",
+  },
+  {
+    icon: DollarSign,
+    title: "Deploy Without IT or AI Teams",
+    description:
+      "Pre-built integrations with Salesforce, Workday, SharePoint, and Slack. Go live in days, not months—no technical expertise required.",
   },
 ];
 
@@ -33,10 +33,11 @@ export function BenefitsSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Why Choose DatatoRAG
+            The ROI Is Clear
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Built by AI engineers for AI engineers. The fastest path from data to production-ready RAG systems.
+            Mid-market companies see ROI in 3 months. No AI team needed, works
+            with your existing HRIS stack.
           </p>
         </div>
 
@@ -61,16 +62,20 @@ export function BenefitsSection() {
         <div className="mt-16 bg-muted/30 rounded-2xl p-8 border shadow-lg shadow-zinc-950/5 dark:shadow-zinc-950/15">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">99.9%</div>
-              <p className="text-muted-foreground">System Uptime</p>
+              <div className="text-4xl font-bold text-foreground mb-2">67%</div>
+              <p className="text-muted-foreground">Reduction in HR Tickets</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">&lt;100ms</div>
-              <p className="text-muted-foreground">Average Query Time</p>
+              <div className="text-4xl font-bold text-foreground mb-2">
+                1.8hrs
+              </div>
+              <p className="text-muted-foreground">Saved Per Employee Daily</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">1M+</div>
-              <p className="text-muted-foreground">Documents Processed</p>
+              <div className="text-4xl font-bold text-foreground mb-2">
+                3 mo
+              </div>
+              <p className="text-muted-foreground">Average Time to ROI</p>
             </div>
           </div>
         </div>
