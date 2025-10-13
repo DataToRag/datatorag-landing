@@ -1,0 +1,382 @@
+Issue Type,Summary,Description,Epic Link,Story Points,Priority,Labels
+Epic,Infrastructure Foundation,"Set up AWS infrastructure foundation including VPC, security, storage, and secrets management",,13,High,mvp sprint-1
+Story,Set up project repository structure,"Create datatorag-mvp repository with proper project structure:
+- /infrastructure/cloudformation/
+- /etl/ (ingestion, processor, embedder, indexer)
+- /sagemaker/models/
+- /api/
+- /tests/
+- /docs/
+Configure .gitignore, README, branch protection",DATATORAG-1,2,High,mvp sprint-1
+Story,Create network CloudFormation stack,"Create 01-network-stack.yaml with:
+- VPC (10.0.0.0/16)
+- 2 public subnets (10.0.1.0/24, 10.0.2.0/24)
+- 2 private subnets (10.0.10.0/24, 10.0.11.0/24)
+- Internet Gateway
+- NAT Gateway
+- Route tables
+- VPC endpoints (S3, SageMaker, OpenSearch, Secrets Manager)",DATATORAG-1,3,High,mvp sprint-1 infrastructure
+Story,Create security CloudFormation stack,"Create 02-security-stack.yaml with:
+- IAM roles (Lambda, ECS, SageMaker, OpenSearch)
+- Security groups (Lambda, ECS, OpenSearch, SageMaker)
+- IAM policies (S3, SageMaker invoke, OpenSearch, Secrets Manager, CloudWatch)",DATATORAG-1,3,High,mvp sprint-1 infrastructure
+Story,Create storage CloudFormation stack,"Create 03-storage-stack.yaml with:
+- S3 buckets (raw-docs, processed, embeddings-cache, sagemaker-models)
+- Versioning enabled
+- Encryption at rest (SSE-S3)
+- Lifecycle policies
+- Event notifications to SQS",DATATORAG-1,2,High,mvp sprint-1 infrastructure
+Story,Create secrets CloudFormation stack,"Create 04-secrets-stack.yaml with:
+- Secrets Manager secrets (FTP, Workday API, Rippling API, OpenSearch master user)
+- Systems Manager parameters (chunk-size, chunk-overlap, embedding-dimension)",DATATORAG-1,1,High,mvp sprint-1 infrastructure
+Story,Set up CI/CD pipeline,"Configure CI/CD (GitHub Actions or GitLab CI):
+- CloudFormation deployment workflow
+- Environments (dev, staging, prod)
+- AWS credentials via OIDC
+- Deployment approvals for production
+- Test with hello-world stack",DATATORAG-1,2,High,mvp sprint-1 devops
+Story,Configure CloudWatch dashboards and basic monitoring,"Set up CloudWatch:
+- Log groups for all services
+- Basic dashboard (VPC, S3, IAM status)
+- Billing alarms ($1000/month threshold)
+- CloudTrail enabled for audit logging",DATATORAG-1,1,Medium,mvp sprint-1 monitoring
+Epic,OpenSearch & SageMaker,"Deploy OpenSearch cluster with vector search and SageMaker endpoint for embeddings",,13,High,mvp sprint-2
+Story,Deploy OpenSearch cluster via CloudFormation,"Create 05-opensearch-stack.yaml:
+- Domain: datatorag-opensearch-prod
+- Version: OpenSearch 2.11+
+- Instance: r6g.large.search x 2
+- EBS: 100GB gp3 per node
+- VPC deployment (private subnets)
+- Fine-grained access control
+- k-NN plugin enabled",DATATORAG-2,3,High,mvp sprint-2 infrastructure
+Story,Create index templates with vector field configuration,"Create OpenSearch index template for hr-documents:
+- Vector field (dimension: 768, HNSW, cosine similarity)
+- Text fields (title, content, chunk_text)
+- Metadata fields (customer_id, file_name, source)
+- k-NN settings (ef_construction: 128, m: 16)",DATATORAG-2,2,High,mvp sprint-2 data
+Story,Test k-NN vector operations manually,"Manual testing:
+- Index 10K sample vectors
+- Test vector search queries
+- Measure query latency (target: <200ms)
+- Tune k-NN parameters if needed",DATATORAG-2,2,Medium,mvp sprint-2 testing
+Story,Prepare Gemma model for SageMaker deployment,"Download and prepare google/gemma-2-300m:
+- Test model locally with HuggingFace Transformers
+- Verify embedding dimension (768)
+- Test embedding quality on sample HR text
+- Package model artifacts
+- Upload to S3 model bucket",DATATORAG-2,3,High,mvp sprint-2 ml
+Story,Create custom inference script for embeddings,"Create sagemaker/models/gemma-embeddings/inference.py:
+- model_fn: Load Gemma model
+- input_fn: Parse JSON input
+- predict_fn: Generate embeddings with mean pooling
+- output_fn: Return normalized embeddings
+Add requirements.txt",DATATORAG-2,2,High,mvp sprint-2 ml
+Story,Deploy SageMaker endpoint via CloudFormation,"Create 06-sagemaker-stack.yaml:
+- Model: gemma-embeddings-300m
+- Endpoint: datatorag-gemma-embeddings-prod
+- Instance: ml.g5.xlarge
+- Auto-scaling (min: 1, max: 3)
+- HuggingFace DLC container",DATATORAG-2,2,High,mvp sprint-2 infrastructure
+Story,Test embedding generation end-to-end,"End-to-end testing:
+- Invoke SageMaker endpoint with sample text
+- Verify embedding output (768-dim vector)
+- Measure latency (target: <2s per batch of 32)
+- Test auto-scaling behavior",DATATORAG-2,2,Medium,mvp sprint-2 testing
+Story,Configure auto-scaling for SageMaker endpoint,"Configure SageMaker auto-scaling:
+- Target: 1000 invocations per minute
+- Scale-out cooldown: 60s
+- Scale-in cooldown: 300s
+- Test with load",DATATORAG-2,1,Medium,mvp sprint-2 infrastructure
+Story,Set up monitoring/alarms for OpenSearch and SageMaker,"CloudWatch alarms:
+- OpenSearch: ClusterStatus.red, FreeStorageSpace, CPUUtilization, JVMMemoryPressure
+- SageMaker: ModelLatency, Invocation4XXErrors, Invocation5XXErrors
+- Dashboard with key metrics",DATATORAG-2,1,Medium,mvp sprint-2 monitoring
+Epic,Document Ingestion,"Build document ingestion service to fetch documents from FTP and APIs",,8,High,mvp sprint-3
+Story,Build FTP client module,"Create etl/ingestion/lambda/ftp_client.py:
+- FTPClient class
+- Connect to FTP server
+- List files in directory
+- Download files
+- Error handling and retry logic",DATATORAG-3,2,High,mvp sprint-3 etl
+Story,Build Workday API client,"Create etl/ingestion/lambda/api_clients.py (WorkdayClient):
+- Authenticate with Workday API
+- Fetch HR documents
+- Handle pagination
+- Error handling and rate limiting",DATATORAG-3,2,High,mvp sprint-3 etl integration
+Story,Build Rippling API client,"Add RipplingClient to api_clients.py:
+- Authenticate with Rippling API
+- Fetch HR documents
+- Handle pagination
+- Error handling and rate limiting",DATATORAG-3,2,High,mvp sprint-3 etl integration
+Story,Implement document ingester Lambda,"Create etl/ingestion/lambda/handler.py:
+- Lambda handler function
+- Fetch credentials from Secrets Manager
+- Call FTP/Workday/Rippling clients based on config
+- Upload documents to S3 raw bucket with metadata
+- CloudFormation template (07-etl-lambda-stack.yaml partial)",DATATORAG-3,3,High,mvp sprint-3 etl
+Story,Create SQS queues via CloudFormation,"Create 09-etl-queue-stack.yaml:
+- processing-queue (S3 → ECS)
+- embedding-queue (ECS → Lambda)
+- indexing-queue (Lambda → Lambda)
+- Dead letter queues for each
+- Visibility timeouts and retention",DATATORAG-3,2,High,mvp sprint-3 infrastructure
+Story,Test ingestion from FTP to S3,"Integration test:
+- Set up test FTP server with sample PDFs
+- Configure ingester Lambda
+- Trigger ingestion
+- Verify files uploaded to S3 with correct metadata",DATATORAG-3,1,Medium,mvp sprint-3 testing
+Story,Test ingestion from APIs to S3,"Integration test:
+- Configure Workday/Rippling test credentials
+- Trigger API ingestion
+- Verify documents uploaded to S3
+- Test error handling (rate limits, auth failures)",DATATORAG-3,1,Medium,mvp sprint-3 testing
+Epic,Document Processing,"Build PDF processing pipeline to extract, clean, and chunk document text",,10,High,mvp sprint-3
+Story,Build PDF parser module,"Create etl/processor/ecs/pdf_parser.py:
+- PDFParser class using PyPDF2
+- Extract text from PDF bytes
+- Handle multi-page documents
+- Basic error handling for corrupted PDFs",DATATORAG-4,2,High,mvp sprint-3 etl
+Story,Build text cleaner module,"Create etl/processor/ecs/text_cleaner.py:
+- TextCleaner class
+- Remove extra whitespace
+- Remove special characters
+- Filter headers/footers
+- Normalize text",DATATORAG-4,2,High,mvp sprint-3 etl
+Story,Build text chunker module,"Create etl/processor/ecs/chunker.py:
+- TextChunker class using LangChain RecursiveCharacterTextSplitter
+- Chunk size: 512 tokens
+- Overlap: 50 tokens
+- Preserve sentence boundaries",DATATORAG-4,2,High,mvp sprint-3 etl
+Story,Create ECS task definition and Dockerfile,"Create etl/processor/ecs/:
+- Dockerfile (Python 3.11-slim base)
+- main.py (poll SQS, process documents, send to embedding queue)
+- requirements.txt (PyPDF2, langchain, boto3)
+- CloudFormation: 08-etl-ecs-stack.yaml (cluster, task definition, Fargate)",DATATORAG-4,3,High,mvp sprint-3 infrastructure
+Story,Deploy processor ECS service via CloudFormation,"Deploy ECS service:
+- Fargate launch type
+- 2 vCPU, 4GB memory
+- Auto-scaling (min: 1, max: 3)
+- CloudWatch logs integration",DATATORAG-4,2,High,mvp sprint-3 infrastructure
+Story,Wire S3 event → SQS → ECS trigger,"Configure event pipeline:
+- S3 bucket event notification (ObjectCreated) → processing-queue
+- ECS task polls processing-queue
+- Lambda or EventBridge to trigger ECS task when queue has messages",DATATORAG-4,2,Medium,mvp sprint-3 infrastructure
+Story,Test end-to-end PDF processing with sample docs,"Integration test:
+- Upload sample HR PDFs to S3 raw bucket
+- Verify ECS task triggered
+- Check processed chunks in embedding-queue
+- Validate chunk quality (512 tokens, overlap working)
+- Test with various PDF formats",DATATORAG-4,2,Medium,mvp sprint-3 testing
+Epic,Embedding & Indexing,"Generate embeddings via SageMaker and index documents in OpenSearch",,10,High,mvp sprint-3
+Story,Implement embedder Lambda,"Create etl/embedder/lambda/handler.py:
+- Lambda handler (SQS trigger)
+- Batch chunks (up to 32 at a time)
+- Call SageMaker endpoint via boto3
+- Send embeddings to indexing-queue
+- Error handling and retry logic",DATATORAG-5,3,High,mvp sprint-3 etl ml
+Story,Implement batch processing logic,"Optimize embedding generation:
+- Batch chunks for efficiency
+- Handle SageMaker throttling
+- Implement exponential backoff
+- Monitor batch size vs latency tradeoff",DATATORAG-5,2,High,mvp sprint-3 etl
+Story,Deploy embedder Lambda via CloudFormation,"Add to 07-etl-lambda-stack.yaml:
+- Function: datatorag-embedder
+- Memory: 1024 MB
+- Timeout: 60s
+- SQS trigger (embedding-queue, batch size: 10)
+- Environment variables (SageMaker endpoint name)",DATATORAG-5,1,High,mvp sprint-3 infrastructure
+Story,Test embedding generation with sample chunks,"Unit and integration testing:
+- Test with sample text chunks
+- Verify embedding dimension (768)
+- Measure latency (<2s per batch)
+- Test error handling (SageMaker throttling, timeouts)",DATATORAG-5,1,Medium,mvp sprint-3 testing
+Story,Implement indexer Lambda,"Create etl/indexer/lambda/handler.py:
+- Lambda handler (SQS trigger)
+- opensearch-py client with AWS4Auth
+- Bulk index to OpenSearch (batches of 500)
+- helpers.bulk for efficient indexing
+- Error handling and partial failure recovery",DATATORAG-5,3,High,mvp sprint-3 etl
+Story,Implement bulk indexing logic,"Optimize OpenSearch indexing:
+- Batch documents (500 per bulk request)
+- Handle partial failures
+- Retry failed documents
+- Monitor indexing throughput",DATATORAG-5,2,High,mvp sprint-3 etl
+Story,Deploy indexer Lambda via CloudFormation,"Add to 07-etl-lambda-stack.yaml:
+- Function: datatorag-indexer
+- Memory: 1024 MB
+- Timeout: 60s
+- SQS trigger (indexing-queue, batch size: 10)
+- Environment variables (OpenSearch endpoint, index name)",DATATORAG-5,1,High,mvp sprint-3 infrastructure
+Story,Test full pipeline: FTP → S3 → Process → Embed → Index,"End-to-end integration test:
+- Upload 100 sample HR PDFs via FTP
+- Monitor full pipeline execution
+- Verify all documents indexed in OpenSearch
+- Check CloudWatch logs for errors
+- Measure total processing time",DATATORAG-5,3,High,mvp sprint-3 testing
+Story,Error handling and retry logic for all Lambdas,"Implement robust error handling:
+- Exponential backoff for throttling
+- Dead letter queue monitoring
+- CloudWatch alarms for high error rates
+- Logging for debugging
+- Partial batch failure handling",DATATORAG-5,2,Medium,mvp sprint-3 reliability
+Story,Dead letter queue monitoring,"Set up DLQ monitoring:
+- CloudWatch alarms for messages in DLQs
+- Dashboard showing DLQ depth
+- Runbook for DLQ processing
+- Test DLQ flow with intentional failures",DATATORAG-5,1,Medium,mvp sprint-3 monitoring
+Epic,Query API,"Build REST API for RAG queries with vector search",,11,High,mvp sprint-4
+Story,Design API schema (FastAPI models),"Define Pydantic models in api/lambda/:
+- QueryRequest (question, customer_id, top_k)
+- SearchRequest (query, customer_id, top_k)
+- Response models
+- Error models",DATATORAG-6,1,High,mvp sprint-4 api
+Story,Implement /query endpoint (vector search),"Create api/lambda/handler.py:
+- POST /query endpoint
+- Generate query embedding via SageMaker
+- Vector search in OpenSearch (k-NN query)
+- Filter by customer_id
+- Format and return results",DATATORAG-6,3,High,mvp sprint-4 api
+Story,Implement /search endpoint (hybrid search),"Add /search endpoint:
+- Hybrid search (vector + keyword)
+- OpenSearch bool query (should: [knn, multi_match])
+- Tune boost weights (0.7 vector, 0.3 keyword)
+- Return ranked results",DATATORAG-6,3,High,mvp sprint-4 api
+Story,Implement /health endpoint,"Add /health endpoint:
+- Check OpenSearch connectivity
+- Check SageMaker endpoint status
+- Return 200 OK with health status
+- Used by ALB health checks",DATATORAG-6,1,Medium,mvp sprint-4 api
+Story,Implement /docs/{doc_id} endpoint,"Add /docs/{doc_id} endpoint:
+- GET specific document by ID
+- Filter by customer_id (security)
+- Return document with metadata
+- 404 if not found",DATATORAG-6,1,Medium,mvp sprint-4 api
+Story,Create API Lambda container image,"Create api/lambda/:
+- Dockerfile (Python 3.11, FastAPI, Mangum)
+- requirements.txt (fastapi, mangum, opensearch-py, boto3)
+- Build and push to ECR
+- Test container locally",DATATORAG-6,2,High,mvp sprint-4 infrastructure
+Story,Deploy API Gateway + Lambda via CloudFormation,"Create 10-api-stack.yaml:
+- API Gateway REST API
+- Lambda function (container image from ECR)
+- Lambda integration
+- Stage: prod
+- Deploy API",DATATORAG-6,2,High,mvp sprint-4 infrastructure
+Story,Configure API key authentication,"Add authentication to API Gateway:
+- API key required
+- Usage plan (10000 requests/day)
+- Generate API keys for testing
+- CORS configuration",DATATORAG-6,1,High,mvp sprint-4 security
+Story,Test all endpoints with Postman/curl,"Manual testing:
+- Test /query with sample questions
+- Test /search with keywords
+- Test /health
+- Test /docs/{doc_id}
+- Test authentication (valid/invalid API keys)
+- Create Postman collection",DATATORAG-6,2,Medium,mvp sprint-4 testing
+Story,Add request validation and error handling,"Implement robust validation:
+- Pydantic validation for requests
+- HTTP status codes (400, 404, 500)
+- Error messages for debugging
+- Input sanitization
+- Rate limiting",DATATORAG-6,2,Medium,mvp sprint-4 api
+Story,Generate API documentation (OpenAPI/Swagger),"Generate API documentation:
+- FastAPI auto-generates OpenAPI schema
+- Serve Swagger UI at /docs
+- ReDoc at /redoc
+- Export OpenAPI spec to docs/api-spec.yaml",DATATORAG-6,1,Low,mvp sprint-4 documentation
+Epic,Integration Testing,"End-to-end testing with real HR documents and queries",,8,High,mvp sprint-5
+Story,Create test dataset (100 sample HR PDFs),"Prepare test data:
+- Collect 100 representative HR documents (handbooks, policies, benefits)
+- Anonymize if necessary
+- Upload to test S3 bucket or FTP server
+- Document test dataset structure",DATATORAG-7,2,Medium,mvp sprint-5 testing
+Story,Run end-to-end ingestion test,"Integration test:
+- Ingest all 100 test documents
+- Monitor pipeline execution
+- Track processing time per document
+- Verify no errors in CloudWatch logs",DATATORAG-7,1,Medium,mvp sprint-5 testing
+Story,Validate all documents indexed correctly,"Validation:
+- Check OpenSearch index count (should match input)
+- Spot-check document content and embeddings
+- Verify metadata fields populated
+- Check for duplicate documents",DATATORAG-7,1,Medium,mvp sprint-5 testing
+Story,Create test query set (20 common HR questions),"Create test queries:
+- 20 common HR questions (PTO policy, benefits, 401k, etc.)
+- Manual relevance labels (expected answer documents)
+- Document as docs/test-queries.md",DATATORAG-7,1,Medium,mvp sprint-5 testing
+Story,Run query tests and measure accuracy,"Evaluation:
+- Run all 20 test queries via API
+- Manual evaluation of top-5 results per query
+- Calculate relevance score (MRR, nDCG, or manual)
+- Target: >80% relevance
+- Document results",DATATORAG-7,2,Medium,mvp sprint-5 testing
+Story,Performance testing (latency, throughput),"Performance tests:
+- Measure query latency (p50, p95, p99)
+- Target: <500ms p95
+- Test with increasing load (10, 50, 100 concurrent requests)
+- Identify bottlenecks",DATATORAG-7,2,Medium,mvp sprint-5 testing
+Story,Load testing (1000 docs, 100 concurrent queries),"Load testing:
+- Ingest 1000 documents
+- Generate 100 concurrent queries
+- Monitor resource utilization (CPU, memory, Lambda throttling)
+- Check error rates
+- Validate auto-scaling behavior",DATATORAG-7,3,Medium,mvp sprint-5 testing
+Epic,Documentation & Operations,"Create comprehensive documentation and operational runbooks",,9,Medium,mvp sprint-5
+Story,Write architecture documentation,"Create docs/architecture.md:
+- High-level architecture diagram
+- Component descriptions
+- Data flow diagrams
+- Technology stack
+- Design decisions and tradeoffs",DATATORAG-8,2,Medium,mvp sprint-5 documentation
+Story,Write deployment runbook,"Create docs/deployment.md:
+- Prerequisites (AWS account, CLI, permissions)
+- Step-by-step CloudFormation deployment
+- Environment configuration
+- Rollback procedures
+- Common deployment issues",DATATORAG-8,2,Medium,mvp sprint-5 documentation
+Story,Write API documentation,"Create docs/api-documentation.md:
+- API endpoints and methods
+- Request/response schemas
+- Authentication
+- Rate limits
+- Code examples (Python, curl)
+- Link to Swagger UI",DATATORAG-8,1,Medium,mvp sprint-5 documentation
+Story,Write troubleshooting guide,"Create docs/troubleshooting.md:
+- Common issues and solutions
+- How to check logs (CloudWatch)
+- How to check queue depths
+- How to reprocess failed documents
+- Performance debugging
+- Emergency contacts",DATATORAG-8,2,Medium,mvp sprint-5 documentation
+Story,Create CloudWatch dashboard for monitoring,"Create comprehensive dashboard:
+- ETL pipeline health (ingestion rate, processing latency, error rate)
+- Search performance (query latency, throughput, error rate)
+- Infrastructure health (CPU, memory, disk for OpenSearch, SageMaker)
+- Cost tracking (estimated daily spend)",DATATORAG-8,2,Medium,mvp sprint-5 monitoring
+Story,Configure alarms for critical metrics,"Set up CloudWatch alarms:
+- OpenSearch: ClusterStatus.red, low disk space
+- SageMaker: high latency, errors
+- Lambda: errors, throttles, duration
+- SQS: queue depth, DLQ messages
+- SNS topic for alarm notifications",DATATORAG-8,1,Medium,mvp sprint-5 monitoring
+Story,Security audit (IAM, encryption, VPC),"Conduct security review:
+- IAM roles follow least privilege
+- All data encrypted at rest and in transit
+- No public endpoints (VPC isolation)
+- Secrets in Secrets Manager
+- CloudTrail enabled
+- Document findings and remediations",DATATORAG-8,2,High,mvp sprint-5 security
+Story,Cost optimization review,"Review and optimize costs:
+- Right-size OpenSearch and SageMaker instances
+- Enable S3 Intelligent-Tiering
+- Review CloudWatch log retention
+- Consider reserved instances or savings plans
+- Set up cost allocation tags
+- Document cost optimization recommendations",DATATORAG-8,1,Medium,mvp sprint-5 cost
+Story,Backup and disaster recovery plan,"Create docs/dr-plan.md:
+- OpenSearch snapshot configuration (to S3)
+- S3 versioning and cross-region replication
+- CloudFormation stack backup
+- Recovery time objective (RTO) and recovery point objective (RPO)
+- Disaster recovery runbook",DATATORAG-8,1,Medium,mvp sprint-5 reliability
