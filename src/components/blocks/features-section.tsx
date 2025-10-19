@@ -1,13 +1,18 @@
-import {
-  MessageSquare,
-  Users,
-  Shield,
-  Link2,
-  TrendingDown,
-  Zap,
-} from "lucide-react";
+import { MessageSquare, Users, Link2, Zap, Lock, Brain } from "lucide-react";
 
 const features = [
+  {
+    icon: Lock,
+    title: "Your Data Stays on Your Infrastructure",
+    description:
+      "Unlike ChatGPT or public AI services, your employee data, compensation info, and benefits details never leave your AWS environment. Self-hosted models ensure compliance with privacy regulations.",
+  },
+  {
+    icon: Brain,
+    title: "Purpose-Built for HR Language",
+    description:
+      "Custom embeddings trained on HR terminology understand the nuance between 'PTO accrual,' 'rollover,' and 'payout.' Better accuracy than generic models on benefits, policies, and compliance questions.",
+  },
   {
     icon: MessageSquare,
     title: "Self-Service HR Knowledge Base",
@@ -21,28 +26,16 @@ const features = [
       "Ensure every new hire gets the same high-quality onboarding, reducing 90-day attrition by up to 50%.",
   },
   {
-    icon: Shield,
-    title: "Multi-State Compliance Management",
-    description:
-      "Stay compliant across all locations with automated policy updates for pay transparency, AI regulations, and local laws.",
-  },
-  {
     icon: Link2,
     title: "Seamless HRIS Integration",
     description:
-      "Connects directly with Salesforce, Workday, SharePoint, and Slack. No IT team required for setup.",
-  },
-  {
-    icon: TrendingDown,
-    title: "67% Reduction in HR Tickets",
-    description:
-      "Free your HR team from repetitive questions. Track ticket volume reduction and employee satisfaction metrics.",
+      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, and more. Works with your existing HR tech stack—no rip and replace required.",
   },
   {
     icon: Zap,
     title: "No AI Expertise Needed",
     description:
-      "Pre-built RAG infrastructure means you can deploy in days, not months. No ML engineers or data scientists required.",
+      "Pre-built on AWS SageMaker and OpenSearch—enterprise-grade infrastructure without vendor lock-in to public AI services. Deploy in days, not months.",
   },
 ];
 

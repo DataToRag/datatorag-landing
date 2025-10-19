@@ -1,6 +1,12 @@
-import { TrendingDown, Clock, Target, DollarSign } from "lucide-react";
+import { TrendingDown, Clock, Target, Shield } from "lucide-react";
 
 const benefits = [
+  {
+    icon: Shield,
+    title: "Compliance-Ready: Your Data Never Leaves Your VPC",
+    description:
+      "Unlike solutions built on ChatGPT or Claude API, your sensitive employee data is processed entirely on self-hosted models within your AWS infrastructure. Meet HIPAA, SOC2, and data residency requirements.",
+  },
   {
     icon: Clock,
     title: "Save 1.8 Hours Per Employee Daily",
@@ -15,15 +21,9 @@ const benefits = [
   },
   {
     icon: TrendingDown,
-    title: "Cut HR Ticket Volume by 67%",
-    description:
-      "Free your HR team from repetitive questions about benefits, policies, and procedures. Focus on strategic initiatives instead.",
-  },
-  {
-    icon: DollarSign,
     title: "Deploy Without IT or AI Teams",
     description:
-      "Pre-built integrations with Salesforce, Workday, SharePoint, and Slack. Go live in days, not months—no technical expertise required.",
+      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Pre-built on AWS SageMaker and OpenSearch. Go live in days, not months—no technical expertise required.",
   },
 ];
 
@@ -60,7 +60,15 @@ export function BenefitsSection() {
         </div>
 
         <div className="mt-16 bg-muted/30 rounded-2xl p-8 border shadow-lg shadow-zinc-950/5 dark:shadow-zinc-950/15">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-foreground mb-2">
+                100%
+              </div>
+              <p className="text-muted-foreground">
+                Data Privacy - On Your Infrastructure
+              </p>
+            </div>
             <div>
               <div className="text-4xl font-bold text-foreground mb-2">67%</div>
               <p className="text-muted-foreground">Reduction in HR Tickets</p>

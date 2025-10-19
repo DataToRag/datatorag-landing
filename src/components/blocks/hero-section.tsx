@@ -114,11 +114,11 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     Scale Your Workforce with AI
                   </h1>
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                    Seamlessly integrate AI into your workforce.
-                    Turn existing knowledgebase and data into powerful RAG applications.
-                    Accelerate productivity and transform your policies, handbooks, and HRIS data into an
-                    AI-powered knowledge base that provides employees instant,
-                    accurate answers.
+                    Your sensitive HR data never leaves your infrastructure.
+                    Transform policies, handbooks, and benefits documentation
+                    into an AI-powered knowledge base with custom embeddings
+                    trained on HR terminology—not generic models that send your
+                    data to third parties like OpenAI or Anthropic.
                   </p>
                 </AnimatedGroup>
 

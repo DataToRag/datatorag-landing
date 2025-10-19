@@ -6,23 +6,23 @@ const steps = [
   {
     number: "1",
     icon: Code,
-    title: "Connect Your Data",
+    title: "Connect Your Data Securely",
     description:
-      "Upload documents, connect databases, or provide data sources. Our system automatically processes and indexes your content.",
+      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), document storage (SharePoint, Box, FTP), or upload files directly. All data is processed entirely within your private AWS VPC—never sent to external AI services.",
   },
   {
     number: "2",
     icon: Upload,
-    title: "Configure RAG Pipeline",
+    title: "Custom Embeddings for HR",
     description:
-      "Set up embeddings, chunking strategies, and retrieval parameters. Fine-tune the system for your specific use case.",
+      "Our self-hosted embedding models (powered by SageMaker) understand HR-specific language. Unlike generic AI, we know 'open enrollment,' '401k match,' and 'FMLA eligibility' in context. All processing happens on your infrastructure.",
   },
   {
     number: "3",
     icon: MessageSquare,
-    title: "Deploy & Query",
+    title: "Query with Confidence",
     description:
-      "Your RAG system is ready. Start querying with natural language and get contextually accurate responses instantly.",
+      "Fast, accurate answers powered by OpenSearch vector search—all running in your private AWS environment. Deploy via Slack, Teams, or web interface. No data shared with OpenAI, Anthropic, or other public AI providers.",
   },
 ];
 
@@ -32,10 +32,11 @@ export function HowItWorksSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Build Your RAG System in 3 Simple Steps
+            Secure AI for HR in 3 Simple Steps
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From data ingestion to intelligent retrieval. Transform your knowledge into a powerful AI system.
+            From secure data ingestion to private AI-powered answers. Your
+            employee data never leaves your infrastructure.
           </p>
         </div>
 
@@ -81,9 +82,7 @@ export function HowItWorksSection() {
 
         <div className="mt-12 text-center">
           <Button asChild size="lg" className="rounded-xl px-8">
-            <Link href="/login">
-              Start Building Your RAG System
-            </Link>
+            <Link href="/login">See How It Works for HR</Link>
           </Button>
         </div>
       </div>
