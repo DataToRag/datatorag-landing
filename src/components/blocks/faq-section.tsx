@@ -7,29 +7,29 @@ import Link from "next/link";
 
 const faqs = [
   {
-    question: "How does DatatoRAG process my documents?",
+    question: "Does my HR data ever leave our infrastructure?",
     answer:
-      "DatatoRAG uses advanced NLP techniques to parse, chunk, and embed your documents into high-dimensional vector spaces. Our intelligent chunking preserves semantic relationships while optimizing for retrieval accuracy and relevance scoring.",
+      "No. Unlike ChatGPT or other cloud AI solutions, DatatoRAG runs entirely within your infrastructure. Your employee data, policies, and benefits information never gets sent to OpenAI, Anthropic, or any third party. Everything stays on your servers.",
   },
   {
-    question: "What file formats are supported?",
+    question: "How much time can this save our HR team?",
     answer:
-      "We support a wide range of formats including PDFs, Word documents, plain text, CSV, JSON, databases (PostgreSQL, MySQL, MongoDB), and structured data sources. Our system automatically detects and processes each format appropriately.",
+      "Our customers see an average 67% reduction in routine HR tickets. Teams save 15+ hours per week by automating responses to common questions about PTO policies, benefits enrollment, parental leave, and company handbooks.",
   },
   {
-    question: "How do you ensure data security and privacy?",
+    question: "What types of HR documents can I upload?",
     answer:
-      "All data is encrypted in transit and at rest using AES-256 encryption. We offer both cloud and on-premises deployment options. Data isolation is maintained per customer, and we're SOC 2 Type II compliant with enterprise-grade security measures.",
+      "You can upload employee handbooks, benefits guides, PTO policies, onboarding documentation, compliance materials, and any other HR knowledge base content. We support PDFs, Word docs, internal wikis, and structured data.",
   },
   {
-    question: "Can I customize the embedding models?",
+    question: "How accurate are the AI responses?",
     answer:
-      "Yes! DatatoRAG supports custom embedding models including domain-specific fine-tuned models. You can use OpenAI, Cohere, HuggingFace models, or bring your own pre-trained embeddings for specialized use cases.",
+      "DatatoRAG uses Gemma 3 for custom embeddings specifically trained on HR terminology and concepts. This model has been battle-tested across 10,000s of documents and understands the nuances of benefits, leave policies, and HR processes better than generic AI models—reducing incorrect answers and improving employee trust.",
   },
   {
-    question: "What's the query performance at scale?",
+    question: "How quickly can we get started?",
     answer:
-      "Our vector database delivers sub-100ms query responses even with millions of documents. We use optimized indexing algorithms and caching strategies to maintain performance. Horizontal scaling ensures consistent speed as your data grows.",
+      "We're currently onboarding early customers. Join our waitlist to get priority access and work with our team to deploy DatatoRAG in your infrastructure within weeks, not months.",
   },
 ];
 
@@ -44,7 +44,7 @@ export function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-muted-foreground">
-            Everything you need to know about building with DatatoRAG
+            Everything you need to know about DatatoRAG for HR teams
           </p>
         </div>
 
@@ -77,10 +77,16 @@ export function FAQSection() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-muted-foreground mb-4">Need technical support or have specific questions?</p>
+          <p className="text-muted-foreground mb-4">
+            Ready to reduce your HR ticket volume?
+          </p>
           <Button asChild>
-            <Link href="/contact">
-              Contact Our Team
+            <Link
+              href="https://tally.so/r/wa8p9q"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join the Waitlist
             </Link>
           </Button>
         </div>

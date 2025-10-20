@@ -8,7 +8,9 @@
       "Bash(pnpm run:*)",
       "Bash(git add -A)",
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd animated beam demo and update CTAs to waitlist\n\n- Install animated-beam component from magicui\n- Create custom AnimatedBeamMultipleOutputDemo with HR software icons (Workday, Rippling, BambooHR, ADP, SharePoint)\n- Replace iframe placeholder with animated beam visualization in hero section\n- Update all CTAs to point to Tally waitlist (https://tally.so/r/wa8p9q)\n- Remove em dashes from landing page copy for more natural flow\n- Add .claude/CLAUDE.md with pnpm configuration\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(git add package.json)",
+      "Bash(git commit -m \"Update dev server port to 3333\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"
