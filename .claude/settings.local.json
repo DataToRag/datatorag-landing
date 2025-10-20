@@ -10,7 +10,10 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd animated beam demo and update CTAs to waitlist\n\n- Install animated-beam component from magicui\n- Create custom AnimatedBeamMultipleOutputDemo with HR software icons (Workday, Rippling, BambooHR, ADP, SharePoint)\n- Replace iframe placeholder with animated beam visualization in hero section\n- Update all CTAs to point to Tally waitlist (https://tally.so/r/wa8p9q)\n- Remove em dashes from landing page copy for more natural flow\n- Add .claude/CLAUDE.md with pnpm configuration\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push)",
       "Bash(git add package.json)",
-      "Bash(git commit -m \"Update dev server port to 3333\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
+      "Bash(git commit -m \"Update dev server port to 3333\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
+      "Bash(pnpm install)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial setup: Next.js 15 with OpenNext, Cloudflare, and shadcn/ui\n\n- Configure Next.js 15.4.6 with TypeScript\n- Set up OpenNext for Cloudflare deployment\n- Add shadcn/ui with New York style\n- Configure Tailwind CSS v4 with custom theme\n- Add ESLint, Prettier, Husky, and lint-staged\n- Set up pnpm as package manager\n- Configure directory structure with src/app, src/components, src/lib\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit -m \"$(cat <<''EOF''\nSimplify footer and refine Gemma 3 messaging\n\n- Remove footer navigation sections (Company, Product, Legal, Connect) as pages don''t exist yet\n- Simplify footer to copyright only\n- Update copy to explicitly mention Gemma 3 embeddings throughout\n- Add social proof about being battle-tested across 10,000s of documents\n- Improve clarity on custom embedding model capabilities\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"

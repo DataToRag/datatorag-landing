@@ -11,7 +11,7 @@ const features = [
     icon: Brain,
     title: "Purpose-Built for HR Language",
     description:
-      "Custom embeddings trained on HR terminology understand the nuance between 'PTO accrual,' 'rollover,' and 'payout.' Better accuracy than generic models on benefits, policies, and compliance questions.",
+      "Gemma 3 embeddings trained on HR terminology understand the nuance between 'PTO accrual,' 'rollover,' and 'payout.' Battle-tested across 10,000s of documents for better accuracy than generic models on benefits, policies, and compliance questions.",
   },
   {
     icon: MessageSquare,

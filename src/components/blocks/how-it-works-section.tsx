@@ -15,7 +15,7 @@ const steps = [
     icon: Upload,
     title: "Custom Embeddings for HR",
     description:
-      "Our self-hosted embedding models (powered by SageMaker) understand HR-specific language. Unlike generic AI, we know 'open enrollment,' '401k match,' and 'FMLA eligibility' in context. All processing happens on your infrastructure.",
+      "Our self-hosted Gemma 3 embedding models (powered by SageMaker) understand HR-specific language. Battle-tested across 10,000s of documents, we know 'open enrollment,' '401k match,' and 'FMLA eligibility' in context. All processing happens on your infrastructure.",
   },
   {
     number: "3",

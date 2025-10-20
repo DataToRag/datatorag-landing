@@ -117,7 +117,7 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
                     Your sensitive HR data never leaves your infrastructure.
                     Transform policies, handbooks, and benefits documentation
-                    into an AI-powered knowledge base with custom embeddings
+                    into an AI-powered knowledge base with Gemma 3 embeddings
                     trained on HR terminology. Unlike generic models, your data
                     stays private and never gets sent to third parties like
                     OpenAI or Anthropic.
