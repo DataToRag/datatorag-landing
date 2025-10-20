@@ -8,7 +8,7 @@ const steps = [
     icon: Code,
     title: "Connect Your Data Securely",
     description:
-      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), document storage (SharePoint, Box, FTP), or upload files directly. All data is processed entirely within your private AWS VPC—never sent to external AI services.",
+      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), document storage (SharePoint, Box, FTP), or upload files directly. All data is processed entirely within your private AWS VPC and never sent to external AI services.",
   },
   {
     number: "2",
@@ -22,7 +22,7 @@ const steps = [
     icon: MessageSquare,
     title: "Query with Confidence",
     description:
-      "Fast, accurate answers powered by OpenSearch vector search—all running in your private AWS environment. Deploy via Slack, Teams, or web interface. No data shared with OpenAI, Anthropic, or other public AI providers.",
+      "Fast, accurate answers powered by OpenSearch vector search, all running in your private AWS environment. Deploy via Slack, Teams, or web interface. No data shared with OpenAI, Anthropic, or other public AI providers.",
   },
 ];
 
@@ -82,7 +82,13 @@ export function HowItWorksSection() {
 
         <div className="mt-12 text-center">
           <Button asChild size="lg" className="rounded-xl px-8">
-            <Link href="/login">See How It Works for HR</Link>
+            <Link
+              href="https://tally.so/r/wa8p9q"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join the Waitlist
+            </Link>
           </Button>
         </div>
       </div>

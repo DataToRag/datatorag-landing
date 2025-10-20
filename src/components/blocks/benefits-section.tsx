@@ -23,7 +23,7 @@ const benefits = [
     icon: TrendingDown,
     title: "Deploy Without IT or AI Teams",
     description:
-      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Pre-built on AWS SageMaker and OpenSearch. Go live in days, not months—no technical expertise required.",
+      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Pre-built on AWS SageMaker and OpenSearch. Go live in days, not months. No technical expertise required.",
   },
 ];
 

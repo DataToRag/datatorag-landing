@@ -29,13 +29,13 @@ const features = [
     icon: Link2,
     title: "Seamless HRIS Integration",
     description:
-      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, and more. Works with your existing HR tech stack—no rip and replace required.",
+      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, and more. Works with your existing HR tech stack without requiring a complete system overhaul.",
   },
   {
     icon: Zap,
     title: "No AI Expertise Needed",
     description:
-      "Pre-built on AWS SageMaker and OpenSearch—enterprise-grade infrastructure without vendor lock-in to public AI services. Deploy in days, not months.",
+      "Pre-built on AWS SageMaker and OpenSearch for enterprise-grade infrastructure without vendor lock-in to public AI services. Deploy in days, not months.",
   },
 ];
 

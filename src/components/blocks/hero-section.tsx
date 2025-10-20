@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { MarketingNav } from "@/components/layout/marketing-nav";
+import { AnimatedBeamMultipleOutputDemo } from "@/components/ui/animated-beam-demo";
 
 const transitionVariants = {
   item: {
@@ -117,8 +118,9 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     Your sensitive HR data never leaves your infrastructure.
                     Transform policies, handbooks, and benefits documentation
                     into an AI-powered knowledge base with custom embeddings
-                    trained on HR terminology—not generic models that send your
-                    data to third parties like OpenAI or Anthropic.
+                    trained on HR terminology. Unlike generic models, your data
+                    stays private and never gets sent to third parties like
+                    OpenAI or Anthropic.
                   </p>
                 </AnimatedGroup>
 
@@ -145,10 +147,12 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                       size="lg"
                       className="rounded-xl px-5 text-base"
                     >
-                      <Link href="/login">
-                        <span className="text-nowrap">
-                          See How It Works for HR
-                        </span>
+                      <Link
+                        href="https://tally.so/r/wa8p9q"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="text-nowrap">Join the Waitlist</span>
                       </Link>
                     </Button>
                   </div>
@@ -160,15 +164,15 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     className="h-10.5 rounded-xl px-5"
                   >
                     <a
-                      href="#demo-iframe"
+                      href="#demo-animation"
                       onClick={(e) => {
                         e.preventDefault();
                         document
-                          .getElementById("demo-iframe")
+                          .getElementById("demo-animation")
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
                     >
-                      <span className="text-nowrap">Calculate Your ROI</span>
+                      <span className="text-nowrap">See How It Works</span>
                     </a>
                   </Button>
                 </AnimatedGroup>
@@ -195,15 +199,8 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                   />
                 )}
-                <div
-                  id="demo-iframe"
-                  className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-2 shadow-lg shadow-zinc-950/15 ring-1"
-                >
-                  <iframe
-                    src="/demo-placeholder"
-                    className="w-full h-[600px] md:h-[700px] lg:h-[800px] rounded-xl border-0"
-                    title="DatatoRAG Demo"
-                  />
+                <div id="demo-animation" className="relative mx-auto max-w-6xl">
+                  <AnimatedBeamMultipleOutputDemo />
                 </div>
               </div>
             </AnimatedGroup>
