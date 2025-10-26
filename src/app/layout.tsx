@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   title: "DatatoRAG - Privacy-First RAG Infrastructure",
   description:
     "Deploy RAG applications with complete data sovereignty. Privacy-first architecture with custom embeddings and secure infrastructure.",
-  icons: {
-    icon: "/datatorag-logo.png",
-  },
 };
 
 export default function RootLayout({
