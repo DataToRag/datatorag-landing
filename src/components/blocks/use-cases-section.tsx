@@ -54,7 +54,7 @@ const useCases = [
       "Answer complex benefits questions instantly. Handle PTO requests, enrollment, and eligibility queries automatically.",
     features: [
       "Benefits calculator",
-      "PTO balance tracking",
+      "PTO requests",
       "Open enrollment support",
     ],
   },
@@ -69,8 +69,7 @@ export function UseCasesSection() {
             Solve Your Biggest HR Challenges
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join 50+ HR teams who&apos;ve reduced ticket volume by 67% and saved
-            1.8 hours per employee daily.
+            Join 50+ HR teams who&apos;ve reduced ticket volume by 80%
           </p>
         </div>
 

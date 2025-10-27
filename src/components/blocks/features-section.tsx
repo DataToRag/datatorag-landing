@@ -3,15 +3,15 @@ import { MessageSquare, Users, Link2, Zap, Lock, Brain } from "lucide-react";
 const features = [
   {
     icon: Lock,
-    title: "Your Data Stays on Your Infrastructure",
+    title: "Your Data Is Secure",
     description:
-      "Unlike ChatGPT or public AI services, your employee data, compensation info, and benefits details never leave your AWS environment. Self-hosted models ensure compliance with privacy regulations.",
+      "Self-hosted models ensure compliance with privacy. No ChatGPT or public AI services allowed! Your data never leaves our infrastructure.",
   },
   {
     icon: Brain,
-    title: "Purpose-Built for HR Language",
+    title: "Purpose-Built for Your Usecase",
     description:
-      "Gemma 3 embeddings trained on HR terminology understand the nuance between 'PTO accrual,' 'rollover,' and 'payout.' Battle-tested across 10,000s of documents for better accuracy than generic models on benefits, policies, and compliance questions.",
+      "We support all models! Choose the one that suits your needs for HR terms like 'PTO accrual,' 'rollover,' and 'payout.'",
   },
   {
     icon: MessageSquare,
@@ -23,19 +23,19 @@ const features = [
     icon: Users,
     title: "Consistent Onboarding Experience",
     description:
-      "Ensure every new hire gets the same high-quality onboarding, reducing 90-day attrition by up to 50%.",
+      "Ensure every new hire receives the same high-quality onboarding, reducing 90-day attrition by up to 50%.",
   },
   {
     icon: Link2,
     title: "Seamless HRIS Integration",
     description:
-      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, and more. Works with your existing HR tech stack without requiring a complete system overhaul.",
+      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, and more. Works with your existing HR tech without requiring a complete system overhaul.",
   },
   {
     icon: Zap,
     title: "No AI Expertise Needed",
     description:
-      "Pre-built on AWS SageMaker and OpenSearch for enterprise-grade infrastructure without vendor lock-in to public AI services. Deploy in days, not months.",
+      "Ready to go when you are without vendor lock-ins or questionable public AI services. Getting going in days, not months.",
   },
 ];
 
@@ -45,11 +45,10 @@ export function FeaturesSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Built for HR Teams, Not Engineers
+            Built for HR Teams Like Yours
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Transform scattered HR information into a unified knowledge base
-            that saves 1.8 hours per employee daily.
+            Centralize scattered HR information into a unified knowledge base
           </p>
         </div>
 

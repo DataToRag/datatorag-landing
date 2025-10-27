@@ -9,12 +9,12 @@ const faqs = [
   {
     question: "Does my HR data ever leave our infrastructure?",
     answer:
-      "No. Unlike ChatGPT or other cloud AI solutions, DatatoRAG runs entirely within your infrastructure. Your employee data, policies, and benefits information never gets sent to OpenAI, Anthropic, or any third party. Everything stays on your servers.",
+      "No. Unlike ChatGPT or other cloud AI solutions, DatatoRAG runs entirely within our infrastructure. Your employee data, policies, and benefits information never gets sent to OpenAI, Anthropic, or any third party. Everything stays on our secure servers.",
   },
   {
     question: "How much time can this save our HR team?",
     answer:
-      "Our customers see an average 67% reduction in routine HR tickets. Teams save 15+ hours per week by automating responses to common questions about PTO policies, benefits enrollment, parental leave, and company handbooks.",
+      "Our customers see an average 80% reduction in routine HR requests. Teams save 15+ hours per week by automating responses to common questions about PTO policies, benefits enrollment, parental leave, and company handbooks.",
   },
   {
     question: "What types of HR documents can I upload?",
@@ -24,12 +24,12 @@ const faqs = [
   {
     question: "How accurate are the AI responses?",
     answer:
-      "DatatoRAG uses Gemma 3 for custom embeddings specifically trained on HR terminology and concepts. This model has been battle-tested across 10,000s of documents and understands the nuances of benefits, leave policies, and HR processes better than generic AI models—reducing incorrect answers and improving employee trust.",
+      "DatatoRAG uses AI models best suited for HR terminology and concepts. We also offer the ability to select and tune models based on the client's needs and data. Our goal is to ensure the client has access to the best model for their data.",
   },
   {
     question: "How quickly can we get started?",
     answer:
-      "We're currently onboarding early customers. Join our waitlist to get priority access and work with our team to deploy DatatoRAG in your infrastructure within weeks, not months.",
+      "We're currently onboarding early customers. Join our waitlist to get priority access and work with our team to integrate DatatoRAG into your workflow.",
   },
 ];
 

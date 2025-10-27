@@ -95,7 +95,7 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                   >
                     <span className="text-foreground text-sm">
-                      Trusted by 50+ HR teams to reduce ticket volume by 67%
+                      Trusted by 50+ HR teams to reduce ticket volume by 80%
                     </span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
@@ -112,15 +112,14 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                   </Link>
 
                   <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                    Reduce HR Tickets by 67% with Privacy-First AI
+                    Reduce HR Requests by 80% with Privacy-First AI
                   </h1>
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                    Your sensitive HR data never leaves your infrastructure.
-                    Transform policies, handbooks, and benefits documentation
-                    into an AI-powered knowledge base with Gemma 3 embeddings
-                    trained on HR terminology. Unlike generic models, your data
-                    stays private and never gets sent to third parties like
-                    OpenAI or Anthropic.
+                    Your sensitive data never leaves our infrastructure.
+                    We self-host models to ensure all data stays private and secure.
+                    We never share data with third party model providers like OpenAI, Meta, or Google.
+                    Start transforming policies, handbooks, and benefits
+                    into an AI-powered knowledge base today!
                   </p>
                 </AnimatedGroup>
 

@@ -1,29 +1,29 @@
-import { TrendingDown, Clock, Target, Shield } from "lucide-react";
+import { Blocks, Clock, Target, Shield } from "lucide-react";
 
 const benefits = [
   {
     icon: Shield,
-    title: "Compliance-Ready: Your Data Never Leaves Your VPC",
+    title: "Compliance-Ready: Your Data Never Leaves Our Infrastructure",
     description:
-      "Unlike solutions built on ChatGPT or Claude API, your sensitive employee data is processed entirely on self-hosted models within your AWS infrastructure. Meet HIPAA, SOC2, and data residency requirements.",
+      "Unlike solutions built on ChatGPT or Claude API, your sensitive employee data is processed entirely on self-hosted models within our infrastructure. Comply with HIPAA, SOC2, and data residency requirements.",
   },
   {
     icon: Clock,
-    title: "Save 1.8 Hours Per Employee Daily",
+    title: "Increase Employee Productivity From Day 1",
     description:
-      "Stop the endless search for information. Employees find answers instantly, boosting productivity across your organization.",
+      "Stop the endless search for information. Reduce friction and tribal knowledge, help employees find answers instantly and boost productivity across your organization.",
   },
   {
     icon: Target,
-    title: "Reduce 90-Day Attrition by 50%",
+    title: "Reduce Your 90-Day Attrition Rate",
     description:
-      "Only 12% of employees rate onboarding as &apos;great.&apos; Our AI ensures consistent, engaging experiences that keep new hires.",
+      "Only 12% of employees rate onboarding as 'great'. Create great experiences for new hires and start on the right path to success",
   },
   {
-    icon: TrendingDown,
+    icon: Blocks,
     title: "Deploy Without IT or AI Teams",
     description:
-      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Pre-built on AWS SageMaker and OpenSearch. Go live in days, not months. No technical expertise required.",
+      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Go live on your terms, no technical expertise required.",
   },
 ];
 
@@ -36,8 +36,9 @@ export function BenefitsSection() {
             The ROI Is Clear
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Mid-market companies see ROI in 3 months. No AI team needed, works
-            with your existing HRIS stack.
+            Experience results within months.
+            No dedicated AI team needed or complicated integrations.
+            Integrate with your existing HRIS stack today.
           </p>
         </div>
 
@@ -66,18 +67,18 @@ export function BenefitsSection() {
                 100%
               </div>
               <p className="text-muted-foreground">
-                Data Privacy - On Your Infrastructure
+                Data Privacy
               </p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">67%</div>
-              <p className="text-muted-foreground">Reduction in HR Tickets</p>
+              <div className="text-4xl font-bold text-foreground mb-2">80%</div>
+              <p className="text-muted-foreground">Reduction in HR Requests</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-foreground mb-2">
-                1.8hrs
+                1
               </div>
-              <p className="text-muted-foreground">Saved Per Employee Daily</p>
+              <p className="text-muted-foreground">Centralized Solution</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-foreground mb-2">
