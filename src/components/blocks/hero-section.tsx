@@ -95,7 +95,8 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                   >
                     <span className="text-foreground text-sm">
-                      Trusted by 50+ HR teams to reduce ticket volume by 80%
+                      Trusted by 50+ HR teams - Same question = same answer,
+                      every time
                     </span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
@@ -112,14 +113,14 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                   </Link>
 
                   <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                    Reduce HR Requests by 80% with Privacy-First AI
+                    Accurate HR Answers. Every Time.
                   </h1>
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                    Your sensitive data never leaves our infrastructure.
-                    We self-host models to ensure all data stays private and secure.
-                    We never share data with third party model providers like OpenAI, Meta, or Google.
-                    Start transforming policies, handbooks, and benefits
-                    into an AI-powered knowledge base today!
+                    Built for HR teams who need guaranteed accuracy, complete
+                    privacy, and Slack-native support. Battle-tested across
+                    10,000s of documents with zero hallucinations. Your data
+                    never leaves our infrastructure - we self-host all models to
+                    ensure compliance. Same question = same answer, every time.
                   </p>
                 </AnimatedGroup>
 
@@ -151,7 +152,9 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <span className="text-nowrap">Join the Waitlist</span>
+                        <span className="text-nowrap">
+                          See How We&apos;re Different
+                        </span>
                       </Link>
                     </Button>
                   </div>

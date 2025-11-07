@@ -1,6 +1,34 @@
-import { MessageSquare, Users, Link2, Zap, Lock, Brain } from "lucide-react";
+import {
+  MessageSquare,
+  Users,
+  Link2,
+  Zap,
+  Lock,
+  Target,
+  ShieldCheck,
+  Bell,
+  FileSearch,
+} from "lucide-react";
 
 const features = [
+  {
+    icon: Target,
+    title: "Guaranteed Accuracy",
+    description:
+      "10 employees asking the same question get identical, correct answers every time. Battle-tested across 10,000s of documents with zero hallucinations. Same question = same answer, always.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Anonymous & Private",
+    description:
+      "Employees ask sensitive questions confidentially about bereavement, personal leave, or embarrassing topics. HR gets anonymized metrics without seeing who asked what.",
+  },
+  {
+    icon: Bell,
+    title: "Smart Alert System",
+    description:
+      "Automatically flags harassment or discrimination questions for HR action while keeping employee identity completely private. Know when issues arise without compromising confidentiality.",
+  },
   {
     icon: Lock,
     title: "Your Data Is Secure",
@@ -8,16 +36,16 @@ const features = [
       "Self-hosted models ensure compliance with privacy. No ChatGPT or public AI services allowed! Your data never leaves our infrastructure.",
   },
   {
-    icon: Brain,
-    title: "Purpose-Built for Your Usecase",
+    icon: FileSearch,
+    title: "Source Citation",
     description:
-      "We support all models! Choose the one that suits your needs for HR terms like 'PTO accrual,' 'rollover,' and 'payout.'",
+      "Every answer shows exactly which document and page it came from. Verify information instantly and build trust with transparent, traceable responses.",
   },
   {
     icon: MessageSquare,
-    title: "Self-Service HR Knowledge Base",
+    title: "Self-Service via Slack",
     description:
-      "Employees get instant answers to benefits, policy, and procedure questions without waiting for HR responses.",
+      "Employees get instant answers to benefits, policy, and procedure questions via Slack slash commands - right where they already work. No new tools to learn.",
   },
   {
     icon: Users,
@@ -27,9 +55,9 @@ const features = [
   },
   {
     icon: Link2,
-    title: "Seamless HRIS Integration",
+    title: "Seamless Integration",
     description:
-      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, and more. Works with your existing HR tech without requiring a complete system overhaul.",
+      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, Google Drive, and more. Easy document updates for annual policy and benefits changes.",
   },
   {
     icon: Zap,

@@ -1,6 +1,12 @@
-import { Blocks, Clock, Target, Shield } from "lucide-react";
+import { Blocks, Clock, Target, Shield, CheckCircle } from "lucide-react";
 
 const benefits = [
+  {
+    icon: CheckCircle,
+    title: "Eliminate ChatGPT's Hallucination Problem",
+    description:
+      "Unlike ChatGPT, we guarantee consistency. Same question = same answer, every time. No more contradictory responses, no made-up policies, no pulling from the internet. Only your approved documents.",
+  },
   {
     icon: Shield,
     title: "Compliance-Ready: Your Data Never Leaves Our Infrastructure",
@@ -36,9 +42,9 @@ export function BenefitsSection() {
             The ROI Is Clear
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience results within months.
-            No dedicated AI team needed or complicated integrations.
-            Integrate with your existing HRIS stack today.
+            Experience results within months. No dedicated AI team needed or
+            complicated integrations. Integrate with your existing HRIS stack
+            today.
           </p>
         </div>
 
@@ -66,18 +72,14 @@ export function BenefitsSection() {
               <div className="text-4xl font-bold text-foreground mb-2">
                 100%
               </div>
-              <p className="text-muted-foreground">
-                Data Privacy
-              </p>
+              <p className="text-muted-foreground">Answer Accuracy</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-foreground mb-2">80%</div>
               <p className="text-muted-foreground">Reduction in HR Requests</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">
-                1
-              </div>
+              <div className="text-4xl font-bold text-foreground mb-2">1</div>
               <p className="text-muted-foreground">Centralized Solution</p>
             </div>
             <div>

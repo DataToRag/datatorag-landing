@@ -1,4 +1,4 @@
-import { UserPlus, FileText, Shield, Globe, Clock } from "lucide-react";
+import { UserPlus, FileText, Shield, Globe, Clock, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -23,6 +23,17 @@ const useCases = [
       "Natural language queries",
       "Policy version control",
       "Compliance tracking",
+    ],
+  },
+  {
+    icon: Lock,
+    title: "Sensitive & Personal Questions",
+    description:
+      "Employees get confidential answers about miscarriage bereavement, personal leave, or embarrassing questions without HR knowing who asked.",
+    features: [
+      "Complete anonymity guaranteed",
+      "Sensitive topic detection & alerts",
+      "Privacy-first architecture",
     ],
   },
   {

@@ -8,21 +8,21 @@ const steps = [
     icon: Link2,
     title: "Connect Your Data Securely",
     description:
-      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), document storage (SharePoint, Box, FTP), or upload files directly.",
+      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), Google Drive, document storage (SharePoint, Box), or upload files directly. Easy annual updates for benefits and policy changes.",
   },
   {
     number: "2",
     icon: Brain,
     title: "Process Your Data With AI Models",
     description:
-      "Our self-hosted models securely process your data. We're experts in HR data and offer the ability to choose your own model to fit your needs.",
+      "Our self-hosted models securely process your data with zero hallucinations. No internet access, no third-party APIs - only your approved documents. Battle-tested accuracy across 10,000s of HR documents.",
   },
   {
     number: "3",
     icon: MessageSquare,
     title: "Query with Confidence",
     description:
-      "Fast, accurate answers all within the context of your data. Control who has access and what they access. Integrate into Slack, Teams, API, or custom UI.",
+      "Fast, accurate answers with complete anonymity. Same question = same answer, every time. Deploy via Slack slash commands, Teams, custom UI, or API - wherever your employees already work.",
   },
 ];
 
@@ -35,8 +35,8 @@ export function HowItWorksSection() {
             Secure AI for HR in 3 Simple Steps
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From secure data ingestion to private AI-powered context, integrate AI
-            into your workflow with ease.
+            From secure data ingestion to private AI-powered context, integrate
+            AI into your workflow with ease.
           </p>
         </div>
 

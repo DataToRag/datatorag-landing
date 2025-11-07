@@ -1,16 +1,20 @@
-import { HeroSection } from './blocks/hero-section';
-import { FeaturesSection } from './blocks/features-section';
-import { HowItWorksSection } from './blocks/how-it-works-section';
-import { BenefitsSection } from './blocks/benefits-section';
-import { UseCasesSection } from './blocks/use-cases-section';
-import { FAQSection } from './blocks/faq-section';
-import { Footer } from './blocks/footer';
+import { HeroSection } from "./blocks/hero-section";
+import { ChatGPTComparisonSection } from "./blocks/chatgpt-comparison-section";
+import { FeaturesSection } from "./blocks/features-section";
+import { HowItWorksSection } from "./blocks/how-it-works-section";
+import { BenefitsSection } from "./blocks/benefits-section";
+import { UseCasesSection } from "./blocks/use-cases-section";
+import { FAQSection } from "./blocks/faq-section";
+import { Footer } from "./blocks/footer";
 
 export function LandingPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <HeroSection />
+
+      {/* ChatGPT Comparison Section */}
+      <ChatGPTComparisonSection />
 
       {/* Features Section */}
       <FeaturesSection />
