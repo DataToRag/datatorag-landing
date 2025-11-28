@@ -5,7 +5,7 @@ import { ChatInterface } from "@/components/blocks/demo/chat-interface";
 import { AccuracyComparisonPanel } from "@/components/blocks/demo/accuracy-comparison-panel";
 import { PrivacyComparison } from "@/components/blocks/demo/privacy-indicator";
 import { AdminDashboard } from "@/components/blocks/demo/admin-dashboard";
-import { DocumentUploadFlow } from "@/components/blocks/demo/document-upload-flow";
+import { DocumentManager } from "@/components/blocks/demo/document-manager";
 import { IntegrationDashboard } from "@/components/blocks/demo/integration-dashboard";
 import { SynthesisVisualizer } from "@/components/blocks/demo/synthesis-visualizer";
 import { AlertNotificationFlow } from "@/components/blocks/demo/alert-notification-flow";
@@ -224,10 +224,12 @@ export default function DemoPage() {
               </div>
 
               {/* Scenario content */}
-              <div className="p-6">
-                {activeScenario === "document-lifecycle" && (
-                  <DocumentUploadFlow />
-                )}
+              <div
+                className={
+                  activeScenario === "document-lifecycle" ? "p-0" : "p-6"
+                }
+              >
+                {activeScenario === "document-lifecycle" && <DocumentManager />}
                 {activeScenario === "integration" && <IntegrationDashboard />}
                 {activeScenario === "synthesis" && <SynthesisVisualizer />}
                 {activeScenario === "citations" && <CitationsScenario />}

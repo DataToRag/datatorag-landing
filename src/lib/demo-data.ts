@@ -3,6 +3,252 @@
  * Pre-scripted scenarios, Q&A pairs, and document sources
  */
 
+// ============================================================================
+// Data Source Integrations
+// ============================================================================
+
+export type DataSourceId =
+  | "gdrive"
+  | "sharepoint"
+  | "notion"
+  | "confluence"
+  | "dropbox";
+
+export interface DataSource {
+  id: DataSourceId;
+  name: string;
+  description: string;
+  connected: boolean;
+  documentsCount: number;
+  lastSync: Date | null;
+  folders?: string[];
+  color: string;
+}
+
+export const MOCK_DATA_SOURCES: DataSource[] = [
+  {
+    id: "gdrive",
+    name: "Google Drive",
+    description: "Connect your Google Workspace documents",
+    connected: true,
+    documentsCount: 24,
+    lastSync: new Date(Date.now() - 2 * 60 * 1000), // 2 min ago
+    folders: ["HR Policies", "Benefits", "Onboarding"],
+    color: "#4285F4",
+  },
+  {
+    id: "sharepoint",
+    name: "SharePoint",
+    description: "Connect Microsoft SharePoint sites",
+    connected: true,
+    documentsCount: 156,
+    lastSync: new Date(Date.now() - 5 * 60 * 1000), // 5 min ago
+    folders: ["Company Handbook", "Legal", "Training"],
+    color: "#038387",
+  },
+  {
+    id: "notion",
+    name: "Notion",
+    description: "Import pages from Notion workspaces",
+    connected: false,
+    documentsCount: 0,
+    lastSync: null,
+    color: "#000000",
+  },
+  {
+    id: "confluence",
+    name: "Confluence",
+    description: "Connect Atlassian Confluence spaces",
+    connected: false,
+    documentsCount: 0,
+    lastSync: null,
+    color: "#0052CC",
+  },
+  {
+    id: "dropbox",
+    name: "Dropbox",
+    description: "Sync files from Dropbox folders",
+    connected: false,
+    documentsCount: 0,
+    lastSync: null,
+    color: "#0061FF",
+  },
+];
+
+// ============================================================================
+// Knowledge Base Documents
+// ============================================================================
+
+export type ProcessingStage = "upload" | "chunk" | "embed" | "index";
+export type ProcessingStatus = "pending" | "active" | "complete" | "error";
+
+export interface ProcessingStep {
+  stage: ProcessingStage;
+  status: ProcessingStatus;
+  detail: string;
+  progress?: number;
+}
+
+export interface KnowledgeDocument {
+  id: string;
+  name: string;
+  source: DataSourceId;
+  type: "pdf" | "docx" | "txt" | "md" | "html";
+  size: string;
+  chunks: number;
+  status: "processing" | "ready" | "error" | "syncing";
+  lastUpdated: Date;
+  processingSteps: ProcessingStep[];
+}
+
+export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
+  {
+    id: "kb-doc-1",
+    name: "Employee Handbook 2025.pdf",
+    source: "gdrive",
+    type: "pdf",
+    size: "2.4 MB",
+    chunks: 47,
+    status: "ready",
+    lastUpdated: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+    processingSteps: [
+      { stage: "upload", status: "complete", detail: "2.4 MB received" },
+      { stage: "chunk", status: "complete", detail: "47 chunks created" },
+      {
+        stage: "embed",
+        status: "complete",
+        detail: "Gemma 3 embeddings generated",
+      },
+      {
+        stage: "index",
+        status: "complete",
+        detail: "Added to vector database",
+      },
+    ],
+  },
+  {
+    id: "kb-doc-2",
+    name: "Benefits Guide 2025.pdf",
+    source: "gdrive",
+    type: "pdf",
+    size: "1.8 MB",
+    chunks: 32,
+    status: "ready",
+    lastUpdated: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+    processingSteps: [
+      { stage: "upload", status: "complete", detail: "1.8 MB received" },
+      { stage: "chunk", status: "complete", detail: "32 chunks created" },
+      {
+        stage: "embed",
+        status: "complete",
+        detail: "Gemma 3 embeddings generated",
+      },
+      {
+        stage: "index",
+        status: "complete",
+        detail: "Added to vector database",
+      },
+    ],
+  },
+  {
+    id: "kb-doc-3",
+    name: "PTO Policy.docx",
+    source: "sharepoint",
+    type: "docx",
+    size: "245 KB",
+    chunks: 12,
+    status: "ready",
+    lastUpdated: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+    processingSteps: [
+      { stage: "upload", status: "complete", detail: "245 KB received" },
+      { stage: "chunk", status: "complete", detail: "12 chunks created" },
+      {
+        stage: "embed",
+        status: "complete",
+        detail: "Gemma 3 embeddings generated",
+      },
+      {
+        stage: "index",
+        status: "complete",
+        detail: "Added to vector database",
+      },
+    ],
+  },
+  {
+    id: "kb-doc-4",
+    name: "Anti-Harassment Policy.pdf",
+    source: "sharepoint",
+    type: "pdf",
+    size: "890 KB",
+    chunks: 18,
+    status: "ready",
+    lastUpdated: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000), // 14 days ago
+    processingSteps: [
+      { stage: "upload", status: "complete", detail: "890 KB received" },
+      { stage: "chunk", status: "complete", detail: "18 chunks created" },
+      {
+        stage: "embed",
+        status: "complete",
+        detail: "Gemma 3 embeddings generated",
+      },
+      {
+        stage: "index",
+        status: "complete",
+        detail: "Added to vector database",
+      },
+    ],
+  },
+  {
+    id: "kb-doc-5",
+    name: "Onboarding Checklist.docx",
+    source: "gdrive",
+    type: "docx",
+    size: "156 KB",
+    chunks: 8,
+    status: "ready",
+    lastUpdated: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    processingSteps: [
+      { stage: "upload", status: "complete", detail: "156 KB received" },
+      { stage: "chunk", status: "complete", detail: "8 chunks created" },
+      {
+        stage: "embed",
+        status: "complete",
+        detail: "Gemma 3 embeddings generated",
+      },
+      {
+        stage: "index",
+        status: "complete",
+        detail: "Added to vector database",
+      },
+    ],
+  },
+  {
+    id: "kb-doc-6",
+    name: "Remote Work Guidelines.pdf",
+    source: "sharepoint",
+    type: "pdf",
+    size: "1.2 MB",
+    chunks: 24,
+    status: "syncing",
+    lastUpdated: new Date(),
+    processingSteps: [
+      { stage: "upload", status: "complete", detail: "1.2 MB received" },
+      {
+        stage: "chunk",
+        status: "active",
+        detail: "Creating chunks...",
+        progress: 65,
+      },
+      { stage: "embed", status: "pending", detail: "Waiting..." },
+      { stage: "index", status: "pending", detail: "Waiting..." },
+    ],
+  },
+];
+
+// ============================================================================
+// Original Document Source Types (for citations)
+// ============================================================================
+
 export interface DocumentSource {
   id: string;
   title: string;

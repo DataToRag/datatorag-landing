@@ -20,7 +20,11 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:www.npmjs.com)",
       "Bash(cat:*)",
-      "Bash(npx ai-elements@latest add prompt-input:*)"
+      "Bash(npx ai-elements@latest add prompt-input:*)",
+      "WebFetch(domain:www.vectara.com)",
+      "WebFetch(domain:docs.vectara.com)",
+      "WebFetch(domain:www.pinecone.io)",
+      "WebFetch(domain:www.notion.com)"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"
