@@ -136,7 +136,7 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     },
                     ...transitionVariants,
                   }}
-                  className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
+                  className="mt-12 flex flex-col items-center justify-center gap-3 md:flex-row"
                 >
                   <div
                     key={1}
@@ -147,14 +147,27 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                       size="lg"
                       className="rounded-xl px-5 text-base"
                     >
+                      <Link href="/demo">
+                        <span className="text-nowrap">
+                          Try Interactive Demo
+                        </span>
+                      </Link>
+                    </Button>
+                  </div>
+                  <div key={2}>
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="rounded-xl px-5 text-base"
+                    >
                       <Link
                         href="https://tally.so/r/wa8p9q"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <span className="text-nowrap">
-                          See How We&apos;re Different
-                        </span>
+                        <span className="text-nowrap">Join Waitlist</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
                   </div>

@@ -13,7 +13,13 @@
       "Bash(git commit -m \"Update dev server port to 3333\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
       "Bash(pnpm install)",
       "Bash(git commit -m \"$(cat <<''EOF''\nInitial setup: Next.js 15 with OpenNext, Cloudflare, and shadcn/ui\n\n- Configure Next.js 15.4.6 with TypeScript\n- Set up OpenNext for Cloudflare deployment\n- Add shadcn/ui with New York style\n- Configure Tailwind CSS v4 with custom theme\n- Add ESLint, Prettier, Husky, and lint-staged\n- Set up pnpm as package manager\n- Configure directory structure with src/app, src/components, src/lib\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git commit -m \"$(cat <<''EOF''\nSimplify footer and refine Gemma 3 messaging\n\n- Remove footer navigation sections (Company, Product, Legal, Connect) as pages don''t exist yet\n- Simplify footer to copyright only\n- Update copy to explicitly mention Gemma 3 embeddings throughout\n- Add social proof about being battle-tested across 10,000s of documents\n- Improve clarity on custom embedding model capabilities\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nSimplify footer and refine Gemma 3 messaging\n\n- Remove footer navigation sections (Company, Product, Legal, Connect) as pages don''t exist yet\n- Simplify footer to copyright only\n- Update copy to explicitly mention Gemma 3 embeddings throughout\n- Add social proof about being battle-tested across 10,000s of documents\n- Improve clarity on custom embedding model capabilities\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "WebFetch(domain:sdk.vercel.ai)",
+      "WebFetch(domain:ai-sdk.dev)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(cat:*)"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"
