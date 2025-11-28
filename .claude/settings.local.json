@@ -19,7 +19,8 @@
       "WebSearch",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:www.npmjs.com)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npx ai-elements@latest add prompt-input:*)"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"

@@ -4,9 +4,15 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { Button } from "@/components/ui/button";
-import { Send, Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Loader2 } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { MessageDisplay } from "./message-display";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputSubmit,
+} from "@/components/ai-elements/prompt-input";
 
 interface ChatInterfaceProps {
   initialMessages?: Array<{ role: "user" | "assistant"; content: string }>;
@@ -21,8 +27,6 @@ export function ChatInterface({
   showSources = true,
   anonymous = false,
 }: ChatInterfaceProps) {
-  const [input, setInput] = useState("");
-
   const { messages, sendMessage, status, error, regenerate } = useChat({
     transport: new DefaultChatTransport({ api: "/api/chat" }),
     messages: initialMessages as any[],
@@ -31,17 +35,11 @@ export function ChatInterface({
   const isLoading = status === "submitted" || status === "streaming";
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  // Focus input on mount
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   return (
     <div className="flex flex-col h-full">
@@ -50,7 +48,7 @@ export function ChatInterface({
         {messages.length === 0 && (
           <div className="text-center text-muted-foreground py-12">
             <p className="text-lg font-medium mb-2">
-              👋 Welcome to DatatoRAG Demo
+              Welcome to DatatoRAG Demo
             </p>
             <p className="text-sm">
               Ask any question about HR policies, benefits, or leave policies
@@ -102,33 +100,23 @@ export function ChatInterface({
 
       {/* Input area */}
       <div className="border-t bg-background p-4">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (input.trim()) {
-              sendMessage({ text: input });
-              setInput("");
+        <PromptInput
+          onSubmit={({ text }) => {
+            if (text.trim()) {
+              sendMessage({ text });
             }
           }}
-          className="flex gap-2"
         >
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+          <PromptInputTextarea
             placeholder={placeholder}
             disabled={isLoading}
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background disabled:opacity-50"
+            autoFocus
           />
-          <Button type="submit" disabled={isLoading || !input.trim()}>
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Send className="h-4 w-4" />
-            )}
-          </Button>
-        </form>
+          <PromptInputFooter>
+            <div />
+            <PromptInputSubmit status={status} disabled={isLoading} />
+          </PromptInputFooter>
+        </PromptInput>
 
         <p className="text-xs text-muted-foreground mt-2 text-center">
           This is a demo with pre-scripted responses. Try asking about
