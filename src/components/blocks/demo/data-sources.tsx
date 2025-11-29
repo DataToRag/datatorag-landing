@@ -313,7 +313,7 @@ export function DataSourcesGrid({
           <h3 className="text-sm font-medium text-muted-foreground mb-4">
             Connected Sources
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {connectedSources.map((source) => (
               <DataSourceCard
                 key={source.id}
@@ -332,7 +332,7 @@ export function DataSourcesGrid({
           <h3 className="text-sm font-medium text-muted-foreground mb-4">
             Available Integrations
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {availableSources.map((source) => (
               <DataSourceCard
                 key={source.id}

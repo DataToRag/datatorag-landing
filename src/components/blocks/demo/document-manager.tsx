@@ -206,7 +206,7 @@ export function DocumentManager() {
 
       {/* Add Source Dialog */}
       <Dialog open={showAddSourceDialog} onOpenChange={setShowAddSourceDialog}>
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="!max-w-[900px] w-[90vw] max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Connect a Data Source</DialogTitle>
           </DialogHeader>
