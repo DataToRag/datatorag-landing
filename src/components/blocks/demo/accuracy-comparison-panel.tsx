@@ -113,12 +113,12 @@ export function AccuracyComparisonPanel() {
 
               {/* Answer bubble */}
               {shouldShowAnswer && (
-                <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-sm animate-in fade-in slide-in-from-bottom-2">
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-sm animate-in fade-in slide-in-from-bottom-2">
                   <p className="text-xs leading-relaxed">
                     {answer.split("\n\n")[0]}
                   </p>
                   {shouldShowCheckmark && (
-                    <div className="mt-2 pt-2 border-t border-purple-500/20 flex items-center gap-2 text-green-600 dark:text-green-400">
+                    <div className="mt-2 pt-2 border-t border-blue-500/20 flex items-center gap-2 text-green-600 dark:text-green-400">
                       <CheckCircle className="h-4 w-4" />
                       <span className="text-xs font-medium">
                         Identical response

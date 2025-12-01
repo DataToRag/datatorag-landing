@@ -12,7 +12,10 @@ export type DataSourceId =
   | "sharepoint"
   | "notion"
   | "confluence"
-  | "dropbox";
+  | "dropbox"
+  | "workday"
+  | "bamboohr"
+  | "adp";
 
 export interface DataSource {
   id: DataSourceId;
@@ -72,6 +75,36 @@ export const MOCK_DATA_SOURCES: DataSource[] = [
     documentsCount: 0,
     lastSync: null,
     color: "#0061FF",
+  },
+  // HRIS Integrations
+  {
+    id: "workday",
+    name: "Workday",
+    description: "Sync HR policies and employee data",
+    connected: true,
+    documentsCount: 89,
+    lastSync: new Date(Date.now() - 60 * 60 * 1000), // 1 hour ago
+    folders: ["HR Policies", "Job Descriptions", "Org Charts"],
+    color: "#F68D2E",
+  },
+  {
+    id: "bamboohr",
+    name: "BambooHR",
+    description: "Import benefits and time-off policies",
+    connected: true,
+    documentsCount: 45,
+    lastSync: new Date(Date.now() - 30 * 60 * 1000), // 30 min ago
+    folders: ["Benefits", "Time Off", "Employee Handbook"],
+    color: "#73C41D",
+  },
+  {
+    id: "adp",
+    name: "ADP Workforce",
+    description: "Sync payroll and compliance documents",
+    connected: false,
+    documentsCount: 0,
+    lastSync: null,
+    color: "#D0271D",
   },
 ];
 
@@ -502,7 +535,7 @@ export const MOCK_USERS = [
     name: "Elena Rodriguez",
     role: "Designer",
     avatar: "ER",
-    color: "bg-purple-500",
+    color: "bg-teal-500",
   },
 ];
 

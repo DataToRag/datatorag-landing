@@ -68,7 +68,7 @@ export function IntegrationDashboard() {
       lastSync: "3 hours ago",
       dataTypes: ["Compliance Docs", "Training Materials", "Forms"],
       documentsCount: 203,
-      color: "bg-purple-500",
+      color: "bg-teal-500",
     },
     {
       id: "adp",
@@ -154,7 +154,7 @@ export function IntegrationDashboard() {
 
         <div className="bg-muted rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-600 dark:text-teal-400 flex items-center justify-center">
               <Calendar className="h-4 w-4" />
             </div>
             <p className="text-sm text-muted-foreground">Total Documents</p>

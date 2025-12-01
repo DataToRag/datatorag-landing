@@ -22,6 +22,7 @@ const DataSourceIcons: Record<
   DataSourceId,
   React.FC<{ className?: string }>
 > = {
+  // Document Storage
   gdrive: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M4.433 22l-1.9-3.3 7.367-12.757 1.9 3.3L4.433 22zm15.134 0H4.433l1.9-3.3h15.134l-1.9 3.3zM12 6.943l1.9-3.3L21.267 16l-1.9 3.3L12 6.943z" />
@@ -45,6 +46,29 @@ const DataSourceIcons: Record<
   dropbox: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M6 2l6 4-6 4 6 4-6 4 6-4 6 4-6-4 6-4-6-4 6 4-6-4-6 4z" />
+    </svg>
+  ),
+  // HRIS Systems
+  workday: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="4" fill="white" />
+    </svg>
+  ),
+  bamboohr: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <rect width="24" height="24" rx="4" />
+      <path
+        d="M7 18V8c0-1 .5-2 2-2h1c1 0 2 .5 2 2v4c0 1 .5 2 2 2h1c1 0 2-.5 2-2V6"
+        stroke="white"
+        strokeWidth="2"
+        fill="none"
+      />
+    </svg>
+  ),
+  adp: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <rect width="24" height="24" rx="4" />
     </svg>
   ),
 };

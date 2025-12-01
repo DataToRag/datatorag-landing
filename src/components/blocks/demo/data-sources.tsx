@@ -14,11 +14,51 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { type DataSource, type DataSourceId } from "@/lib/demo-data";
 
-// Data source brand icons
+// Data source brand icons (document storage + HRIS)
 const DataSourceLogos: Record<
   DataSourceId,
   React.FC<{ className?: string }>
 > = {
+  // HRIS Systems
+  workday: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" fill="#F68D2E" />
+      <path
+        d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4-4-1.8-4-4z"
+        fill="white"
+      />
+      <circle cx="12" cy="12" r="2" fill="#F68D2E" />
+    </svg>
+  ),
+  bamboohr: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="4" fill="#73C41D" />
+      <path
+        d="M7 18V8c0-1 .5-2 2-2h1c1 0 2 .5 2 2v4c0 1 .5 2 2 2h1c1 0 2-.5 2-2V6"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+  ),
+  adp: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="4" fill="#D0271D" />
+      <text
+        x="12"
+        y="16"
+        textAnchor="middle"
+        fill="white"
+        fontSize="10"
+        fontWeight="bold"
+        fontFamily="Arial"
+      >
+        ADP
+      </text>
+    </svg>
+  ),
+  // Document Storage
   gdrive: ({ className }) => (
     <svg className={className} viewBox="0 0 87.3 78" fill="none">
       <path
@@ -273,6 +313,15 @@ interface DataSourcesGridProps {
   onSourceUpdate: (sources: DataSource[]) => void;
 }
 
+const HRIS_IDS: DataSourceId[] = ["workday", "bamboohr", "adp"];
+const STORAGE_IDS: DataSourceId[] = [
+  "gdrive",
+  "sharepoint",
+  "notion",
+  "confluence",
+  "dropbox",
+];
+
 export function DataSourcesGrid({
   sources,
   onSourceUpdate,
@@ -302,48 +351,71 @@ export function DataSourcesGrid({
     );
   };
 
-  const connectedSources = sources.filter((s) => s.connected);
-  const availableSources = sources.filter((s) => !s.connected);
+  const hrisSources = sources.filter((s) => HRIS_IDS.includes(s.id));
+  const storageSources = sources.filter((s) => STORAGE_IDS.includes(s.id));
 
   return (
     <div className="space-y-8">
-      {/* Connected Sources */}
-      {connectedSources.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-4">
-            Connected Sources
+      {/* HRIS Integrations */}
+      <div>
+        <div className="mb-4">
+          <h3 className="text-sm font-medium text-foreground mb-1">
+            HRIS Integrations
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {connectedSources.map((source) => (
-              <DataSourceCard
-                key={source.id}
-                source={source}
-                onConnect={handleConnect}
-                onDisconnect={handleDisconnect}
-              />
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground">
+            Connect your HR systems to automatically sync policies, employee
+            data, and benefits information
+          </p>
         </div>
-      )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {hrisSources.map((source) => (
+            <DataSourceCard
+              key={source.id}
+              source={source}
+              onConnect={handleConnect}
+              onDisconnect={handleDisconnect}
+            />
+          ))}
+        </div>
+      </div>
 
-      {/* Available Sources */}
-      {availableSources.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-4">
-            Available Integrations
+      {/* Document Storage */}
+      <div>
+        <div className="mb-4">
+          <h3 className="text-sm font-medium text-foreground mb-1">
+            Document Storage
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {availableSources.map((source) => (
-              <DataSourceCard
-                key={source.id}
-                source={source}
-                onConnect={handleConnect}
-                onDisconnect={handleDisconnect}
-              />
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground">
+            Import documents from cloud storage providers and collaboration
+            tools
+          </p>
         </div>
-      )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {storageSources.map((source) => (
+            <DataSourceCard
+              key={source.id}
+              source={source}
+              onConnect={handleConnect}
+              onDisconnect={handleDisconnect}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Info Box */}
+      <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+        <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-2">
+          How Integrations Work
+        </p>
+        <ul className="text-xs text-muted-foreground space-y-1">
+          <li>
+            Integrations automatically sync documents every hour (configurable)
+          </li>
+          <li>New documents are detected and processed immediately</li>
+          <li>Updated documents replace old versions automatically</li>
+          <li>All synced data stays secure and private</li>
+        </ul>
+      </div>
     </div>
   );
 }

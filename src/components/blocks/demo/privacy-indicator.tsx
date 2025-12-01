@@ -93,7 +93,7 @@ export function PrivacyComparison({ className = "" }: PrivacyComparisonProps) {
       {/* HR Admin View */}
       <div className="space-y-3">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-slate-500/20 text-slate-600 dark:text-slate-400 flex items-center justify-center">
             <EyeOff className="h-4 w-4" />
           </div>
           <div>
@@ -106,9 +106,9 @@ export function PrivacyComparison({ className = "" }: PrivacyComparisonProps) {
 
         <div className="bg-muted rounded-lg p-4 space-y-3">
           <div className="flex items-start gap-2">
-            <Eye className="h-4 w-4 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
+            <Eye className="h-4 w-4 text-slate-600 dark:text-slate-400 flex-shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-purple-600 dark:text-purple-400">
+              <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
                 Anonymous analytics only
               </p>
               <p className="text-xs text-muted-foreground mt-1">

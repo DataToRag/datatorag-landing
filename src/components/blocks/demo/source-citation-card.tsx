@@ -17,7 +17,7 @@ export function SourceCitationCard({ source }: SourceCitationCardProps) {
     benefits:
       "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20",
     policy:
-      "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
+      "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
   };
 
   const typeLabels = {

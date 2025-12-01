@@ -11,13 +11,16 @@ import {
   Bell,
   Shield,
   Calendar,
+  Eye,
+  EyeOff,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<
-    "overview" | "documents" | "alerts"
+    "overview" | "documents" | "alerts" | "privacy"
   >("overview");
 
   return (
@@ -39,7 +42,7 @@ export function AdminDashboard() {
       </div>
 
       {/* Tab navigation */}
-      <div className="border-b flex gap-4">
+      <div className="border-b flex flex-wrap gap-4">
         <button
           onClick={() => setActiveTab("overview")}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
@@ -70,6 +73,16 @@ export function AdminDashboard() {
         >
           Alerts & Monitoring
         </button>
+        <button
+          onClick={() => setActiveTab("privacy")}
+          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+            activeTab === "privacy"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Privacy Controls
+        </button>
       </div>
 
       {/* Tab content */}
@@ -77,6 +90,7 @@ export function AdminDashboard() {
         {activeTab === "overview" && <OverviewTab />}
         {activeTab === "documents" && <DocumentsTab />}
         {activeTab === "alerts" && <AlertsTab />}
+        {activeTab === "privacy" && <PrivacyTab />}
       </div>
     </div>
   );
@@ -100,7 +114,7 @@ function OverviewTab() {
 
         <div className="bg-muted rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
-            <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+            <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <p className="text-sm text-muted-foreground">Active Documents</p>
           </div>
           <p className="text-3xl font-bold">
@@ -339,6 +353,174 @@ function AlertsTab() {
               Alerts notify you that sensitive topics are being raised, but
               never reveal who asked the question. Employee anonymity is always
               preserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PrivacyTab() {
+  return (
+    <div className="space-y-6">
+      {/* Privacy Settings */}
+      <div className="bg-muted rounded-lg p-6">
+        <h4 className="font-semibold mb-4 flex items-center gap-2">
+          <ShieldCheck className="h-4 w-4" />
+          Privacy Configuration
+        </h4>
+        <div className="space-y-4">
+          <label className="flex items-center justify-between p-3 bg-background rounded-lg">
+            <div>
+              <p className="text-sm font-medium">Anonymous Mode (Default)</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                All employee questions are completely anonymous
+              </p>
+            </div>
+            <input
+              type="checkbox"
+              defaultChecked
+              className="w-4 h-4 rounded border-gray-300"
+            />
+          </label>
+
+          <label className="flex items-center justify-between p-3 bg-background rounded-lg">
+            <div>
+              <p className="text-sm font-medium">Aggregate Analytics Only</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                HR sees trends and patterns, never individual queries
+              </p>
+            </div>
+            <input
+              type="checkbox"
+              defaultChecked
+              className="w-4 h-4 rounded border-gray-300"
+            />
+          </label>
+
+          <label className="flex items-center justify-between p-3 bg-background rounded-lg">
+            <div>
+              <p className="text-sm font-medium">No Query Logging</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Individual questions are not stored after response
+              </p>
+            </div>
+            <input
+              type="checkbox"
+              defaultChecked
+              className="w-4 h-4 rounded border-gray-300"
+            />
+          </label>
+        </div>
+      </div>
+
+      {/* Privacy Comparison */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Employee View */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <ShieldCheck className="h-4 w-4" />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold">Employee Experience</h4>
+              <p className="text-xs text-muted-foreground">
+                Complete privacy guaranteed
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-muted rounded-lg p-4 space-y-3">
+            <div className="flex items-start gap-2">
+              <ShieldCheck className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-green-600 dark:text-green-400">
+                  Your identity is protected
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Ask sensitive questions about leave, medical issues, or
+                  personal matters without anyone knowing who asked.
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t pt-3 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">Name</span>
+                <span className="font-mono">***********</span>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">Email</span>
+                <span className="font-mono">***********</span>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">Department</span>
+                <span className="font-mono">***********</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* HR Admin View */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <EyeOff className="h-4 w-4" />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold">HR Dashboard View</h4>
+              <p className="text-xs text-muted-foreground">
+                Metrics without identity
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-muted rounded-lg p-4 space-y-3">
+            <div className="flex items-start gap-2">
+              <Eye className="h-4 w-4 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                  Anonymous analytics only
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  HR sees what questions are being asked and how often, but
+                  never who asked them.
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t pt-3 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">Total Questions</span>
+                <span className="font-semibold">1,247</span>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">This Week</span>
+                <span className="font-semibold">89</span>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">Top Topic</span>
+                <span className="font-semibold">PTO Policies</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Info Box */}
+      <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+        <div className="flex items-start gap-2">
+          <Shield className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-green-600 dark:text-green-400">
+              Privacy-First Architecture
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              DatatoRAG is built from the ground up with employee privacy as a
+              core principle. Employees can ask sensitive questions about
+              medical leave, harassment, or personal matters knowing their
+              identity is never recorded.
             </p>
           </div>
         </div>

@@ -49,9 +49,9 @@ export function SynthesisVisualizer() {
       id: "parental",
       name: "Parental Leave Guide",
       icon: "👶",
-      color: "purple",
-      bgColor: "bg-purple-500/10",
-      textColor: "text-purple-600 dark:text-purple-400",
+      color: "amber",
+      bgColor: "bg-amber-500/10",
+      textColor: "text-amber-600 dark:text-amber-400",
     },
   ];
 
@@ -72,7 +72,7 @@ export function SynthesisVisualizer() {
       text: " For parental leave, primary caregivers receive 16 weeks of paid leave, while secondary caregivers receive 8 weeks.",
       sourceId: "parental",
       sourceName: "Parental Leave Guide",
-      color: "purple",
+      color: "amber",
     },
     {
       text: " In total, that's 25 days for PTO and sick leave combined, plus up to 16 weeks for parental leave.",
@@ -131,10 +131,10 @@ export function SynthesisVisualizer() {
         text: "text-green-600 dark:text-green-400",
         border: "border-green-500/20",
       },
-      purple: {
-        bg: "bg-purple-500/10",
-        text: "text-purple-600 dark:text-purple-400",
-        border: "border-purple-500/20",
+      amber: {
+        bg: "bg-amber-500/10",
+        text: "text-amber-600 dark:text-amber-400",
+        border: "border-amber-500/20",
       },
       orange: {
         bg: "bg-orange-500/10",
@@ -231,7 +231,7 @@ export function SynthesisVisualizer() {
           </div>
           <Plus className="h-4 w-4 text-muted-foreground" />
           <div
-            className={`flex items-center gap-2 ${getColorClass("purple", "text")}`}
+            className={`flex items-center gap-2 ${getColorClass("amber", "text")}`}
           >
             <FileText className="h-4 w-4" />
             <span className="text-sm font-medium">Parental</span>

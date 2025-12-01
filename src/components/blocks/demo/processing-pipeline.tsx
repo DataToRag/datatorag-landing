@@ -320,16 +320,16 @@ export function ProcessingPipeline() {
                       className={cn(
                         "w-8 h-6 rounded border flex items-center justify-center transition-colors",
                         chunk.id < embeddedCount
-                          ? "bg-purple-500/30 border-purple-500/50"
+                          ? "bg-teal-500/30 border-teal-500/50"
                           : "bg-primary/20 border-primary/30"
                       )}
                       animate={
                         chunk.id < embeddedCount
                           ? {
                               boxShadow: [
-                                "0 0 0 0 rgba(168, 85, 247, 0.4)",
-                                "0 0 0 4px rgba(168, 85, 247, 0)",
-                                "0 0 0 0 rgba(168, 85, 247, 0)",
+                                "0 0 0 0 rgba(20, 184, 166, 0.4)",
+                                "0 0 0 4px rgba(20, 184, 166, 0)",
+                                "0 0 0 0 rgba(20, 184, 166, 0)",
                               ],
                             }
                           : {}
@@ -340,7 +340,7 @@ export function ProcessingPipeline() {
                         className={cn(
                           "text-[8px] font-mono",
                           chunk.id < embeddedCount
-                            ? "text-purple-600 dark:text-purple-400"
+                            ? "text-teal-600 dark:text-teal-400"
                             : "text-primary"
                         )}
                       >
@@ -353,7 +353,7 @@ export function ProcessingPipeline() {
                 {/* Gemma 3 badge */}
                 <div className="flex flex-col items-center">
                   <motion.div
-                    className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center"
+                    className="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center"
                     animate={{ rotate: 360 }}
                     transition={{
                       repeat: Infinity,
@@ -361,9 +361,9 @@ export function ProcessingPipeline() {
                       ease: "linear",
                     }}
                   >
-                    <Sparkles className="h-8 w-8 text-purple-500" />
+                    <Sparkles className="h-8 w-8 text-teal-500" />
                   </motion.div>
-                  <div className="mt-2 text-xs font-medium text-purple-600 dark:text-purple-400">
+                  <div className="mt-2 text-xs font-medium text-teal-600 dark:text-teal-400">
                     Gemma 3
                   </div>
                   <div className="text-xs text-muted-foreground">
@@ -389,7 +389,7 @@ export function ProcessingPipeline() {
                   {[0, 1, 2, 3, 4].map((i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-6 h-4 bg-purple-500/30 rounded border border-purple-500/50"
+                      className="absolute w-6 h-4 bg-teal-500/30 rounded border border-teal-500/50"
                       initial={{ x: 0, opacity: 1 }}
                       animate={{ x: 120, opacity: 0 }}
                       transition={{
@@ -459,7 +459,7 @@ export function ProcessingPipeline() {
           <div className="text-xs text-muted-foreground">Chunks Created</div>
         </div>
         <div className="bg-muted/50 rounded-lg p-3 text-center">
-          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+          <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">
             {embeddedCount}
           </div>
           <div className="text-xs text-muted-foreground">Embeddings</div>

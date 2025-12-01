@@ -29,58 +29,27 @@ import {
   MOCK_DATA_SOURCES,
 } from "@/lib/demo-data";
 
-// File type icons
+// File type icon - consistent styling for all types
+function FileTypeIcon({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center bg-muted text-muted-foreground rounded",
+        className
+      )}
+    >
+      <FileText className="h-4 w-4" />
+    </div>
+  );
+}
+
+// File type icons map (uses consistent styling)
 const FileTypeIcons: Record<string, React.FC<{ className?: string }>> = {
-  pdf: ({ className }) => (
-    <div
-      className={cn(
-        "flex items-center justify-center bg-red-500/10 text-red-600 dark:text-red-400 rounded",
-        className
-      )}
-    >
-      <FileText className="h-4 w-4" />
-    </div>
-  ),
-  docx: ({ className }) => (
-    <div
-      className={cn(
-        "flex items-center justify-center bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded",
-        className
-      )}
-    >
-      <FileText className="h-4 w-4" />
-    </div>
-  ),
-  txt: ({ className }) => (
-    <div
-      className={cn(
-        "flex items-center justify-center bg-gray-500/10 text-gray-600 dark:text-gray-400 rounded",
-        className
-      )}
-    >
-      <FileText className="h-4 w-4" />
-    </div>
-  ),
-  md: ({ className }) => (
-    <div
-      className={cn(
-        "flex items-center justify-center bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded",
-        className
-      )}
-    >
-      <FileText className="h-4 w-4" />
-    </div>
-  ),
-  html: ({ className }) => (
-    <div
-      className={cn(
-        "flex items-center justify-center bg-orange-500/10 text-orange-600 dark:text-orange-400 rounded",
-        className
-      )}
-    >
-      <FileText className="h-4 w-4" />
-    </div>
-  ),
+  pdf: FileTypeIcon,
+  docx: FileTypeIcon,
+  txt: FileTypeIcon,
+  md: FileTypeIcon,
+  html: FileTypeIcon,
 };
 
 // Source badges
