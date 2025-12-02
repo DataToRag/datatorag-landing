@@ -13,7 +13,7 @@ import {
   PromptInputFooter,
   PromptInputSubmit,
 } from "@/components/ai-elements/prompt-input";
-import { Suggestions, Suggestion } from "@/components/ai-elements/suggestion";
+import { Suggestion } from "@/components/ai-elements/suggestion";
 
 const SUGGESTED_QUESTIONS = [
   "How does PTO rollover work?",
@@ -96,6 +96,7 @@ export function ChatInterface({
             message={message}
             showSources={showSources}
             anonymous={anonymous && message.role === "user"}
+            onSuggestionClick={handleSuggestionClick}
           />
         ))}
 

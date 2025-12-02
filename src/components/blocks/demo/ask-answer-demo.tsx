@@ -5,7 +5,7 @@ import { ChatInterface } from "./chat-interface";
 export function AskAnswerDemo() {
   return (
     <div className="space-y-4">
-      <div className="border rounded-lg h-[500px] flex flex-col overflow-hidden">
+      <div className="border rounded-lg h-[700px] flex flex-col overflow-hidden">
         <ChatInterface
           initialMessages={[]}
           placeholder="Ask about benefits, PTO, or policies..."

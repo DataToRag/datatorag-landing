@@ -1,23 +1,47 @@
 import { getMockResponse } from "@/lib/demo-data";
 
-interface SimpleMessage {
+interface MessagePart {
+  type: string;
+  text?: string;
+}
+
+interface Message {
   role: string;
-  content: string;
+  content?: string;
+  parts?: MessagePart[];
+}
+
+// Extract text content from a message (handles both formats)
+function getMessageContent(message: Message): string {
+  // Try parts array first (AI SDK format)
+  if (message.parts && Array.isArray(message.parts)) {
+    return message.parts
+      .filter((part) => part.type === "text" && part.text)
+      .map((part) => part.text)
+      .join("");
+  }
+  // Fall back to content string
+  if (typeof message.content === "string") {
+    return message.content;
+  }
+  return "";
 }
 
 export async function POST(req: Request) {
   try {
-    const { messages } = (await req.json()) as { messages: SimpleMessage[] };
+    const body = await req.json();
+    const { messages } = body as { messages: Message[] };
 
     // Get the last user message
-    const lastUserMessage = messages
-      .filter((m) => m.role === "user")
-      .pop()?.content;
+    const lastUserMessage = messages.filter((m) => m.role === "user").pop();
+    const userMessageContent = lastUserMessage
+      ? getMessageContent(lastUserMessage)
+      : "";
+
+    console.log("[API] User message:", userMessageContent);
 
     // Get mock response based on user message
-    const mockResponse = getMockResponse(
-      typeof lastUserMessage === "string" ? lastUserMessage : ""
-    );
+    const mockResponse = getMockResponse(userMessageContent);
 
     const text = mockResponse.content;
 

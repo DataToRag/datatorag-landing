@@ -296,6 +296,7 @@ export interface MockMessage {
   role: "user" | "assistant";
   content: string;
   sources?: DocumentSource[];
+  followUpSuggestions?: string[];
   metadata?: {
     userId?: string;
     userName?: string;
@@ -470,7 +471,54 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
     {
       role: "assistant",
       content:
-        "We offer **three health insurance tiers** to fit different needs and budgets:\n\n**Bronze Plan (HDHP with HSA)**\n- $50/month employee contribution\n- High-deductible plan with Health Savings Account\n- Best for those who want to save with HSA tax benefits\n\n**Silver Plan (PPO)**\n- $150/month employee contribution\n- Standard PPO with moderate deductible\n- Good balance of cost and coverage\n\n**Gold Plan (Premium PPO)**\n- $250/month employee contribution\n- Low deductible, comprehensive coverage\n- Best for those who need frequent medical care\n\n**All plans include:**\n- Dental coverage\n- Vision coverage\n- Prescription drug coverage\n\n**Annual enrollment period:** November 1-30\n\nYou can compare detailed plan benefits in the HR portal or schedule a one-on-one benefits consultation with our HR team.",
+        "We offer **three health insurance plans**:\n\n| Plan | Monthly Cost | Best For |\n|------|--------------|----------|\n| **Bronze** (HDHP + HSA) | $50 | HSA tax savings, low premiums |\n| **Silver** (PPO) | $150 | Balanced cost & coverage |\n| **Gold** (Premium PPO) | $250 | Frequent medical care, low deductibles |\n\nAll plans include dental, vision, and prescription coverage.\n\nWould you like details on a specific plan?",
+      sources: [MOCK_DOCUMENTS.benefits_guide, MOCK_DOCUMENTS.benefits_summary],
+      followUpSuggestions: [
+        "Tell me more about the Gold plan",
+        "Tell me more about the Silver plan",
+        "Tell me more about the Bronze plan",
+      ],
+    },
+  ],
+
+  // Follow-up: Gold Plan details
+  benefits_gold_plan: [
+    {
+      role: "user",
+      content: "Tell me more about the Gold plan",
+    },
+    {
+      role: "assistant",
+      content:
+        "Here are the details for the **Gold Plan (Premium PPO)**:\n\n**Costs:**\n- Monthly premium: **$250** (employee contribution)\n- Annual deductible: **$500** individual / $1,000 family\n- Out-of-pocket maximum: **$3,000**/year (lowest of all plans)\n\n**Coverage Highlights:**\n- Primary care visits: **$20 copay**\n- Specialist visits: **$40 copay**\n- Emergency room: **$150 copay**\n- Preventive care: **100% covered**\n- Prescription drugs: $10/$25/$50 tiered copays\n\n**Why Choose Gold:**\n- Best for employees with ongoing medical needs\n- Lowest out-of-pocket costs when you need care\n- Access to our nationwide network of 500,000+ providers\n- No referrals needed for specialists\n\n**Enrollment:** November 1-30 in the HR portal.",
+      sources: [MOCK_DOCUMENTS.benefits_guide, MOCK_DOCUMENTS.benefits_summary],
+    },
+  ],
+
+  // Follow-up: Silver Plan details
+  benefits_silver_plan: [
+    {
+      role: "user",
+      content: "Tell me more about the Silver plan",
+    },
+    {
+      role: "assistant",
+      content:
+        "Here are the details for the **Silver Plan (PPO)**:\n\n**Costs:**\n- Monthly premium: **$150** (employee contribution)\n- Annual deductible: **$1,500** individual / $3,000 family\n- Out-of-pocket maximum: **$5,000**/year\n\n**Coverage Highlights:**\n- Primary care visits: **$30 copay** (after deductible)\n- Specialist visits: **$50 copay** (after deductible)\n- Emergency room: **$200 copay**\n- Preventive care: **100% covered**\n- Prescription drugs: $15/$35/$70 tiered copays\n\n**Why Choose Silver:**\n- Good balance of premium cost and coverage\n- Most popular plan among employees\n- Full PPO flexibility with no referrals needed\n- Nationwide network of 500,000+ providers\n\n**Enrollment:** November 1-30 in the HR portal.",
+      sources: [MOCK_DOCUMENTS.benefits_guide, MOCK_DOCUMENTS.benefits_summary],
+    },
+  ],
+
+  // Follow-up: Bronze Plan details
+  benefits_bronze_plan: [
+    {
+      role: "user",
+      content: "Tell me more about the Bronze plan",
+    },
+    {
+      role: "assistant",
+      content:
+        "Here are the details for the **Bronze Plan (HDHP with HSA)**:\n\n**Costs:**\n- Monthly premium: **$50** (employee contribution)\n- Annual deductible: **$3,000** individual / $6,000 family\n- Out-of-pocket maximum: **$7,000**/year\n\n**HSA Benefits:**\n- Company contributes **$500/year** to your HSA\n- Your contributions are **pre-tax** (reduces taxable income)\n- Unused funds **roll over** year to year\n- Can be used for qualified medical expenses tax-free\n\n**Coverage Highlights:**\n- Preventive care: **100% covered** (no deductible)\n- All other services: Covered after deductible met\n- Prescription drugs: 20% coinsurance after deductible\n\n**Why Choose Bronze:**\n- Lowest monthly premium\n- Triple tax advantage with HSA\n- Great if you're generally healthy and want to save\n- HSA funds can be invested and grow tax-free\n\n**Enrollment:** November 1-30 in the HR portal.",
       sources: [MOCK_DOCUMENTS.benefits_guide, MOCK_DOCUMENTS.benefits_summary],
     },
   ],
@@ -671,10 +719,36 @@ export function getMockResponse(userMessage: string): MockMessage {
     return DEMO_CONVERSATIONS.citations_pto[1];
   }
 
+  // Check for specific plan follow-ups first (e.g., "Tell me more about the Gold plan")
+  // Also match response content (e.g., "Here are the details for the Gold Plan")
+  const isFollowUpQuestion =
+    lowerMessage.includes("tell me more") ||
+    lowerMessage.includes("more about") ||
+    lowerMessage.includes("details about") ||
+    lowerMessage.includes("details for the");
+
+  if (isFollowUpQuestion) {
+    if (lowerMessage.includes("gold")) {
+      return DEMO_CONVERSATIONS.benefits_gold_plan[1];
+    }
+    if (lowerMessage.includes("silver")) {
+      return DEMO_CONVERSATIONS.benefits_silver_plan[1];
+    }
+    if (
+      lowerMessage.includes("bronze") ||
+      lowerMessage.includes("hsa") ||
+      lowerMessage.includes("hdhp")
+    ) {
+      return DEMO_CONVERSATIONS.benefits_bronze_plan[1];
+    }
+  }
+
+  // Check for general health insurance questions or responses
   if (
     lowerMessage.includes("health") ||
     lowerMessage.includes("insurance") ||
-    lowerMessage.includes("benefits")
+    lowerMessage.includes("benefits") ||
+    lowerMessage.includes("three health insurance plans")
   ) {
     return DEMO_CONVERSATIONS.benefits_enrollment[1];
   }

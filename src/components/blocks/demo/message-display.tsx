@@ -2,9 +2,11 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { UIMessage } from "@ai-sdk/react";
-import { Bot, ShieldCheck } from "lucide-react";
+import { Bot, ShieldCheck, FileText } from "lucide-react";
 import { getMockResponse, type DocumentSource } from "@/lib/demo-data";
 import type { ReactElement } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   Sources,
   SourcesTrigger,
@@ -13,7 +15,6 @@ import {
 } from "@/components/ai-elements/sources";
 import {
   InlineCitation,
-  InlineCitationText,
   InlineCitationCard,
   InlineCitationCardTrigger,
   InlineCitationCardBody,
@@ -27,12 +28,13 @@ import {
   InlineCitationSource,
   InlineCitationQuote,
 } from "@/components/ai-elements/inline-citation";
-import { FileText } from "lucide-react";
+import { Suggestion } from "@/components/ai-elements/suggestion";
 
 interface MessageDisplayProps {
   message: UIMessage;
   showSources?: boolean;
   anonymous?: boolean;
+  onSuggestionClick?: (suggestion: string) => void;
 }
 
 // Render text with inline citations at key points
@@ -41,16 +43,7 @@ function renderTextWithCitations(
   sources: DocumentSource[]
 ): ReactElement {
   if (sources.length === 0) {
-    return (
-      <div
-        className="whitespace-pre-wrap"
-        dangerouslySetInnerHTML={{
-          __html: text
-            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-            .replace(/\n/g, "<br />"),
-        }}
-      />
-    );
+    return <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>;
   }
 
   // Find the first paragraph/sentence to add citation after
@@ -66,14 +59,10 @@ function renderTextWithCitations(
   );
 
   return (
-    <div className="whitespace-pre-wrap">
-      <span
-        dangerouslySetInnerHTML={{
-          __html: beforeCitation
-            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-            .replace(/\n/g, "<br />"),
-        }}
-      />
+    <div>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {beforeCitation}
+      </ReactMarkdown>
       <InlineCitation>
         <InlineCitationCard>
           <InlineCitationCardTrigger sources={sourceUrls}>
@@ -107,13 +96,9 @@ function renderTextWithCitations(
         </InlineCitationCard>
       </InlineCitation>
       {afterCitation && (
-        <span
-          dangerouslySetInnerHTML={{
-            __html: afterCitation
-              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-              .replace(/\n/g, "<br />"),
-          }}
-        />
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {afterCitation}
+        </ReactMarkdown>
       )}
     </div>
   );
@@ -123,6 +108,7 @@ export function MessageDisplay({
   message,
   showSources = true,
   anonymous = false,
+  onSuggestionClick,
 }: MessageDisplayProps): ReactElement {
   const isUser = message.role === "user";
 
@@ -151,10 +137,11 @@ export function MessageDisplay({
     textContent = "";
   }
 
-  // Extract sources from mock data based on message content
+  // Extract sources and follow-up suggestions from mock data based on message content
   const mockMessage =
     !isUser && textContent ? getMockResponse(textContent) : null;
   const sources = mockMessage?.sources || [];
+  const followUpSuggestions = mockMessage?.followUpSuggestions || [];
   const hasAlert = Boolean(
     mockMessage?.metadata && "alert" in mockMessage.metadata
       ? mockMessage.metadata.alert
@@ -197,14 +184,9 @@ export function MessageDisplay({
               showSources ? (
                 renderTextWithCitations(textContent, sources)
               ) : (
-                <div
-                  className="whitespace-pre-wrap"
-                  dangerouslySetInnerHTML={{
-                    __html: textContent
-                      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                      .replace(/\n/g, "<br />"),
-                  }}
-                />
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {textContent}
+                </ReactMarkdown>
               )
             ) : (
               !isUser && <span className="text-muted-foreground">...</span>
@@ -240,6 +222,24 @@ export function MessageDisplay({
                   ))}
                 </SourcesContent>
               </Sources>
+            </div>
+          )}
+
+          {/* Follow-up suggestions */}
+          {!isUser && followUpSuggestions.length > 0 && onSuggestionClick && (
+            <div className="mt-4 pt-3 border-t border-border">
+              <p className="text-xs text-muted-foreground mb-2">
+                Follow-up questions:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {followUpSuggestions.map((suggestion) => (
+                  <Suggestion
+                    key={suggestion}
+                    suggestion={suggestion}
+                    onClick={onSuggestionClick}
+                  />
+                ))}
+              </div>
             </div>
           )}
         </div>
