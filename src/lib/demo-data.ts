@@ -364,12 +364,12 @@ export const MOCK_DOCUMENTS: Record<string, DocumentSource> = {
   },
   benefits_summary: {
     id: "benefits_summary",
-    title: "Benefits Summary Sheet 2025",
+    title: "Health Insurance Plan Details 2025",
     type: "benefits",
-    page: 2,
-    section: "Plan Comparison",
+    page: 15,
+    section: "Coverage Details & Network",
     excerpt:
-      "All health plans include preventive care at 100% coverage, prescription drug benefits, and access to our nationwide provider network. HSA-eligible plans allow pre-tax contributions up to $4,150 for individuals or $8,300 for families.",
+      "All health plans include preventive care at 100% coverage, prescription drug benefits, and access to our nationwide provider network with over 500,000 providers. The Gold plan offers the lowest out-of-pocket maximum at $3,000/year.",
   },
   parental_leave: {
     id: "parental_leave",
