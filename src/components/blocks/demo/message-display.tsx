@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { UIMessage } from "@ai-sdk/react";
-import { User, Bot, ShieldCheck } from "lucide-react";
+import { Bot, ShieldCheck } from "lucide-react";
 import { SourceCitationCard } from "./source-citation-card";
 import { getMockResponse } from "@/lib/demo-data";
 import type { ReactElement } from "react";
@@ -21,12 +21,34 @@ export function MessageDisplay({
   const isUser = message.role === "user";
 
   // Extract text content from message parts
-  const textContent = message.parts
-    ? message.parts
-        .filter((part: any) => part.type === "text")
-        .map((part: any) => part.text)
-        .join("\n")
-    : "";
+  // AI SDK UIMessage parts can have different structures:
+  // - { type: "text", text: string } for text parts
+  // - Other part types that we should skip
+  let textContent = "";
+  try {
+    if (
+      message.parts &&
+      Array.isArray(message.parts) &&
+      message.parts.length > 0
+    ) {
+      textContent = message.parts
+        .filter((part: any) => part != null)
+        .map((part: any) => {
+          if (part && part.type === "text" && typeof part.text === "string") {
+            return part.text;
+          }
+          return "";
+        })
+        .join("");
+    }
+    // Fallback to content property if available
+    if (!textContent && (message as any).content) {
+      textContent = String((message as any).content);
+    }
+  } catch {
+    // Ignore errors in text extraction
+    textContent = "";
+  }
 
   // Extract sources from mock data based on message content
   const mockMessage =
@@ -42,39 +64,23 @@ export function MessageDisplay({
     <div
       className={`flex gap-3 ${isUser ? "flex-row-reverse" : "flex-row"} group`}
     >
-      {/* Avatar */}
-      <div
-        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-          isUser
-            ? anonymous
-              ? "bg-green-500/20 text-green-600 dark:text-green-400"
-              : "bg-blue-500/20 text-blue-600 dark:text-blue-400"
-            : "bg-primary/20 text-primary"
-        }`}
-      >
-        {isUser ? (
-          anonymous ? (
-            <ShieldCheck className="h-4 w-4" />
-          ) : (
-            <User className="h-4 w-4" />
-          )
-        ) : (
+      {/* Avatar - only show for assistant messages */}
+      {!isUser && (
+        <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-primary/20 text-primary">
           <Bot className="h-4 w-4" />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Message content */}
       <div
-        className={`flex-1 max-w-[80%] ${isUser ? "items-end" : "items-start"} flex flex-col gap-2`}
+        className={`flex-1 ${isUser ? "max-w-full items-end text-right" : "max-w-[80%] items-start"} flex flex-col gap-2`}
       >
         {/* Message bubble */}
         <div
-          className={`rounded-lg px-4 py-3 ${
+          className={`${
             isUser
-              ? anonymous
-                ? "bg-green-500/10 text-foreground border border-green-500/20"
-                : "bg-blue-500/10 text-foreground"
-              : "bg-muted text-foreground"
+              ? "text-foreground"
+              : "rounded-lg px-4 py-3 bg-muted text-foreground"
           }`}
         >
           {/* Anonymous indicator */}
@@ -86,7 +92,7 @@ export function MessageDisplay({
           )}
 
           <div className="prose prose-sm dark:prose-invert max-w-none">
-            {textContent && (
+            {textContent ? (
               <div
                 className="whitespace-pre-wrap"
                 dangerouslySetInnerHTML={{
@@ -95,6 +101,8 @@ export function MessageDisplay({
                     .replace(/\n/g, "<br />"),
                 }}
               />
+            ) : (
+              !isUser && <span className="text-muted-foreground">...</span>
             )}
           </div>
 
@@ -126,12 +134,7 @@ export function MessageDisplay({
         )}
 
         {/* Timestamp */}
-        <p className="text-xs text-muted-foreground px-1">
-          {new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </p>
+        <p className="text-xs text-muted-foreground px-1">10:00 AM</p>
       </div>
     </div>
   );

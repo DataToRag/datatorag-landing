@@ -6,7 +6,6 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { MarketingNav } from "@/components/layout/marketing-nav";
-import { AnimatedBeamMultipleOutputDemo } from "@/components/ui/animated-beam-demo";
 
 const transitionVariants = {
   item: {
@@ -195,8 +194,14 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
                     className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                   />
                 )}
-                <div id="demo-animation" className="relative mx-auto max-w-6xl">
-                  <AnimatedBeamMultipleOutputDemo />
+                <div className="relative mx-auto max-w-6xl">
+                  <div className="rounded-xl border shadow-2xl overflow-hidden bg-background">
+                    <iframe
+                      src="/demo"
+                      className="w-full h-[600px] md:h-[700px]"
+                      title="DatatoRAG Interactive Demo"
+                    />
+                  </div>
                 </div>
               </div>
             </AnimatedGroup>

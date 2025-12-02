@@ -300,12 +300,11 @@ function DataSourceCard({
 }
 
 function formatTimeAgo(date: Date): string {
-  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
-
-  if (seconds < 60) return "just now";
-  if (seconds < 3600) return `${Math.floor(seconds / 60)} min ago`;
-  if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
-  return `${Math.floor(seconds / 86400)} days ago`;
+  // Use fixed format to avoid hydration mismatch
+  const month = date.getUTCMonth() + 1;
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+  return `${month}/${day}/${year}`;
 }
 
 interface DataSourcesGridProps {
@@ -333,7 +332,7 @@ export function DataSourcesGrid({
           ? {
               ...s,
               connected: true,
-              lastSync: new Date(),
+              lastSync: new Date("2025-11-01T10:00:00Z"),
               documentsCount: Math.floor(Math.random() * 50) + 10,
             }
           : s

@@ -35,7 +35,7 @@ export const MOCK_DATA_SOURCES: DataSource[] = [
     description: "Connect your Google Workspace documents",
     connected: true,
     documentsCount: 24,
-    lastSync: new Date(Date.now() - 2 * 60 * 1000), // 2 min ago
+    lastSync: new Date("2025-11-01T10:00:00Z"), // Fixed date for SSR
     folders: ["HR Policies", "Benefits", "Onboarding"],
     color: "#4285F4",
   },
@@ -45,7 +45,7 @@ export const MOCK_DATA_SOURCES: DataSource[] = [
     description: "Connect Microsoft SharePoint sites",
     connected: true,
     documentsCount: 156,
-    lastSync: new Date(Date.now() - 5 * 60 * 1000), // 5 min ago
+    lastSync: new Date("2025-11-01T09:55:00Z"), // Fixed date for SSR
     folders: ["Company Handbook", "Legal", "Training"],
     color: "#038387",
   },
@@ -83,7 +83,7 @@ export const MOCK_DATA_SOURCES: DataSource[] = [
     description: "Sync HR policies and employee data",
     connected: true,
     documentsCount: 89,
-    lastSync: new Date(Date.now() - 60 * 60 * 1000), // 1 hour ago
+    lastSync: new Date("2025-11-01T09:00:00Z"), // Fixed date for SSR
     folders: ["HR Policies", "Job Descriptions", "Org Charts"],
     color: "#F68D2E",
   },
@@ -93,7 +93,7 @@ export const MOCK_DATA_SOURCES: DataSource[] = [
     description: "Import benefits and time-off policies",
     connected: true,
     documentsCount: 45,
-    lastSync: new Date(Date.now() - 30 * 60 * 1000), // 30 min ago
+    lastSync: new Date("2025-11-01T09:30:00Z"), // Fixed date for SSR
     folders: ["Benefits", "Time Off", "Employee Handbook"],
     color: "#73C41D",
   },
@@ -143,7 +143,7 @@ export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
     size: "2.4 MB",
     chunks: 47,
     status: "ready",
-    lastUpdated: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+    lastUpdated: new Date("2025-10-31T10:00:00Z"), // 1 day ago
     processingSteps: [
       { stage: "upload", status: "complete", detail: "2.4 MB received" },
       { stage: "chunk", status: "complete", detail: "47 chunks created" },
@@ -167,7 +167,7 @@ export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
     size: "1.8 MB",
     chunks: 32,
     status: "ready",
-    lastUpdated: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+    lastUpdated: new Date("2025-10-29T10:00:00Z"), // 3 days ago
     processingSteps: [
       { stage: "upload", status: "complete", detail: "1.8 MB received" },
       { stage: "chunk", status: "complete", detail: "32 chunks created" },
@@ -191,7 +191,7 @@ export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
     size: "245 KB",
     chunks: 12,
     status: "ready",
-    lastUpdated: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+    lastUpdated: new Date("2025-10-25T10:00:00Z"), // 7 days ago
     processingSteps: [
       { stage: "upload", status: "complete", detail: "245 KB received" },
       { stage: "chunk", status: "complete", detail: "12 chunks created" },
@@ -215,7 +215,7 @@ export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
     size: "890 KB",
     chunks: 18,
     status: "ready",
-    lastUpdated: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000), // 14 days ago
+    lastUpdated: new Date("2025-10-18T10:00:00Z"), // 14 days ago
     processingSteps: [
       { stage: "upload", status: "complete", detail: "890 KB received" },
       { stage: "chunk", status: "complete", detail: "18 chunks created" },
@@ -239,7 +239,7 @@ export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
     size: "156 KB",
     chunks: 8,
     status: "ready",
-    lastUpdated: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    lastUpdated: new Date("2025-10-30T10:00:00Z"), // 2 days ago
     processingSteps: [
       { stage: "upload", status: "complete", detail: "156 KB received" },
       { stage: "chunk", status: "complete", detail: "8 chunks created" },
@@ -263,7 +263,7 @@ export const MOCK_KNOWLEDGE_DOCUMENTS: KnowledgeDocument[] = [
     size: "1.2 MB",
     chunks: 24,
     status: "syncing",
-    lastUpdated: new Date(),
+    lastUpdated: new Date("2025-11-01T10:00:00Z"),
     processingSteps: [
       { stage: "upload", status: "complete", detail: "1.2 MB received" },
       {
@@ -374,7 +374,7 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
       metadata: {
         userId: "user1",
         userName: "Employee A",
-        timestamp: new Date().toISOString(),
+        timestamp: "2025-11-01T10:00:00Z",
       },
     },
     {
@@ -393,7 +393,7 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
         "I experienced a miscarriage. What leave options do I have? I don't want my manager to know the details.",
       metadata: {
         anonymous: true,
-        timestamp: new Date().toISOString(),
+        timestamp: "2025-11-01T10:00:00Z",
       },
     },
     {

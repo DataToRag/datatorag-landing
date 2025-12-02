@@ -20,26 +20,19 @@ export async function POST(req: Request) {
     );
 
     const text = mockResponse.content;
-    const words = text.split(" ");
 
-    // Create a readable stream that simulates typing
+    // Create a simple text stream
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
-        for (const word of words) {
-          // Format as AI SDK data stream protocol
-          const chunk = `0:"${word.replace(/"/g, '\\"')} "\n`;
-          controller.enqueue(encoder.encode(chunk));
-          // Simulate typing delay
-          await new Promise((resolve) => setTimeout(resolve, 30));
+        // Stream text character by character for smooth effect
+        for (let i = 0; i < text.length; i++) {
+          controller.enqueue(encoder.encode(text[i]));
+          // Small delay for streaming effect
+          if (i % 5 === 0) {
+            await new Promise((resolve) => setTimeout(resolve, 10));
+          }
         }
-        // Send finish message
-        controller.enqueue(
-          encoder.encode(
-            `e:{"finishReason":"stop","usage":{"promptTokens":0,"completionTokens":${words.length}}}\n`
-          )
-        );
-        controller.enqueue(encoder.encode(`d:{"finishReason":"stop"}\n`));
         controller.close();
       },
     });
@@ -47,7 +40,6 @@ export async function POST(req: Request) {
     return new Response(stream, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
-        "X-Vercel-AI-Data-Stream": "v1",
       },
     });
   } catch (error) {

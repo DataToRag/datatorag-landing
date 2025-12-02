@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
+import { TextStreamChatTransport } from "ai";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
@@ -28,7 +28,7 @@ export function ChatInterface({
   anonymous = false,
 }: ChatInterfaceProps) {
   const { messages, sendMessage, status, error, regenerate } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
+    transport: new TextStreamChatTransport({ api: "/api/chat" }),
     messages: initialMessages as any[],
   });
 
@@ -101,7 +101,8 @@ export function ChatInterface({
       {/* Input area */}
       <div className="border-t bg-background p-4">
         <PromptInput
-          onSubmit={({ text }) => {
+          onSubmit={(message) => {
+            const text = message?.text || "";
             if (text.trim()) {
               sendMessage({ text });
             }

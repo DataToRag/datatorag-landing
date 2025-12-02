@@ -113,14 +113,11 @@ function DocumentCard({
   const FileIcon = FileTypeIcons[document.type] || FileTypeIcons.txt;
 
   const formatDate = (date: Date) => {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) return "Today";
-    if (diffDays === 1) return "Yesterday";
-    if (diffDays < 7) return `${diffDays} days ago`;
-    return date.toLocaleDateString();
+    // Use fixed format to avoid hydration mismatch
+    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+    const year = date.getUTCFullYear();
+    return `${month}/${day}/${year}`;
   };
 
   return (

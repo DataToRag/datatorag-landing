@@ -222,7 +222,7 @@ function DocumentsTab() {
                 </span>
                 <span className="text-xs text-muted-foreground flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
-                  Updated {new Date(doc.lastUpdated).toLocaleDateString()}
+                  Updated {doc.lastUpdated}
                 </span>
               </div>
             </div>
@@ -326,7 +326,7 @@ function AlertsTab() {
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {new Date(alert.timestamp).toLocaleString()}
+                  {alert.timestamp.replace("T", " ").replace("Z", " UTC")}
                 </p>
                 <div className="mt-3 flex gap-2">
                   <Button size="sm" variant="outline">
