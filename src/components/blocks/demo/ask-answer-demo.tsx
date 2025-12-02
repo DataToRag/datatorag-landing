@@ -5,19 +5,6 @@ import { ChatInterface } from "./chat-interface";
 export function AskAnswerDemo() {
   return (
     <div className="space-y-4">
-      <div className="bg-muted rounded-lg p-4">
-        <p className="text-sm text-center text-muted-foreground">
-          Try asking:{" "}
-          <strong className="text-foreground">
-            &quot;How does PTO rollover work?&quot;
-          </strong>{" "}
-          or{" "}
-          <strong className="text-foreground">
-            &quot;What health insurance options are available?&quot;
-          </strong>
-        </p>
-      </div>
-
       <div className="border rounded-lg h-[500px] flex flex-col overflow-hidden">
         <ChatInterface
           initialMessages={[]}

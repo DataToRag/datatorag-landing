@@ -3,14 +3,120 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { UIMessage } from "@ai-sdk/react";
 import { Bot, ShieldCheck } from "lucide-react";
-import { SourceCitationCard } from "./source-citation-card";
-import { getMockResponse } from "@/lib/demo-data";
+import { getMockResponse, type DocumentSource } from "@/lib/demo-data";
 import type { ReactElement } from "react";
+import {
+  Sources,
+  SourcesTrigger,
+  SourcesContent,
+  Source,
+} from "@/components/ai-elements/sources";
+import {
+  InlineCitation,
+  InlineCitationText,
+  InlineCitationCard,
+  InlineCitationCardTrigger,
+  InlineCitationCardBody,
+  InlineCitationCarousel,
+  InlineCitationCarouselContent,
+  InlineCitationCarouselItem,
+  InlineCitationCarouselHeader,
+  InlineCitationCarouselIndex,
+  InlineCitationCarouselPrev,
+  InlineCitationCarouselNext,
+  InlineCitationSource,
+  InlineCitationQuote,
+} from "@/components/ai-elements/inline-citation";
+import { FileText } from "lucide-react";
 
 interface MessageDisplayProps {
   message: UIMessage;
   showSources?: boolean;
   anonymous?: boolean;
+}
+
+// Render text with inline citations at key points
+function renderTextWithCitations(
+  text: string,
+  sources: DocumentSource[]
+): ReactElement {
+  if (sources.length === 0) {
+    return (
+      <div
+        className="whitespace-pre-wrap"
+        dangerouslySetInnerHTML={{
+          __html: text
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\n/g, "<br />"),
+        }}
+      />
+    );
+  }
+
+  // Find the first paragraph/sentence to add citation after
+  const firstBreak = text.indexOf("\n\n");
+  const citationPoint = firstBreak > 0 ? firstBreak : text.length;
+
+  const beforeCitation = text.slice(0, citationPoint);
+  const afterCitation = text.slice(citationPoint);
+
+  // Create fake URLs for the citation badge (it expects URLs)
+  const sourceUrls = sources.map(
+    (s) => `https://docs.company.com/${s.id || "doc"}`
+  );
+
+  return (
+    <div className="whitespace-pre-wrap">
+      <span
+        dangerouslySetInnerHTML={{
+          __html: beforeCitation
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\n/g, "<br />"),
+        }}
+      />
+      <InlineCitation>
+        <InlineCitationCard>
+          <InlineCitationCardTrigger sources={sourceUrls}>
+            <FileText className="h-3 w-3 mr-1" />
+            {sources.length} {sources.length === 1 ? "source" : "sources"}
+          </InlineCitationCardTrigger>
+          <InlineCitationCardBody>
+            <InlineCitationCarousel>
+              <InlineCitationCarouselHeader>
+                <InlineCitationCarouselPrev />
+                <InlineCitationCarouselIndex />
+                <InlineCitationCarouselNext />
+              </InlineCitationCarouselHeader>
+              <InlineCitationCarouselContent>
+                {sources.map((source, index) => (
+                  <InlineCitationCarouselItem key={source.id || index}>
+                    <InlineCitationSource
+                      title={source.title}
+                      description={
+                        source.section
+                          ? `${source.section}${source.page ? ` (Page ${source.page})` : ""}`
+                          : undefined
+                      }
+                    />
+                    <InlineCitationQuote>{source.excerpt}</InlineCitationQuote>
+                  </InlineCitationCarouselItem>
+                ))}
+              </InlineCitationCarouselContent>
+            </InlineCitationCarousel>
+          </InlineCitationCardBody>
+        </InlineCitationCard>
+      </InlineCitation>
+      {afterCitation && (
+        <span
+          dangerouslySetInnerHTML={{
+            __html: afterCitation
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+              .replace(/\n/g, "<br />"),
+          }}
+        />
+      )}
+    </div>
+  );
 }
 
 export function MessageDisplay({
@@ -21,9 +127,6 @@ export function MessageDisplay({
   const isUser = message.role === "user";
 
   // Extract text content from message parts
-  // AI SDK UIMessage parts can have different structures:
-  // - { type: "text", text: string } for text parts
-  // - Other part types that we should skip
   let textContent = "";
   try {
     if (
@@ -41,12 +144,10 @@ export function MessageDisplay({
         })
         .join("");
     }
-    // Fallback to content property if available
     if (!textContent && (message as any).content) {
       textContent = String((message as any).content);
     }
   } catch {
-    // Ignore errors in text extraction
     textContent = "";
   }
 
@@ -93,14 +194,18 @@ export function MessageDisplay({
 
           <div className="prose prose-sm dark:prose-invert max-w-none">
             {textContent ? (
-              <div
-                className="whitespace-pre-wrap"
-                dangerouslySetInnerHTML={{
-                  __html: textContent
-                    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                    .replace(/\n/g, "<br />"),
-                }}
-              />
+              showSources ? (
+                renderTextWithCitations(textContent, sources)
+              ) : (
+                <div
+                  className="whitespace-pre-wrap"
+                  dangerouslySetInnerHTML={{
+                    __html: textContent
+                      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                      .replace(/\n/g, "<br />"),
+                  }}
+                />
+              )
             ) : (
               !isUser && <span className="text-muted-foreground">...</span>
             )}
@@ -114,24 +219,30 @@ export function MessageDisplay({
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                 </span>
                 <span className="font-medium">
-                  🚨 HR Alert: This question has been flagged for review
+                  HR Alert: This question has been flagged for review
                 </span>
               </div>
             </div>
           )}
-        </div>
 
-        {/* Source citations */}
-        {!isUser && showSources && sources.length > 0 && (
-          <div className="space-y-2 w-full">
-            <p className="text-xs text-muted-foreground px-1">
-              Sources ({sources.length}):
-            </p>
-            {sources.map((source, index) => (
-              <SourceCitationCard key={source.id || index} source={source} />
-            ))}
-          </div>
-        )}
+          {/* Sources panel using AI Elements Sources component */}
+          {!isUser && showSources && sources.length > 0 && (
+            <div className="mt-4 pt-3 border-t border-border">
+              <Sources>
+                <SourcesTrigger count={sources.length} />
+                <SourcesContent>
+                  {sources.map((source, index) => (
+                    <Source
+                      key={source.id || index}
+                      href={`#${source.id}`}
+                      title={`${source.title}${source.page ? ` (p. ${source.page})` : ""}`}
+                    />
+                  ))}
+                </SourcesContent>
+              </Sources>
+            </div>
+          )}
+        </div>
 
         {/* Timestamp */}
         <p className="text-xs text-muted-foreground px-1">10:00 AM</p>

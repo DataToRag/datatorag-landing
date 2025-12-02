@@ -24,7 +24,16 @@
       "WebFetch(domain:www.vectara.com)",
       "WebFetch(domain:docs.vectara.com)",
       "WebFetch(domain:www.pinecone.io)",
-      "WebFetch(domain:www.notion.com)"
+      "WebFetch(domain:www.notion.com)",
+      "Bash(textutil:*)",
+      "WebFetch(domain:zotgpt.uci.edu)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx ai-elements@latest add inline-citation)",
+      "Bash(pkill:*)",
+      "Bash(npx ai-elements@latest add sources:*)",
+      "Bash(npx ai-elements@latest add:*)"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"

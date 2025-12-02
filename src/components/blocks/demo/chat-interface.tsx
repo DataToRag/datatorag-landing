@@ -13,6 +13,13 @@ import {
   PromptInputFooter,
   PromptInputSubmit,
 } from "@/components/ai-elements/prompt-input";
+import { Suggestions, Suggestion } from "@/components/ai-elements/suggestion";
+
+const SUGGESTED_QUESTIONS = [
+  "How does PTO rollover work?",
+  "What health insurance options are available?",
+  "How many days of bereavement leave do I get?",
+];
 
 interface ChatInterfaceProps {
   initialMessages?: Array<{ role: "user" | "assistant"; content: string }>;
@@ -41,20 +48,26 @@ export function ChatInterface({
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const handleSuggestionClick = (suggestion: string) => {
+    if (!isLoading) {
+      sendMessage({ text: suggestion });
+    }
+  };
+
   return (
     <div className="flex flex-col h-full">
       {/* Chat messages area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
-          <div className="text-center text-muted-foreground py-12">
+          <div className="text-center text-muted-foreground py-8">
             <p className="text-lg font-medium mb-2">
               Welcome to DatatoRAG Demo
             </p>
-            <p className="text-sm">
+            <p className="text-sm mb-4">
               Ask any question about HR policies, benefits, or leave policies
             </p>
             {anonymous && (
-              <div className="mt-4 inline-flex items-center gap-2 bg-green-500/10 text-green-600 dark:text-green-400 px-4 py-2 rounded-full text-sm">
+              <div className="mb-4 inline-flex items-center gap-2 bg-green-500/10 text-green-600 dark:text-green-400 px-4 py-2 rounded-full text-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -62,6 +75,18 @@ export function ChatInterface({
                 Your questions are completely anonymous
               </div>
             )}
+            <div className="mt-4 flex flex-col items-center">
+              <p className="text-xs text-muted-foreground mb-3">Try asking:</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {SUGGESTED_QUESTIONS.map((question) => (
+                  <Suggestion
+                    key={question}
+                    suggestion={question}
+                    onClick={handleSuggestionClick}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -120,8 +145,7 @@ export function ChatInterface({
         </PromptInput>
 
         <p className="text-xs text-muted-foreground mt-2 text-center">
-          This is a demo with pre-scripted responses. Try asking about
-          bereavement leave, PTO, or benefits.
+          This is a demo with pre-scripted responses.
         </p>
       </div>
     </div>
