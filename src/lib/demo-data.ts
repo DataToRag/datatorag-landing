@@ -326,6 +326,15 @@ export const MOCK_DOCUMENTS: Record<string, DocumentSource> = {
     excerpt:
       "Employees are entitled to 5 days of paid bereavement leave for the loss of an immediate family member (spouse, child, parent, sibling). For the loss of pregnancy (miscarriage, stillbirth), employees are entitled to the same 5 days of paid leave. Additional unpaid leave may be requested through HR.",
   },
+  bereavement_handbook: {
+    id: "bereavement_handbook",
+    title: "Employee Handbook 2025",
+    type: "handbook",
+    page: 89,
+    section: "Chapter 12: Leave of Absence",
+    excerpt:
+      "Bereavement leave is provided to support employees during difficult times. Immediate family is defined as spouse, domestic partner, child, parent, sibling, grandparent, or grandchild. Documentation may be requested for leave exceeding 3 days.",
+  },
   pto_policy: {
     id: "pto_policy",
     title: "PTO and Leave Policies 2025",
@@ -335,6 +344,15 @@ export const MOCK_DOCUMENTS: Record<string, DocumentSource> = {
     excerpt:
       "Full-time employees accrue 15 days of PTO annually (1.25 days per month). Up to 5 unused PTO days may roll over to the next calendar year. Any remaining days beyond 5 will be paid out at year-end at 100% of base salary rate.",
   },
+  pto_handbook: {
+    id: "pto_handbook",
+    title: "Employee Handbook 2025",
+    type: "handbook",
+    page: 78,
+    section: "Chapter 10: Time Off Benefits",
+    excerpt:
+      "PTO requests should be submitted at least 2 weeks in advance for planned absences. Rolled over PTO days from the previous year must be used by June 30th. PTO balances can be viewed in the HR portal under 'My Time Off'.",
+  },
   benefits_guide: {
     id: "benefits_guide",
     title: "2025 Benefits Guide",
@@ -343,6 +361,15 @@ export const MOCK_DOCUMENTS: Record<string, DocumentSource> = {
     section: "Health Insurance Options",
     excerpt:
       "We offer three health insurance tiers: Bronze (HDHP with HSA, $50/month employee contribution), Silver (PPO, $150/month), and Gold (Premium PPO, $250/month). All plans include dental and vision coverage. Enrollment period: November 1-30 annually.",
+  },
+  benefits_summary: {
+    id: "benefits_summary",
+    title: "Benefits Summary Sheet 2025",
+    type: "benefits",
+    page: 2,
+    section: "Plan Comparison",
+    excerpt:
+      "All health plans include preventive care at 100% coverage, prescription drug benefits, and access to our nationwide provider network. HSA-eligible plans allow pre-tax contributions up to $4,150 for individuals or $8,300 for families.",
   },
   parental_leave: {
     id: "parental_leave",
@@ -361,6 +388,15 @@ export const MOCK_DOCUMENTS: Record<string, DocumentSource> = {
     section: "Reporting Procedures",
     excerpt:
       "Any employee who experiences or witnesses harassment or discrimination should report it immediately to HR, their manager, or via our anonymous hotline (1-800-555-0123). All reports are investigated promptly and confidentially. Retaliation against reporters is strictly prohibited.",
+  },
+  harassment_handbook: {
+    id: "harassment_handbook",
+    title: "Employee Handbook 2025",
+    type: "handbook",
+    page: 15,
+    section: "Chapter 3: Workplace Conduct",
+    excerpt:
+      "Our company maintains a zero-tolerance policy for harassment, discrimination, and retaliation. All employees are required to complete annual training on these policies. Violations may result in disciplinary action up to and including termination.",
   },
 };
 
@@ -381,7 +417,10 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
       role: "assistant",
       content:
         "You are entitled to **5 days of paid bereavement leave** for the loss of an immediate family member (spouse, child, parent, or sibling).\n\nThis also applies to pregnancy loss (miscarriage or stillbirth). If you need additional time, you can request unpaid leave through HR.\n\nI'm very sorry for your loss. Please reach out to HR if you need any support during this difficult time.",
-      sources: [MOCK_DOCUMENTS.bereavement_policy],
+      sources: [
+        MOCK_DOCUMENTS.bereavement_policy,
+        MOCK_DOCUMENTS.bereavement_handbook,
+      ],
     },
   ],
 
@@ -418,7 +457,7 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
       role: "assistant",
       content:
         "Here's how PTO rollover and payout works:\n\n**Rollover:**\n- You can roll over up to **5 unused PTO days** to the next calendar year\n- Rolled over days must be used by June 30th of the following year\n\n**Year-End Payout:**\n- Any unused PTO days beyond the 5-day rollover limit are **automatically paid out**\n- Payout is at **100% of your base salary rate**\n- This happens in the first paycheck of January\n\n**Example:** If you have 8 unused PTO days at year-end:\n- 5 days roll over to next year\n- 3 days are paid out in January\n\nYou can view your current PTO balance in the HR portal at any time.",
-      sources: [MOCK_DOCUMENTS.pto_policy],
+      sources: [MOCK_DOCUMENTS.pto_policy, MOCK_DOCUMENTS.pto_handbook],
     },
   ],
 
@@ -432,7 +471,7 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
       role: "assistant",
       content:
         "We offer **three health insurance tiers** to fit different needs and budgets:\n\n**Bronze Plan (HDHP with HSA)**\n- $50/month employee contribution\n- High-deductible plan with Health Savings Account\n- Best for those who want to save with HSA tax benefits\n\n**Silver Plan (PPO)**\n- $150/month employee contribution\n- Standard PPO with moderate deductible\n- Good balance of cost and coverage\n\n**Gold Plan (Premium PPO)**\n- $250/month employee contribution\n- Low deductible, comprehensive coverage\n- Best for those who need frequent medical care\n\n**All plans include:**\n- Dental coverage\n- Vision coverage\n- Prescription drug coverage\n\n**Annual enrollment period:** November 1-30\n\nYou can compare detailed plan benefits in the HR portal or schedule a one-on-one benefits consultation with our HR team.",
-      sources: [MOCK_DOCUMENTS.benefits_guide],
+      sources: [MOCK_DOCUMENTS.benefits_guide, MOCK_DOCUMENTS.benefits_summary],
     },
   ],
 
@@ -448,7 +487,10 @@ export const DEMO_CONVERSATIONS: Record<string, MockMessage[]> = {
       role: "assistant",
       content:
         "Thank you for speaking up. Reporting harassment is important, and you have several confidential options:\n\n**How to Report:**\n1. **HR Direct:** Email hr@company.com or speak with any HR team member\n2. **Your Manager:** If you're comfortable, you can report to your direct manager\n3. **Anonymous Hotline:** Call 1-800-555-0123 (available 24/7)\n4. **Online Portal:** Submit an anonymous report at company.ethicspoint.com\n\n**What Happens Next:**\n- All reports are investigated promptly and confidentially\n- You'll be protected from retaliation (it's strictly prohibited)\n- HR will follow up within 2-3 business days\n- You can remain anonymous if you choose\n\n**🚨 This question has been flagged for HR attention**\n\nYour identity is protected, but HR has been notified that someone has raised a harassment concern so they can be prepared to support you.\n\nIs there anything else I can help you with regarding this process?",
-      sources: [MOCK_DOCUMENTS.harassment_policy],
+      sources: [
+        MOCK_DOCUMENTS.harassment_policy,
+        MOCK_DOCUMENTS.harassment_handbook,
+      ],
       metadata: {
         alert: true,
         alertType: "harassment",
