@@ -59,13 +59,12 @@ Reposition DatatoRAG from an **HR-specific Q&A tool** to a **universal knowledge
 
 ### 6. Use Cases Section (`use-cases-section.tsx`)
 **Current**: 6 HR-specific use cases
-**New direction** — show breadth across departments:
-  1. **HR & People Ops** — policies, onboarding, benefits (HR becomes ONE use case)
-  2. **Engineering & Product** — technical docs, runbooks, architecture decisions
-  3. **Sales & Customer Success** — playbooks, product info, competitive intel
-  4. **Operations** — SOPs, compliance docs, vendor information
-  5. **Finance & Legal** — contracts, policies, regulatory docs
-  6. **Company-wide Knowledge** — cross-team knowledge sharing, org-wide search
+**New direction** — show breadth across real customer verticals:
+  1. **Finance & CPAs** — tax codes, client docs, regulatory filings, audit prep
+  2. **Academia & Universities** — research papers, course materials, institutional policies
+  3. **HR & People Ops** — policies, onboarding, benefits (HR becomes ONE use case)
+  4. **Sales** — playbooks, product info, competitive intel, deal rooms
+  5. **Engineering** — technical docs, runbooks, architecture decisions, incident postmortems
 
 ### 7. FAQ Section (`faq-section.tsx`)
 - Broaden all Q&As from HR-specific to general knowledge management
