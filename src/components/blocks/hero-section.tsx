@@ -27,6 +27,15 @@ const transitionVariants = {
   },
 };
 
+const integrations = [
+  "Notion",
+  "Google Drive",
+  "SharePoint",
+  "Confluence",
+  "Slack",
+  "Dropbox",
+];
+
 interface HeroSectionProps {
   showDemoFade?: boolean;
 }
@@ -89,37 +98,28 @@ export function HeroSection({ showDemoFade = false }: HeroSectionProps) {
             <div className="mx-auto max-w-7xl px-6">
               <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                 <AnimatedGroup variants={transitionVariants}>
-                  <Link
-                    href="/case-studies"
-                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
-                  >
-                    <span className="text-foreground text-sm">
-                      Trusted by 50+ HR teams - Same question = same answer,
-                      every time
+                  <div className="mx-auto flex flex-wrap items-center justify-center gap-2 mb-8">
+                    {integrations.map((name) => (
+                      <span
+                        key={name}
+                        className="inline-flex items-center rounded-full border bg-muted/60 px-3 py-1 text-sm font-medium text-foreground shadow-sm"
+                      >
+                        {name}
+                      </span>
+                    ))}
+                    <span className="inline-flex items-center rounded-full border border-dashed bg-background px-3 py-1 text-sm text-muted-foreground">
+                      + more
                     </span>
-                    <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
+                  </div>
 
-                    <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
-                      <div className="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0">
-                        <span className="flex size-6">
-                          <ArrowRight className="m-auto size-3" />
-                        </span>
-                        <span className="flex size-6">
-                          <ArrowRight className="m-auto size-3" />
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-
-                  <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                    Accurate HR Answers. Every Time.
+                  <h1 className="mt-4 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-8 xl:text-[5.25rem]">
+                    Connect Everything. Find Anything.
                   </h1>
                   <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                    Built for HR teams who need guaranteed accuracy, complete
-                    privacy, and Slack-native support. Battle-tested across
-                    10,000s of documents with zero hallucinations. Your data
-                    never leaves our infrastructure - we self-host all models to
-                    ensure compliance. Same question = same answer, every time.
+                    DatatoRAG connects to the tools your team already uses and
+                    turns scattered knowledge into instant, accurate answers —
+                    with zero hallucinations and full source citations. Built for
+                    growing teams, not enterprise sales cycles.
                   </p>
                 </AnimatedGroup>
 

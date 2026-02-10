@@ -3,28 +3,28 @@ import { X, Check } from "lucide-react";
 const comparisons = [
   {
     problem: "Hallucinations & wrong answers",
-    chatgpt: "Same question gets different answers",
-    datatorag: "Guaranteed accuracy - 10 people, same answer",
+    chatgpt: "Same question gets different answers each time",
+    datatorag: "Guaranteed accuracy — same question, same answer, every time",
   },
   {
     problem: "Outdated information",
     chatgpt: "Remembers old documents after deletion",
-    datatorag: "Proper version control - only current docs",
+    datatorag: "Proper version control — only current docs",
   },
   {
     problem: "Data sources",
-    chatgpt: "Pulls from internet despite instructions",
+    chatgpt: "Pulls from the internet despite instructions",
     datatorag: "Only your approved documents, nothing else",
   },
   {
     problem: "Consistency",
     chatgpt: "Desktop vs web gives different results",
-    datatorag: "10-person validation test for every answer",
+    datatorag: "Validated answers across every channel",
   },
   {
-    problem: "Privacy",
-    chatgpt: "No anonymity guarantees",
-    datatorag: "Complete anonymity with smart alerts",
+    problem: "Privacy & compliance",
+    chatgpt: "Data sent to third-party servers",
+    datatorag: "Self-hosted models — your data never leaves",
   },
   {
     problem: "Source verification",
@@ -39,11 +39,11 @@ export function ChatGPTComparisonSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Why HR Teams Are Switching from ChatGPT
+            Why Teams Are Switching from ChatGPT
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            ChatGPT wasn&apos;t built for HR. We were. See the difference that
-            matters to your team.
+            ChatGPT wasn&apos;t built for your internal knowledge. DatatoRAG
+            was. See the difference that matters.
           </p>
         </div>
 
@@ -92,12 +92,12 @@ export function ChatGPTComparisonSection() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground italic">
-            &ldquo;We switched from ChatGPT after it gave 3 different employees
-            3 different answers to the same bereavement policy question.
-            That&apos;s when we knew we needed something built for HR.&rdquo;
+            &ldquo;We switched from ChatGPT after it gave three different people
+            three different answers to the same compliance question. That&apos;s
+            when we knew we needed something purpose-built.&rdquo;
           </p>
           <p className="text-foreground font-semibold mt-2">
-            - HR Director at Fortune 500 Company
+            - Operations Director, Mid-Market SaaS Company
           </p>
         </div>
       </div>

@@ -1,72 +1,67 @@
-import { UserPlus, FileText, Shield, Globe, Clock, Lock } from "lucide-react";
+import {
+  Calculator,
+  GraduationCap,
+  Users,
+  TrendingUp,
+  Code,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const useCases = [
   {
-    icon: UserPlus,
-    title: "Employee Onboarding",
+    icon: Calculator,
+    title: "Finance & CPAs",
     description:
-      "Reduce 90-day attrition by 50% with consistent, intelligent onboarding that adapts to each role and location.",
+      "Surface tax codes, audit standards, and regulatory guidance instantly. Keep your team aligned on the latest compliance requirements across clients.",
     features: [
-      "Day-one readiness",
-      "Role-specific training paths",
-      "Manager handoff automation",
+      "Instant tax & regulatory lookups",
+      "Client knowledge base per engagement",
+      "Audit-ready source citations",
     ],
   },
   {
-    icon: FileText,
-    title: "Policy & Handbook Management",
+    icon: GraduationCap,
+    title: "Academia & Universities",
     description:
-      "Turn your employee handbook and policies into an AI assistant that provides instant, accurate answers.",
+      "Unify faculty handbooks, research databases, and institutional policies. Give staff and students instant access to the answers they need.",
     features: [
-      "Natural language queries",
-      "Policy version control",
-      "Compliance tracking",
+      "Policy & handbook Q&A",
+      "Research knowledge search",
+      "Multi-department access control",
     ],
   },
   {
-    icon: Lock,
-    title: "Sensitive & Personal Questions",
+    icon: Users,
+    title: "HR & People Ops",
     description:
-      "Employees get confidential answers about miscarriage bereavement, personal leave, or embarrassing questions without HR knowing who asked.",
+      "Centralize benefits guides, employee handbooks, and onboarding docs. Answer policy questions accurately and consistently across the entire org.",
     features: [
-      "Complete anonymity guaranteed",
-      "Sensitive topic detection & alerts",
-      "Privacy-first architecture",
+      "Consistent policy answers",
+      "Onboarding automation",
+      "Anonymous sensitive Q&A",
     ],
   },
   {
-    icon: Shield,
-    title: "Compliance & Regulations",
+    icon: TrendingUp,
+    title: "Sales",
     description:
-      "Navigate pay transparency, AI regulations, and multi-state requirements with automated compliance updates.",
+      "Give reps instant access to battlecards, product specs, pricing guides, and competitive intel — right in Slack or your CRM.",
     features: [
-      "State-specific policies",
-      "Regulatory alerts",
-      "Audit-ready documentation",
+      "Battlecard & competitive intel",
+      "Product knowledge on demand",
+      "Deal-specific context retrieval",
     ],
   },
   {
-    icon: Globe,
-    title: "Remote Workforce Support",
+    icon: Code,
+    title: "Engineering",
     description:
-      "Eliminate the 63% training gap for remote employees with 24/7 access to personalized HR support.",
+      "Connect internal docs, runbooks, architecture decisions, and code wikis. New engineers ramp faster and everyone finds answers without pinging leads.",
     features: [
-      "Time-zone aware assistance",
-      "Remote-specific resources",
-      "Cultural adaptation",
-    ],
-  },
-  {
-    icon: Clock,
-    title: "Benefits & Time-off Management",
-    description:
-      "Answer complex benefits questions instantly. Handle PTO requests, enrollment, and eligibility queries automatically.",
-    features: [
-      "Benefits calculator",
-      "PTO requests",
-      "Open enrollment support",
+      "Runbook & incident lookups",
+      "Architecture decision search",
+      "Onboarding knowledge base",
     ],
   },
 ];
@@ -77,10 +72,11 @@ export function UseCasesSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Solve Your Biggest HR Challenges
+            One Platform, Every Team
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join 50+ HR teams who&apos;ve reduced ticket volume by 80%
+            DatatoRAG works across verticals — wherever teams need fast,
+            accurate answers from their own knowledge
           </p>
         </div>
 
@@ -128,10 +124,16 @@ export function UseCasesSection() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Ready to transform your HR operations with AI?
+            Ready to give your team instant access to everything they know?
           </p>
           <Button asChild variant="ghost" className="font-semibold">
-            <Link href="/contact">See ROI calculator →</Link>
+            <Link
+              href="https://tally.so/r/wa8p9q"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get started →
+            </Link>
           </Button>
         </div>
       </div>
