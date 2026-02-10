@@ -6,23 +6,23 @@ const steps = [
   {
     number: "1",
     icon: Link2,
-    title: "Connect Your Data Securely",
+    title: "Connect Your Tools",
     description:
-      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), Google Drive, document storage (SharePoint, Box), or upload files directly. Easy annual updates for benefits and policy changes.",
+      "Link your Notion, Google Drive, SharePoint, Confluence, Slack, Dropbox, or upload files directly. Setup is simple and your data stays secure throughout.",
   },
   {
     number: "2",
     icon: Brain,
-    title: "Process Your Data With AI Models",
+    title: "AI Processes Your Knowledge",
     description:
-      "Our self-hosted models securely process your data with zero hallucinations. No internet access, no third-party APIs - only your approved documents. Battle-tested accuracy across 10,000s of HR documents.",
+      "Our self-hosted models securely process your documents with zero hallucinations. No internet access, no third-party APIs — only your approved content.",
   },
   {
     number: "3",
     icon: MessageSquare,
-    title: "Query with Confidence",
+    title: "Your Team Gets Answers",
     description:
-      "Fast, accurate answers with complete anonymity. Same question = same answer, every time. Deploy via Slack slash commands, Teams, custom UI, or API - wherever your employees already work.",
+      "Fast, accurate answers with full source citations. Deploy via Slack, Teams, a custom UI, or API — wherever your team already works.",
   },
 ];
 
@@ -32,11 +32,11 @@ export function HowItWorksSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Secure AI for HR in 3 Simple Steps
+            Up and Running in 3 Simple Steps
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From secure data ingestion to private AI-powered context, integrate
-            AI into your workflow with ease.
+            From connecting your tools to team-wide answers — no AI expertise
+            required.
           </p>
         </div>
 

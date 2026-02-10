@@ -1,35 +1,35 @@
-import { Blocks, Clock, Target, Shield, CheckCircle } from "lucide-react";
+import { Blocks, Search, Target, Shield, CheckCircle } from "lucide-react";
 
 const benefits = [
   {
-    icon: CheckCircle,
-    title: "Eliminate ChatGPT's Hallucination Problem",
+    icon: Search,
+    title: "Stop Searching, Start Finding",
     description:
-      "Unlike ChatGPT, we guarantee consistency. Same question = same answer, every time. No more contradictory responses, no made-up policies, no pulling from the internet. Only your approved documents.",
+      "Your team wastes hours digging through Notion pages, Google Docs, and Slack threads. DatatoRAG surfaces the right answer instantly — from any connected source.",
   },
   {
     icon: Shield,
-    title: "Compliance-Ready: Your Data Never Leaves Our Infrastructure",
+    title: "Compliance-Ready",
     description:
-      "Unlike solutions built on ChatGPT or Claude API, your sensitive employee data is processed entirely on self-hosted models within our infrastructure. Comply with HIPAA, SOC2, and data residency requirements.",
-  },
-  {
-    icon: Clock,
-    title: "Increase Employee Productivity From Day 1",
-    description:
-      "Stop the endless search for information. Reduce friction and tribal knowledge, help employees find answers instantly and boost productivity across your organization.",
+      "Your data is processed entirely on self-hosted models within our infrastructure. Meet HIPAA, SOC2, and data residency requirements without compromise.",
   },
   {
     icon: Target,
-    title: "Reduce Your 90-Day Attrition Rate",
+    title: "One Source of Truth",
     description:
-      "Only 12% of employees rate onboarding as 'great'. Create great experiences for new hires and start on the right path to success",
+      "No more conflicting answers from different tools. DatatoRAG unifies your knowledge base so every team member gets the same accurate, up-to-date information.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Zero Hallucinations",
+    description:
+      "Unlike general-purpose AI, DatatoRAG only answers from your approved documents. No made-up facts, no internet pulls — just verified information with source citations.",
   },
   {
     icon: Blocks,
-    title: "Deploy Without IT or AI Teams",
+    title: "Deploy Without IT",
     description:
-      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Go live on your terms, no technical expertise required.",
+      "Connect your tools, invite your team, and go live. No dedicated AI team, no complex infrastructure, no months-long implementation.",
   },
 ];
 
@@ -42,9 +42,8 @@ export function BenefitsSection() {
             The ROI Is Clear
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience results within months. No dedicated AI team needed or
-            complicated integrations. Integrate with your existing HRIS stack
-            today.
+            Real results without a dedicated AI team or complicated
+            integrations. Connect your tools and see the impact immediately.
           </p>
         </div>
 
@@ -75,18 +74,18 @@ export function BenefitsSection() {
               <p className="text-muted-foreground">Answer Accuracy</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">80%</div>
-              <p className="text-muted-foreground">Reduction in HR Requests</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-foreground mb-2">1</div>
-              <p className="text-muted-foreground">Centralized Solution</p>
+              <div className="text-4xl font-bold text-foreground mb-2">10+</div>
+              <p className="text-muted-foreground">Integrations</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-foreground mb-2">
-                3 mo
+                Days
               </div>
-              <p className="text-muted-foreground">Average Time to ROI</p>
+              <p className="text-muted-foreground">To Go Live</p>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-foreground mb-2">0</div>
+              <p className="text-muted-foreground">Hallucinations</p>
             </div>
           </div>
         </div>

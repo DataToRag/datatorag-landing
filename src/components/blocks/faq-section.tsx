@@ -7,45 +7,39 @@ import Link from "next/link";
 
 const faqs = [
   {
-    question: "Why is DatatoRAG more accurate than ChatGPT?",
+    question: "What integrations does DatatoRAG support?",
     answer:
-      "ChatGPT wasn't built for HR and suffers from hallucinations, inconsistent answers, and pulling information from the internet. DatatoRAG guarantees accuracy - we use only your approved documents, implement 10-person validation testing, and ensure the same question always gets the same answer. We've been battle-tested across 10,000s of documents with zero hallucinations.",
+      "DatatoRAG connects with Notion, Google Drive, SharePoint, Confluence, Slack, Dropbox, and more — with new integrations shipping regularly. You can also upload files directly. All sources stay in sync automatically so your answers are always up to date.",
   },
   {
-    question: "Can employees ask questions anonymously?",
+    question: "Who is DatatoRAG built for?",
     answer:
-      "Yes, complete anonymity is guaranteed. Employees can ask sensitive questions about bereavement, personal leave, or other private matters without HR knowing who asked. HR teams receive anonymized metrics showing question frequency and topics, plus alerts when sensitive issues like harassment are raised - all without compromising employee privacy.",
+      "DatatoRAG is built for growing teams and SMBs that need fast, accurate answers from their own knowledge — without enterprise sales cycles or dedicated AI teams. Our customers span finance, academia, HR, sales, engineering, and more.",
   },
   {
-    question: "Does my HR data ever leave our infrastructure?",
+    question: "How is this different from Glean?",
     answer:
-      "No. Unlike ChatGPT or other cloud AI solutions, DatatoRAG runs entirely within our infrastructure. Your employee data, policies, and benefits information never gets sent to OpenAI, Anthropic, or any third party. Everything stays on our secure servers.",
+      "Glean is built for large enterprises with long implementation timelines and six-figure contracts. DatatoRAG delivers the same core value — unified knowledge search with AI — but is purpose-built for SMBs: fast setup, transparent pricing, self-hosted models for privacy, and zero hallucinations guaranteed.",
   },
   {
-    question: "How do I update documents when policies change?",
+    question: "What types of documents can DatatoRAG process?",
     answer:
-      "Our document management interface gives HR teams complete control. Upload or remove documents anytime - typically needed during annual benefits updates (end of year) and policy refreshes (beginning of year). Changes sync from Google Drive, and old versions are completely removed (unlike ChatGPT which remembers deleted documents).",
+      "We support PDFs, Word docs, Google Docs, Notion pages, Confluence pages, Markdown files, spreadsheets, presentations, and more. Content syncs automatically from connected integrations, and you can also upload files directly.",
   },
   {
-    question:
-      "What happens when someone asks about harassment or discrimination?",
+    question: "How does DatatoRAG handle data privacy?",
     answer:
-      "Our smart alert system automatically flags sensitive questions about harassment, discrimination, or other serious issues for HR team attention. You'll know these topics are being raised without seeing who asked, allowing you to take proactive action while maintaining employee confidentiality.",
+      "Your data is processed entirely on self-hosted models within our secure infrastructure. Nothing is sent to OpenAI, Anthropic, or any third-party AI service. We support HIPAA, SOC2, and data residency requirements out of the box.",
   },
   {
-    question: "How much time can this save our HR team?",
+    question: "How accurate are the answers?",
     answer:
-      "Our customers see an average 80% reduction in routine HR requests. Teams save 15+ hours per week by automating responses to common questions about PTO policies, benefits enrollment, parental leave, and company handbooks.",
-  },
-  {
-    question: "What types of HR documents can I upload?",
-    answer:
-      "You can upload employee handbooks, benefits guides, PTO policies, onboarding documentation, compliance materials, state-specific addendums, and any other HR knowledge base content. We support PDFs, Word docs, Google Drive sync, internal wikis, and structured data.",
+      "DatatoRAG guarantees zero hallucinations. Every answer is sourced exclusively from your approved documents with full citations showing the exact document and page. The same question always returns the same correct answer — no matter who asks or when.",
   },
   {
     question: "How quickly can we get started?",
     answer:
-      "We're currently onboarding early customers. Join our waitlist to get priority access and work with our team to integrate DatatoRAG into your workflow. Most teams go live within days, not months.",
+      "Most teams go live in days, not months. Connect your tools, invite your team, and start getting answers. No AI expertise, no complex infrastructure, and no lengthy onboarding required. Join our waitlist for priority access.",
   },
 ];
 
@@ -60,7 +54,7 @@ export function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-muted-foreground">
-            Everything you need to know about DatatoRAG for HR teams
+            Everything you need to know about DatatoRAG
           </p>
         </div>
 
@@ -94,7 +88,7 @@ export function FAQSection() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Ready to reduce your HR ticket volume?
+            Ready to connect your team&apos;s knowledge?
           </p>
           <Button asChild>
             <Link

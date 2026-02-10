@@ -1,69 +1,69 @@
 import {
-  MessageSquare,
-  Users,
   Link2,
   Zap,
   Lock,
   Target,
   ShieldCheck,
-  Bell,
   FileSearch,
+  RefreshCw,
+  Users,
+  MessageSquare,
 } from "lucide-react";
 
 const features = [
   {
+    icon: Link2,
+    title: "Deep Integrations",
+    description:
+      "Connect Notion, Google Drive, SharePoint, Confluence, Slack, Dropbox, and more. Your knowledge stays in sync across every tool your team uses.",
+  },
+  {
     icon: Target,
     title: "Guaranteed Accuracy",
     description:
-      "10 employees asking the same question get identical, correct answers every time. Battle-tested across 10,000s of documents with zero hallucinations. Same question = same answer, always.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Anonymous & Private",
-    description:
-      "Employees ask sensitive questions confidentially about bereavement, personal leave, or embarrassing topics. HR gets anonymized metrics without seeing who asked what.",
-  },
-  {
-    icon: Bell,
-    title: "Smart Alert System",
-    description:
-      "Automatically flags harassment or discrimination questions for HR action while keeping employee identity completely private. Know when issues arise without compromising confidentiality.",
+      "Ask the same question ten times and get the same correct answer every time. Battle-tested across tens of thousands of documents with zero hallucinations.",
   },
   {
     icon: Lock,
-    title: "Your Data Is Secure",
+    title: "Private & Secure",
     description:
-      "Self-hosted models ensure compliance with privacy. No ChatGPT or public AI services allowed! Your data never leaves our infrastructure.",
+      "Self-hosted models ensure compliance. Your data never leaves our infrastructure — no ChatGPT, no public AI services, no third-party access.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Works Where You Work",
+    description:
+      "Deploy via Slack, Teams, a custom UI, or API. Your team gets answers right where they already collaborate — no new tools to learn.",
   },
   {
     icon: FileSearch,
     title: "Source Citation",
     description:
-      "Every answer shows exactly which document and page it came from. Verify information instantly and build trust with transparent, traceable responses.",
+      "Every answer shows exactly which document and page it came from. Verify information instantly with transparent, traceable responses.",
   },
   {
-    icon: MessageSquare,
-    title: "Self-Service via Slack",
+    icon: RefreshCw,
+    title: "Real-time Sync",
     description:
-      "Employees get instant answers to benefits, policy, and procedure questions via Slack slash commands - right where they already work. No new tools to learn.",
-  },
-  {
-    icon: Users,
-    title: "Consistent Onboarding Experience",
-    description:
-      "Ensure every new hire receives the same high-quality onboarding, reducing 90-day attrition by up to 50%.",
-  },
-  {
-    icon: Link2,
-    title: "Seamless Integration",
-    description:
-      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, Google Drive, and more. Easy document updates for annual policy and benefits changes.",
+      "Documents update automatically when your source files change. Old versions are removed completely — no stale information, ever.",
   },
   {
     icon: Zap,
     title: "No AI Expertise Needed",
     description:
-      "Ready to go when you are without vendor lock-ins or questionable public AI services. Getting going in days, not months.",
+      "Go live in days, not months. No vendor lock-in, no complicated setup, no dedicated AI team required.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Role-based Access",
+    description:
+      "Control who sees what with granular permissions. Sensitive documents stay visible only to the right teams.",
+  },
+  {
+    icon: Users,
+    title: "Built for Growing Teams",
+    description:
+      "Designed for SMBs and mid-market companies. Enterprise-grade capabilities without the enterprise sales cycle or price tag.",
   },
 ];
 
@@ -73,10 +73,11 @@ export function FeaturesSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Built for HR Teams Like Yours
+            Built for Teams That Run on Knowledge
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Centralize scattered HR information into a unified knowledge base
+            Turn scattered information across dozens of tools into instant,
+            accurate answers for your entire team
           </p>
         </div>
 
