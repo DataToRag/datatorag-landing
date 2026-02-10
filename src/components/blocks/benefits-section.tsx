@@ -3,33 +3,33 @@ import { Blocks, Clock, Target, Shield, CheckCircle } from "lucide-react";
 const benefits = [
   {
     icon: CheckCircle,
-    title: "Eliminate ChatGPT's Hallucination Problem",
+    title: "Stop Searching, Start Finding",
     description:
-      "Unlike ChatGPT, we guarantee consistency. Same question = same answer, every time. No more contradictory responses, no made-up policies, no pulling from the internet. Only your approved documents.",
+      "Your team wastes hours hunting across Notion, Drive, SharePoint, and Slack for the right document. DatatoRAG gives them instant, accurate answers from all sources at once.",
   },
   {
     icon: Shield,
-    title: "Compliance-Ready: Your Data Never Leaves Our Infrastructure",
+    title: "Compliance-Ready From Day One",
     description:
-      "Unlike solutions built on ChatGPT or Claude API, your sensitive employee data is processed entirely on self-hosted models within our infrastructure. Comply with HIPAA, SOC2, and data residency requirements.",
+      "Your sensitive data is processed entirely on self-hosted models within our infrastructure. No data sent to OpenAI, Anthropic, or any third party. HIPAA and SOC2 ready.",
   },
   {
     icon: Clock,
-    title: "Increase Employee Productivity From Day 1",
+    title: "One Source of Truth",
     description:
-      "Stop the endless search for information. Reduce friction and tribal knowledge, help employees find answers instantly and boost productivity across your organization.",
+      "Eliminate scattered knowledge and conflicting versions. DatatoRAG syncs your tools in real time so every answer reflects the latest information — no stale docs, no confusion.",
   },
   {
     icon: Target,
-    title: "Reduce Your 90-Day Attrition Rate",
+    title: "Zero Hallucinations, Guaranteed",
     description:
-      "Only 12% of employees rate onboarding as 'great'. Create great experiences for new hires and start on the right path to success",
+      "Unlike ChatGPT, DatatoRAG only uses your approved documents. Same question = same answer, every time. Source citations let anyone verify in seconds.",
   },
   {
     icon: Blocks,
     title: "Deploy Without IT or AI Teams",
     description:
-      "Works with Workday, Rippling, BambooHR, ADP, and major HRIS platforms. Go live on your terms, no technical expertise required.",
+      "Connect your tools, invite your team, and go live. No technical expertise required, no enterprise sales cycles. Most teams are up and running in days.",
   },
 ];
 
@@ -42,9 +42,9 @@ export function BenefitsSection() {
             The ROI Is Clear
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience results within months. No dedicated AI team needed or
-            complicated integrations. Integrate with your existing HRIS stack
-            today.
+            Measurable results within weeks. No AI team needed, no complicated
+            setup. Connect your existing tools and start seeing value
+            immediately.
           </p>
         </div>
 
@@ -75,18 +75,18 @@ export function BenefitsSection() {
               <p className="text-muted-foreground">Answer Accuracy</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-foreground mb-2">80%</div>
-              <p className="text-muted-foreground">Reduction in HR Requests</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-foreground mb-2">1</div>
-              <p className="text-muted-foreground">Centralized Solution</p>
+              <div className="text-4xl font-bold text-foreground mb-2">10+</div>
+              <p className="text-muted-foreground">Integrations Supported</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-foreground mb-2">
-                3 mo
+                Days
               </div>
-              <p className="text-muted-foreground">Average Time to ROI</p>
+              <p className="text-muted-foreground">To Go Live</p>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-foreground mb-2">0</div>
+              <p className="text-muted-foreground">Hallucinations</p>
             </div>
           </div>
         </div>

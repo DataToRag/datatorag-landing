@@ -9,43 +9,43 @@ const faqs = [
   {
     question: "Why is DatatoRAG more accurate than ChatGPT?",
     answer:
-      "ChatGPT wasn't built for HR and suffers from hallucinations, inconsistent answers, and pulling information from the internet. DatatoRAG guarantees accuracy - we use only your approved documents, implement 10-person validation testing, and ensure the same question always gets the same answer. We've been battle-tested across 10,000s of documents with zero hallucinations.",
+      "ChatGPT pulls from the internet and suffers from hallucinations and inconsistent answers. DatatoRAG only uses your approved documents — nothing else. We implement 10-person validation testing to ensure the same question always gets the same answer. Battle-tested across 10,000s of documents with zero hallucinations.",
   },
   {
-    question: "Can employees ask questions anonymously?",
+    question: "What tools and services does DatatoRAG integrate with?",
     answer:
-      "Yes, complete anonymity is guaranteed. Employees can ask sensitive questions about bereavement, personal leave, or other private matters without HR knowing who asked. HR teams receive anonymized metrics showing question frequency and topics, plus alerts when sensitive issues like harassment are raised - all without compromising employee privacy.",
+      "We integrate with Notion, Google Drive, SharePoint, Confluence, Dropbox, Slack, and more — with new integrations shipping regularly. You can also upload files directly. All sources sync automatically so your knowledge base stays current.",
   },
   {
-    question: "Does my HR data ever leave our infrastructure?",
+    question: "Does my data ever leave my infrastructure?",
     answer:
-      "No. Unlike ChatGPT or other cloud AI solutions, DatatoRAG runs entirely within our infrastructure. Your employee data, policies, and benefits information never gets sent to OpenAI, Anthropic, or any third party. Everything stays on our secure servers.",
+      "No. Unlike ChatGPT or other cloud AI solutions, DatatoRAG runs entirely on self-hosted models. Your documents, data, and queries never get sent to OpenAI, Anthropic, or any third party. Everything stays on our secure, isolated infrastructure.",
   },
   {
-    question: "How do I update documents when policies change?",
+    question: "How does DatatoRAG handle document updates?",
     answer:
-      "Our document management interface gives HR teams complete control. Upload or remove documents anytime - typically needed during annual benefits updates (end of year) and policy refreshes (beginning of year). Changes sync from Google Drive, and old versions are completely removed (unlike ChatGPT which remembers deleted documents).",
+      "Connected sources sync automatically — when a Notion page or Google Doc is updated, the knowledge base reflects it immediately. You can also manually upload or remove documents anytime. Old versions are properly replaced, unlike ChatGPT which can remember deleted content.",
+  },
+  {
+    question: "Who is DatatoRAG built for?",
+    answer:
+      "DatatoRAG is built for small and medium businesses that need an AI-powered knowledge layer without enterprise complexity. Our customers span finance and accounting firms, universities, HR teams, sales organizations, and engineering teams. If your team wastes time searching for information across multiple tools, DatatoRAG is for you.",
   },
   {
     question:
-      "What happens when someone asks about harassment or discrimination?",
+      "How is this different from Glean or other enterprise search tools?",
     answer:
-      "Our smart alert system automatically flags sensitive questions about harassment, discrimination, or other serious issues for HR team attention. You'll know these topics are being raised without seeing who asked, allowing you to take proactive action while maintaining employee confidentiality.",
+      "Enterprise tools like Glean are built for large organizations with dedicated IT teams and six-figure budgets. DatatoRAG delivers the same core capability — AI search across your company's knowledge — but built for growing teams. No enterprise sales cycles, no complex setup, and pricing that works for SMEs.",
   },
   {
-    question: "How much time can this save our HR team?",
+    question: "What types of documents can I use?",
     answer:
-      "Our customers see an average 80% reduction in routine HR requests. Teams save 15+ hours per week by automating responses to common questions about PTO policies, benefits enrollment, parental leave, and company handbooks.",
-  },
-  {
-    question: "What types of HR documents can I upload?",
-    answer:
-      "You can upload employee handbooks, benefits guides, PTO policies, onboarding documentation, compliance materials, state-specific addendums, and any other HR knowledge base content. We support PDFs, Word docs, Google Drive sync, internal wikis, and structured data.",
+      "DatatoRAG supports PDFs, Word docs, Google Docs, Notion pages, Confluence spaces, spreadsheets, internal wikis, and structured data. If your team uses it, we can likely connect to it.",
   },
   {
     question: "How quickly can we get started?",
     answer:
-      "We're currently onboarding early customers. Join our waitlist to get priority access and work with our team to integrate DatatoRAG into your workflow. Most teams go live within days, not months.",
+      "Most teams go live within days, not months. Connect your tools, invite your team, and start querying. No AI expertise required, no IT team needed. We're currently onboarding early customers — join our waitlist for priority access.",
   },
 ];
 
@@ -60,7 +60,7 @@ export function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-muted-foreground">
-            Everything you need to know about DatatoRAG for HR teams
+            Everything you need to know about DatatoRAG
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export function FAQSection() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Ready to reduce your HR ticket volume?
+            Ready to connect your team&apos;s knowledge?
           </p>
           <Button asChild>
             <Link

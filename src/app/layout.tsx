@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DatatoRAG - Privacy-First RAG Infrastructure",
+  title: "DatatoRAG - Connect Everything, Find Anything",
   description:
-    "Deploy RAG applications with complete data sovereignty. Privacy-first architecture with custom embeddings and secure infrastructure.",
+    "AI-powered knowledge search for growing teams. Connect Notion, Google Drive, SharePoint, Confluence, and more into one accurate, private, source-cited answer layer.",
 };
 
 export default function RootLayout({

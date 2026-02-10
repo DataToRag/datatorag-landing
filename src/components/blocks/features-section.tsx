@@ -1,82 +1,82 @@
 import {
-  MessageSquare,
-  Users,
   Link2,
   Zap,
   Lock,
   Target,
-  ShieldCheck,
-  Bell,
   FileSearch,
+  MessageSquare,
+  RefreshCw,
+  ShieldCheck,
+  Building2,
 } from "lucide-react";
 
 const features = [
   {
+    icon: Link2,
+    title: "Deep Integrations",
+    description:
+      "Connect Notion, Google Drive, SharePoint, Confluence, Dropbox, Slack, and more. Your knowledge lives in many places — DatatoRAG brings it all together.",
+  },
+  {
     icon: Target,
     title: "Guaranteed Accuracy",
     description:
-      "10 employees asking the same question get identical, correct answers every time. Battle-tested across 10,000s of documents with zero hallucinations. Same question = same answer, always.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Anonymous & Private",
-    description:
-      "Employees ask sensitive questions confidentially about bereavement, personal leave, or embarrassing topics. HR gets anonymized metrics without seeing who asked what.",
-  },
-  {
-    icon: Bell,
-    title: "Smart Alert System",
-    description:
-      "Automatically flags harassment or discrimination questions for HR action while keeping employee identity completely private. Know when issues arise without compromising confidentiality.",
+      "Every answer is sourced from your approved documents only. Zero hallucinations, zero internet data. Ask the same question 10 times, get the same answer 10 times.",
   },
   {
     icon: Lock,
-    title: "Your Data Is Secure",
+    title: "Private & Secure",
     description:
-      "Self-hosted models ensure compliance with privacy. No ChatGPT or public AI services allowed! Your data never leaves our infrastructure.",
+      "Self-hosted models ensure your data never leaves your infrastructure. No ChatGPT, no third-party APIs touching your sensitive information. HIPAA and SOC2 ready.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Works Where You Work",
+    description:
+      "Deploy via Slack slash commands, Microsoft Teams, a custom UI, or API. Your team gets answers right where they already work — no new tools to learn.",
   },
   {
     icon: FileSearch,
     title: "Source Citation",
     description:
-      "Every answer shows exactly which document and page it came from. Verify information instantly and build trust with transparent, traceable responses.",
+      "Every answer shows exactly which document, page, and section it came from. Verify information instantly with transparent, traceable responses.",
   },
   {
-    icon: MessageSquare,
-    title: "Self-Service via Slack",
+    icon: RefreshCw,
+    title: "Real-time Sync",
     description:
-      "Employees get instant answers to benefits, policy, and procedure questions via Slack slash commands - right where they already work. No new tools to learn.",
-  },
-  {
-    icon: Users,
-    title: "Consistent Onboarding Experience",
-    description:
-      "Ensure every new hire receives the same high-quality onboarding, reducing 90-day attrition by up to 50%.",
-  },
-  {
-    icon: Link2,
-    title: "Seamless Integration",
-    description:
-      "Connects with Workday, Rippling, BambooHR, ADP, SharePoint, Google Drive, and more. Easy document updates for annual policy and benefits changes.",
+      "When documents update, answers update. Automatic syncing from connected tools means your knowledge base is always current — no manual re-uploads.",
   },
   {
     icon: Zap,
     title: "No AI Expertise Needed",
     description:
-      "Ready to go when you are without vendor lock-ins or questionable public AI services. Getting going in days, not months.",
+      "Go live in days, not months. No vendor lock-in, no dedicated AI team required. Connect your tools and start getting answers immediately.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Role-based Access",
+    description:
+      "Control who can see what. Set permissions by team, department, or role so sensitive documents stay accessible only to the right people.",
+  },
+  {
+    icon: Building2,
+    title: "Built for Growing Teams",
+    description:
+      "Affordable pricing without enterprise sales cycles. Whether you're a 10-person startup or a 500-person firm, DatatoRAG scales with you.",
   },
 ];
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 bg-background">
+    <section id="integrations" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Built for HR Teams Like Yours
+            Built for Teams That Run on Knowledge
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Centralize scattered HR information into a unified knowledge base
+            Connect your scattered tools into one AI-powered knowledge layer
           </p>
         </div>
 

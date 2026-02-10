@@ -6,23 +6,23 @@ const steps = [
   {
     number: "1",
     icon: Link2,
-    title: "Connect Your Data Securely",
+    title: "Connect Your Tools",
     description:
-      "Connect your HRIS (Workday, Rippling, BambooHR, ADP), Google Drive, document storage (SharePoint, Box), or upload files directly. Easy annual updates for benefits and policy changes.",
+      "Link your Notion workspace, Google Drive, SharePoint, Confluence, Dropbox, or upload files directly. Add new sources anytime — DatatoRAG keeps everything in sync.",
   },
   {
     number: "2",
     icon: Brain,
-    title: "Process Your Data With AI Models",
+    title: "AI Processes Your Knowledge",
     description:
-      "Our self-hosted models securely process your data with zero hallucinations. No internet access, no third-party APIs - only your approved documents. Battle-tested accuracy across 10,000s of HR documents.",
+      "Our self-hosted models securely process your documents with zero hallucinations. No internet access, no third-party APIs — only your approved content. Battle-tested across 10,000s of documents.",
   },
   {
     number: "3",
     icon: MessageSquare,
-    title: "Query with Confidence",
+    title: "Your Team Gets Answers",
     description:
-      "Fast, accurate answers with complete anonymity. Same question = same answer, every time. Deploy via Slack slash commands, Teams, custom UI, or API - wherever your employees already work.",
+      "Accurate, source-cited answers — every time. Deploy via Slack, Teams, a custom UI, or API. Same question always gets the same answer, no matter who asks or when.",
   },
 ];
 
@@ -32,11 +32,11 @@ export function HowItWorksSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Secure AI for HR in 3 Simple Steps
+            Up and Running in 3 Simple Steps
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From secure data ingestion to private AI-powered context, integrate
-            AI into your workflow with ease.
+            From connecting your first tool to getting accurate answers — it
+            takes days, not months.
           </p>
         </div>
 

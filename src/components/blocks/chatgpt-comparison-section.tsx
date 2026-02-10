@@ -3,17 +3,17 @@ import { X, Check } from "lucide-react";
 const comparisons = [
   {
     problem: "Hallucinations & wrong answers",
-    chatgpt: "Same question gets different answers",
-    datatorag: "Guaranteed accuracy - 10 people, same answer",
+    chatgpt: "Same question gets different answers each time",
+    datatorag: "Guaranteed accuracy — same question, same answer, always",
   },
   {
     problem: "Outdated information",
     chatgpt: "Remembers old documents after deletion",
-    datatorag: "Proper version control - only current docs",
+    datatorag: "Real-time sync — only current docs, proper version control",
   },
   {
     problem: "Data sources",
-    chatgpt: "Pulls from internet despite instructions",
+    chatgpt: "Pulls from the internet despite instructions",
     datatorag: "Only your approved documents, nothing else",
   },
   {
@@ -22,14 +22,15 @@ const comparisons = [
     datatorag: "10-person validation test for every answer",
   },
   {
-    problem: "Privacy",
-    chatgpt: "No anonymity guarantees",
-    datatorag: "Complete anonymity with smart alerts",
+    problem: "Privacy & security",
+    chatgpt: "Data sent to third-party servers",
+    datatorag:
+      "Self-hosted models — your data never leaves your infrastructure",
   },
   {
     problem: "Source verification",
     chatgpt: "Can't trace where answers come from",
-    datatorag: "Shows exact document and page reference",
+    datatorag: "Shows exact document, page, and section reference",
   },
 ];
 
@@ -39,11 +40,11 @@ export function ChatGPTComparisonSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Why HR Teams Are Switching from ChatGPT
+            Why Teams Are Switching from ChatGPT
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            ChatGPT wasn&apos;t built for HR. We were. See the difference that
-            matters to your team.
+            ChatGPT wasn&apos;t built for your company&apos;s internal
+            knowledge. DatatoRAG was.
           </p>
         </div>
 
@@ -92,12 +93,12 @@ export function ChatGPTComparisonSection() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground italic">
-            &ldquo;We switched from ChatGPT after it gave 3 different employees
-            3 different answers to the same bereavement policy question.
-            That&apos;s when we knew we needed something built for HR.&rdquo;
+            &ldquo;We switched from ChatGPT after it confidently cited a policy
+            that had been updated six months ago. Three team members made
+            decisions based on wrong information before we caught it.&rdquo;
           </p>
           <p className="text-foreground font-semibold mt-2">
-            - HR Director at Fortune 500 Company
+            - Operations Lead, 200-person SaaS company
           </p>
         </div>
       </div>
