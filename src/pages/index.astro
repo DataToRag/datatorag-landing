@@ -1,13 +1,22 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
+import IntegrationCard from "@/components/IntegrationCard.astro";
+import { GITHUB_URL } from "@/lib/site-config";
+import { formatDate } from "@/lib/site-config";
 import { getCollection } from "astro:content";
 
-const integrations = await getCollection("integrations");
-const featured = integrations.filter((i) => i.data.featured);
-const guides = await getCollection("guides", ({ data }) => !data.draft);
-const useCases = await getCollection("use-cases");
+const [featured, guides, useCases] = await Promise.all([
+  getCollection("integrations", ({ data }) => data.featured),
+  getCollection("guides", ({ data }) => !data.draft),
+  getCollection("use-cases"),
+]);
+
+const latestGuides = guides
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  )
+  .slice(0, 3);
 
 const steps = [
   {
@@ -29,8 +38,6 @@ const steps = [
 ---
 
 <BaseLayout title="MCP Integration Marketplace for Claude">
-  <Header />
-
   <!-- Hero -->
   <section class="relative overflow-hidden border-b">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36">
@@ -130,31 +137,16 @@ const steps = [
       </div>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
-          featured.map((integration) => (
-            <a
-              href={`/integrations/${integration.id}`}
-              class="group rounded-lg border bg-card p-5 transition-colors hover:border-primary/30 hover:bg-accent/50"
-            >
-              <div class="flex items-start gap-3">
-                <span class="text-2xl">{integration.data.icon}</span>
-                <div class="min-w-0">
-                  <h3 class="font-semibold group-hover:text-primary">
-                    {integration.data.name}
-                  </h3>
-                  <p class="mt-1 text-sm text-muted-foreground line-clamp-2">
-                    {integration.data.description}
-                  </p>
-                  <div class="mt-3 flex flex-wrap gap-1.5">
-                    <span class="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-                      {integration.data.difficulty}
-                    </span>
-                    <span class="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-                      {integration.data.setupTime}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </a>
+          featured.map((i) => (
+            <IntegrationCard
+              id={i.id}
+              name={i.data.name}
+              description={i.data.description}
+              icon={i.data.icon}
+              difficulty={i.data.difficulty}
+              setupTime={i.data.setupTime}
+              industries={i.data.industries}
+            />
           ))
         }
       </div>
@@ -247,7 +239,7 @@ const steps = [
           class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <a
-            href="https://github.com/datatorag"
+            href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex h-10 items-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
@@ -286,29 +278,22 @@ const steps = [
       </div>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
-          guides
-            .sort(
-              (a, b) =>
-                new Date(b.data.pubDate).getTime() -
-                new Date(a.data.pubDate).getTime(),
-            )
-            .slice(0, 3)
-            .map((guide) => (
-              <a
-                href={`/guides/${guide.id}`}
-                class="group rounded-lg border bg-card p-5 transition-colors hover:border-primary/30 hover:bg-accent/50"
-              >
-                <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                  {guide.data.category}
-                </span>
-                <h3 class="mt-2 font-semibold group-hover:text-primary">
-                  {guide.data.title}
-                </h3>
-                <p class="mt-1 text-sm text-muted-foreground line-clamp-2">
-                  {guide.data.description}
-                </p>
-              </a>
-            ))
+          latestGuides.map((guide) => (
+            <a
+              href={`/guides/${guide.id}`}
+              class="group rounded-lg border bg-card p-5 transition-colors hover:border-primary/30 hover:bg-accent/50"
+            >
+              <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                {guide.data.category}
+              </span>
+              <h3 class="mt-2 font-semibold group-hover:text-primary">
+                {guide.data.title}
+              </h3>
+              <p class="mt-1 text-sm text-muted-foreground line-clamp-2">
+                {guide.data.description}
+              </p>
+            </a>
+          ))
         }
       </div>
     </div>
@@ -334,6 +319,4 @@ const steps = [
       </div>
     </div>
   </section>
-
-  <Footer />
 </BaseLayout>

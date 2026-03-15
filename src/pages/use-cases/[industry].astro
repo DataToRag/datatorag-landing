@@ -1,37 +1,37 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const useCases = await getCollection("use-cases");
+  const [useCases, integrations] = await Promise.all([
+    getCollection("use-cases"),
+    getCollection("integrations"),
+  ]);
   return useCases.map((uc) => ({
     params: { industry: uc.id },
-    props: { useCase: uc },
+    props: {
+      useCase: uc,
+      featured: integrations.filter((i) =>
+        uc.data.featuredIntegrations.includes(i.id),
+      ),
+    },
   }));
 }
 
-const { useCase } = Astro.props;
+const { useCase, featured } = Astro.props;
 const { Content } = await render(useCase);
-
-const integrations = await getCollection("integrations");
-const featured = integrations.filter((i) =>
-  useCase.data.featuredIntegrations.includes(i.id),
-);
 ---
 
 <BaseLayout title={useCase.data.title} description={useCase.data.description}>
-  <Header />
-
   <article class="py-10">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <!-- Breadcrumb -->
-      <nav class="mb-6 text-sm text-muted-foreground">
-        <a href="/use-cases" class="hover:text-foreground">Use Cases</a>
-        <span class="mx-2">/</span>
-        <span>{useCase.data.industry}</span>
-      </nav>
+      <Breadcrumb
+        items={[
+          { label: "Use Cases", href: "/use-cases" },
+          { label: useCase.data.industry },
+        ]}
+      />
 
       <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
         {useCase.data.title}
@@ -67,6 +67,4 @@ const featured = integrations.filter((i) =>
       </div>
     </div>
   </article>
-
-  <Footer />
 </BaseLayout>

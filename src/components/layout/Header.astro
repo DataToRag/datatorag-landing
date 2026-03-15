@@ -1,9 +1,5 @@
 ---
-const navItems = [
-  { label: "Integrations", href: "/integrations" },
-  { label: "Use Cases", href: "/use-cases" },
-  { label: "Guides", href: "/guides" },
-];
+import { NAV_ITEMS, SITE_NAME, GITHUB_URL } from "@/lib/site-config";
 ---
 
 <header class="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
@@ -14,12 +10,12 @@ const navItems = [
       href="/"
       class="flex items-center gap-2 text-lg font-bold tracking-tight"
     >
-      <img src="/datatorag-logo.png" alt="DatatoRAG" class="h-8 w-8" />
-      DatatoRAG
+      <img src="/datatorag-logo.png" alt={SITE_NAME} class="h-8 w-8" />
+      {SITE_NAME}
     </a>
     <div class="hidden items-center gap-6 md:flex">
       {
-        navItems.map((item) => (
+        NAV_ITEMS.map((item) => (
           <a
             href={item.href}
             class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -29,7 +25,7 @@ const navItems = [
         ))
       }
       <a
-        href="https://github.com/datatorag"
+        href={GITHUB_URL}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex h-9 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
@@ -59,7 +55,7 @@ const navItems = [
   <div id="mobile-menu" class="hidden border-t md:hidden">
     <div class="flex flex-col gap-2 px-4 py-4">
       {
-        navItems.map((item) => (
+        NAV_ITEMS.map((item) => (
           <a
             href={item.href}
             class="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
@@ -69,7 +65,7 @@ const navItems = [
         ))
       }
       <a
-        href="https://github.com/datatorag"
+        href={GITHUB_URL}
         target="_blank"
         rel="noopener noreferrer"
         class="mt-2 inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground"

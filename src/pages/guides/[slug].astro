@@ -1,70 +1,58 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { formatDate } from "@/lib/site-config";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const guides = await getCollection("guides", ({ data }) => !data.draft);
   return guides.map((guide) => ({
     params: { slug: guide.id },
-    props: { guide },
+    props: {
+      guide,
+      related: guides
+        .filter(
+          (g) =>
+            g.id !== guide.id &&
+            (g.data.category === guide.data.category ||
+              g.data.tags.some((t: string) => guide.data.tags.includes(t))),
+        )
+        .slice(0, 3),
+    },
   }));
 }
 
-const { guide } = Astro.props;
+const { guide, related } = Astro.props;
 const { Content, headings } = await render(guide);
-
-const allGuides = await getCollection("guides", ({ data }) => !data.draft);
-const related = allGuides
-  .filter(
-    (g) =>
-      g.id !== guide.id &&
-      (g.data.category === guide.data.category ||
-        g.data.tags.some((t: string) => guide.data.tags.includes(t))),
-  )
-  .slice(0, 3);
 ---
 
 <BaseLayout title={guide.data.title} description={guide.data.description}>
-  <Header />
-
   <article class="py-10">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <!-- Breadcrumb -->
-      <nav class="mb-6 text-sm text-muted-foreground">
-        <a href="/guides" class="hover:text-foreground">Guides</a>
-        <span class="mx-2">/</span>
-        <span>{guide.data.title}</span>
-      </nav>
+      <Breadcrumb
+        items={[
+          { label: "Guides", href: "/guides" },
+          { label: guide.data.title },
+        ]}
+      />
 
       <!-- Meta -->
       <div class="flex items-center gap-2">
         <span
           class="rounded-full bg-muted px-2 py-0.5 text-xs font-medium capitalize"
+          >{guide.data.category}</span
         >
-          {guide.data.category}
-        </span>
-        <span class="rounded-full bg-muted px-2 py-0.5 text-xs font-medium">
-          {guide.data.difficulty}
-        </span>
+        <span class="rounded-full bg-muted px-2 py-0.5 text-xs font-medium"
+          >{guide.data.difficulty}</span
+        >
       </div>
 
       <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
         {guide.data.title}
       </h1>
-      <p class="mt-2 text-lg text-muted-foreground">
-        {guide.data.description}
-      </p>
+      <p class="mt-2 text-lg text-muted-foreground">{guide.data.description}</p>
       <p class="mt-3 text-sm text-muted-foreground">
-        By {guide.data.author} &middot;{" "}
-        {
-          new Date(guide.data.pubDate).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
+        By {guide.data.author} &middot; {formatDate(guide.data.pubDate)}
       </p>
 
       <!-- Table of Contents -->
@@ -120,6 +108,4 @@ const related = allGuides
       }
     </div>
   </article>
-
-  <Footer />
 </BaseLayout>

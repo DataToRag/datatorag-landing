@@ -1,16 +1,20 @@
 ---
-const links = {
-  product: [
-    { label: "Integrations", href: "/integrations" },
-    { label: "Use Cases", href: "/use-cases" },
-    { label: "Guides", href: "/guides" },
-  ],
-  developers: [
-    { label: "GitHub", href: "https://github.com/datatorag" },
-    { label: "Contributing", href: "https://github.com/datatorag" },
-    { label: "Documentation", href: "/guides" },
-  ],
-};
+import { NAV_ITEMS, SITE_NAME, GITHUB_URL } from "@/lib/site-config";
+
+const linkSections = [
+  {
+    title: "Product",
+    links: NAV_ITEMS.map((item) => ({ label: item.label, href: item.href })),
+  },
+  {
+    title: "Developers",
+    links: [
+      { label: "GitHub", href: GITHUB_URL },
+      { label: "Contributing", href: GITHUB_URL },
+      { label: "Documentation", href: "/guides" },
+    ],
+  },
+];
 ---
 
 <footer class="border-t bg-muted/30">
@@ -18,57 +22,43 @@ const links = {
     <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
       <div class="sm:col-span-2 md:col-span-2">
         <a href="/" class="flex items-center gap-2 text-lg font-bold">
-          <img src="/datatorag-logo.png" alt="DatatoRAG" class="h-8 w-8" />
-          DatatoRAG
+          <img src="/datatorag-logo.png" alt={SITE_NAME} class="h-8 w-8" />
+          {SITE_NAME}
         </a>
         <p class="mt-3 max-w-sm text-sm text-muted-foreground">
           Discover and install MCP integrations that supercharge Claude for your
           industry. Open source, community-driven.
         </p>
       </div>
-      <div>
-        <h3 class="mb-3 text-sm font-semibold">Product</h3>
-        <ul class="space-y-2">
-          {
-            links.product.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div>
-        <h3 class="mb-3 text-sm font-semibold">Developers</h3>
-        <ul class="space-y-2">
-          {
-            links.developers.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    link.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      {
+        linkSections.map((section) => (
+          <div>
+            <h3 class="mb-3 text-sm font-semibold">{section.title}</h3>
+            <ul class="space-y-2">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      link.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
     <div class="mt-10 border-t pt-6 text-center text-sm text-muted-foreground">
-      &copy; {new Date().getFullYear()} DatatoRAG. All rights reserved.
+      &copy; {new Date().getFullYear()}
+      {SITE_NAME}. All rights reserved.
     </div>
   </div>
 </footer>
