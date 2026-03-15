@@ -1,0 +1,111 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { formatDate } from "@/lib/site-config";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("guides", ({ data }) => !data.draft);
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: {
+      guide,
+      related: guides
+        .filter(
+          (g) =>
+            g.id !== guide.id &&
+            (g.data.category === guide.data.category ||
+              g.data.tags.some((t: string) => guide.data.tags.includes(t))),
+        )
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { guide, related } = Astro.props;
+const { Content, headings } = await render(guide);
+---
+
+<BaseLayout title={guide.data.title} description={guide.data.description}>
+  <article class="py-10">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <Breadcrumb
+        items={[
+          { label: "Guides", href: "/guides" },
+          { label: guide.data.title },
+        ]}
+      />
+
+      <!-- Meta -->
+      <div class="flex items-center gap-2">
+        <span
+          class="rounded-full bg-muted px-2 py-0.5 text-xs font-medium capitalize"
+          >{guide.data.category}</span
+        >
+        <span class="rounded-full bg-muted px-2 py-0.5 text-xs font-medium"
+          >{guide.data.difficulty}</span
+        >
+      </div>
+
+      <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        {guide.data.title}
+      </h1>
+      <p class="mt-2 text-lg text-muted-foreground">{guide.data.description}</p>
+      <p class="mt-3 text-sm text-muted-foreground">
+        By {guide.data.author} &middot; {formatDate(guide.data.pubDate)}
+      </p>
+
+      <!-- Table of Contents -->
+      {
+        headings.length > 2 && (
+          <nav class="mt-8 rounded-lg border bg-muted/30 p-4">
+            <h2 class="mb-2 text-sm font-semibold">In this guide</h2>
+            <ul class="space-y-1">
+              {headings
+                .filter((h) => h.depth <= 3)
+                .map((heading) => (
+                  <li style={`padding-left: ${(heading.depth - 2) * 0.75}rem`}>
+                    <a
+                      href={`#${heading.slug}`}
+                      class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </nav>
+        )
+      }
+
+      <!-- Content -->
+      <div class="prose prose-zinc mt-10 max-w-none dark:prose-invert">
+        <Content />
+      </div>
+
+      <!-- Related -->
+      {
+        related.length > 0 && (
+          <div class="mt-12 border-t pt-8">
+            <h2 class="text-xl font-bold">Related Guides</h2>
+            <div class="mt-4 grid gap-4 sm:grid-cols-3">
+              {related.map((r) => (
+                <a
+                  href={`/guides/${r.id}`}
+                  class="group rounded-lg border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-accent/50"
+                >
+                  <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    {r.data.category}
+                  </span>
+                  <h3 class="mt-2 font-semibold group-hover:text-primary">
+                    {r.data.title}
+                  </h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>

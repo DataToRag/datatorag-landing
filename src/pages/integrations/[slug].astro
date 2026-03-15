@@ -1,0 +1,151 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import IntegrationCard from "@/components/IntegrationCard.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const integrations = await getCollection("integrations");
+  return integrations.map((integration) => ({
+    params: { slug: integration.id },
+    props: {
+      integration,
+      related: integrations
+        .filter(
+          (i) =>
+            i.id !== integration.id &&
+            i.data.industries.some((ind: string) =>
+              integration.data.industries.includes(ind),
+            ),
+        )
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { integration, related } = Astro.props;
+const { Content } = await render(integration);
+
+const compatEntries = [
+  { key: "claudeDesktop" as const, label: "Claude Desktop" },
+  { key: "claudeCode" as const, label: "Claude Code" },
+  { key: "claudeApi" as const, label: "Claude API" },
+].filter((entry) => integration.data.compatibility[entry.key]);
+---
+
+<BaseLayout
+  title={integration.data.name}
+  description={integration.data.description}
+>
+  <article class="py-10">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <Breadcrumb
+        items={[
+          { label: "Integrations", href: "/integrations" },
+          { label: integration.data.name },
+        ]}
+      />
+
+      <!-- Header -->
+      <div class="flex items-start gap-4">
+        <span class="text-4xl">{integration.data.icon}</span>
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight">
+            {integration.data.name}
+          </h1>
+          <p class="mt-1 text-lg text-muted-foreground">
+            {integration.data.description}
+          </p>
+        </div>
+      </div>
+
+      <!-- Meta -->
+      <div class="mt-6 flex flex-wrap gap-2">
+        <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium"
+          >{integration.data.difficulty}</span
+        >
+        <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium"
+          >{integration.data.setupTime} setup</span
+        >
+        {
+          integration.data.industries.map((ind: string) => (
+            <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+              {ind}
+            </span>
+          ))
+        }
+      </div>
+
+      <!-- Compatibility -->
+      {
+        compatEntries.length > 0 && (
+          <div class="mt-4 flex gap-3 text-sm text-muted-foreground">
+            {compatEntries.map((entry) => (
+              <span class="flex items-center gap-1">
+                <svg
+                  class="h-4 w-4 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                {entry.label}
+              </span>
+            ))}
+          </div>
+        )
+      }
+
+      <!-- Content -->
+      <div class="prose prose-zinc mt-10 max-w-none dark:prose-invert">
+        <Content />
+      </div>
+
+      <!-- GitHub CTA -->
+      <div class="mt-10 rounded-lg border bg-muted/30 p-6">
+        <h3 class="font-semibold">Open Source</h3>
+        <p class="mt-1 text-sm text-muted-foreground">
+          This integration is open source. View the code, report issues, or
+          contribute on GitHub.
+        </p>
+        <a
+          href={integration.data.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-3 inline-flex h-9 items-center rounded-md border px-4 text-sm font-medium transition-colors hover:bg-accent"
+        >
+          View on GitHub →
+        </a>
+      </div>
+
+      <!-- Related -->
+      {
+        related.length > 0 && (
+          <div class="mt-12">
+            <h2 class="text-xl font-bold">Related Integrations</h2>
+            <div class="mt-4 grid gap-4 sm:grid-cols-3">
+              {related.map((r) => (
+                <IntegrationCard
+                  id={r.id}
+                  name={r.data.name}
+                  description={r.data.description}
+                  icon={r.data.icon}
+                  difficulty={r.data.difficulty}
+                  setupTime={r.data.setupTime}
+                  industries={r.data.industries}
+                  compact
+                />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>

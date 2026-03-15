@@ -1,0 +1,70 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const [useCases, integrations] = await Promise.all([
+    getCollection("use-cases"),
+    getCollection("integrations"),
+  ]);
+  return useCases.map((uc) => ({
+    params: { industry: uc.id },
+    props: {
+      useCase: uc,
+      featured: integrations.filter((i) =>
+        uc.data.featuredIntegrations.includes(i.id),
+      ),
+    },
+  }));
+}
+
+const { useCase, featured } = Astro.props;
+const { Content } = await render(useCase);
+---
+
+<BaseLayout title={useCase.data.title} description={useCase.data.description}>
+  <article class="py-10">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <Breadcrumb
+        items={[
+          { label: "Use Cases", href: "/use-cases" },
+          { label: useCase.data.industry },
+        ]}
+      />
+
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        {useCase.data.title}
+      </h1>
+      <p class="mt-2 text-lg text-muted-foreground">
+        {useCase.data.description}
+      </p>
+
+      <!-- Featured Integrations -->
+      {
+        featured.length > 0 && (
+          <div class="mt-8">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Recommended Integrations
+            </h2>
+            <div class="mt-3 flex flex-wrap gap-3">
+              {featured.map((i) => (
+                <a
+                  href={`/integrations/${i.id}`}
+                  class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition-colors hover:bg-accent"
+                >
+                  <span>{i.data.icon}</span>
+                  {i.data.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      <div class="prose prose-zinc mt-10 max-w-none dark:prose-invert">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

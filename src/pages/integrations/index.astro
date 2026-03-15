@@ -1,0 +1,153 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import IntegrationCard from "@/components/IntegrationCard.astro";
+import { INTEGRATION_CATEGORIES } from "@/lib/site-config";
+import { getCollection } from "astro:content";
+
+const integrations = await getCollection("integrations");
+
+const industries = [
+  ...new Set(integrations.flatMap((i) => i.data.industries)),
+].sort();
+---
+
+<BaseLayout
+  title="Integration Marketplace"
+  description="Browse MCP integrations for Claude. Connect Slack, Google Drive, Salesforce, and more."
+>
+  <PageHeader
+    title="Integration Marketplace"
+    description="Browse and install MCP integrations for Claude. Each one comes with a step-by-step setup guide."
+  />
+
+  <section class="py-10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <!-- Filters -->
+      <div class="mb-8 flex flex-wrap gap-2" id="filters">
+        <div class="flex flex-wrap gap-1.5">
+          <span
+            class="mr-1 self-center text-sm font-medium text-muted-foreground"
+            >Category:</span
+          >
+          {
+            INTEGRATION_CATEGORIES.map((cat) => (
+              <button
+                class:list={[
+                  "filter-btn rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-accent",
+                  cat.value === "all" &&
+                    "bg-primary text-primary-foreground border-primary",
+                ]}
+                data-filter="category"
+                data-value={cat.value}
+              >
+                {cat.label}
+              </button>
+            ))
+          }
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          <span
+            class="mr-1 self-center text-sm font-medium text-muted-foreground"
+            >Industry:</span
+          >
+          <button
+            class="filter-btn rounded-full border bg-primary text-primary-foreground border-primary px-3 py-1 text-xs font-medium transition-colors hover:bg-accent"
+            data-filter="industry"
+            data-value="all"
+          >
+            All
+          </button>
+          {
+            industries.map((ind) => (
+              <button
+                class="filter-btn rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-accent"
+                data-filter="industry"
+                data-value={ind}
+              >
+                {ind.charAt(0).toUpperCase() + ind.slice(1)}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Integration Grid -->
+      <div
+        class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        id="integration-grid"
+      >
+        {
+          integrations.map((i) => (
+            <IntegrationCard
+              id={i.id}
+              name={i.data.name}
+              description={i.data.description}
+              icon={i.data.icon}
+              difficulty={i.data.difficulty}
+              setupTime={i.data.setupTime}
+              industries={i.data.industries}
+              category={i.data.category}
+              showDataAttrs
+            />
+          ))
+        }
+      </div>
+
+      <div
+        id="no-results"
+        class="hidden py-12 text-center text-muted-foreground"
+      >
+        No integrations match your filters. Try a different combination.
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  let activeCategory = "all";
+  let activeIndustry = "all";
+
+  const cards = document.querySelectorAll<HTMLElement>(".integration-card");
+  const noResults = document.getElementById("no-results");
+  const activeClasses = [
+    "bg-primary",
+    "text-primary-foreground",
+    "border-primary",
+  ];
+
+  const buttonGroups: Record<string, NodeListOf<HTMLButtonElement>> = {
+    category: document.querySelectorAll('.filter-btn[data-filter="category"]'),
+    industry: document.querySelectorAll('.filter-btn[data-filter="industry"]'),
+  };
+
+  function applyFilters() {
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const category = card.dataset.category || "";
+      const industries = (card.dataset.industries || "").split(",");
+      const visible =
+        (activeCategory === "all" || category === activeCategory) &&
+        (activeIndustry === "all" || industries.includes(activeIndustry));
+      card.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
+    });
+    noResults?.classList.toggle("hidden", visibleCount > 0);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>(".filter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter || "";
+      const value = btn.dataset.value || "all";
+
+      if (filter === "category") activeCategory = value;
+      if (filter === "industry") activeIndustry = value;
+
+      buttonGroups[filter]?.forEach((b) =>
+        b.classList.remove(...activeClasses),
+      );
+      btn.classList.add(...activeClasses);
+      applyFilters();
+    });
+  });
+</script>
