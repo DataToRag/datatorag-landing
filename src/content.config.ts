@@ -25,7 +25,11 @@ const integrations = defineCollection({
         claudeCode: z.boolean().default(false),
         claudeApi: z.boolean().default(false),
       })
-      .default({}),
+      .default({
+        claudeDesktop: true,
+        claudeCode: false,
+        claudeApi: false,
+      }),
   }),
 });
 
