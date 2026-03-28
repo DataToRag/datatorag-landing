@@ -33,7 +33,8 @@
       "Bash(npx ai-elements@latest add inline-citation)",
       "Bash(pkill:*)",
       "Bash(npx ai-elements@latest add sources:*)",
-      "Bash(npx ai-elements@latest add:*)"
+      "Bash(npx ai-elements@latest add:*)",
+      "Bash(pnpm remove:*)"
     ],
     "additionalDirectories": [
       "/Users/myang/git/websyte-workers/websyte-ai-chat-widget"

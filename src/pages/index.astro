@@ -2,135 +2,170 @@
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import IntegrationCard from "@/components/IntegrationCard.astro";
 import { GITHUB_URL } from "@/lib/site-config";
-import { formatDate } from "@/lib/site-config";
 import { getCollection } from "astro:content";
 
-const [featured, guides, useCases] = await Promise.all([
+const [featured, useCases] = await Promise.all([
   getCollection("integrations", ({ data }) => data.featured),
-  getCollection("guides", ({ data }) => !data.draft),
   getCollection("use-cases"),
 ]);
 
-const latestGuides = guides
-  .sort(
-    (a, b) =>
-      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
-  )
-  .slice(0, 3);
+const pillars = [
+  {
+    icon: "⚡",
+    title: "MCP Gateway",
+    description:
+      "Managed MCP server infrastructure that connects your data sources to Claude and other AI assistants. We handle hosting, scaling, and uptime so you don't have to.",
+    tag: "Infrastructure",
+  },
+  {
+    icon: "🔧",
+    title: "Custom Integrations",
+    description:
+      "Our engineering team builds custom MCP servers for your proprietary systems — internal databases, APIs, legacy tools. White-glove setup, fully managed.",
+    tag: "Services",
+  },
+  {
+    icon: "🚀",
+    title: "SaaS Platform",
+    description:
+      "Self-serve dashboard to connect popular tools, manage access, and monitor usage. Pre-built connectors for Google Workspace, Salesforce, Databricks, and more.",
+    tag: "Platform",
+  },
+];
+
+const connectors = [
+  { name: "Google Workspace", icon: "📧" },
+  { name: "Salesforce", icon: "☁️" },
+  { name: "Databricks", icon: "📊" },
+  { name: "Slack", icon: "💬" },
+  { name: "GitHub", icon: "🐙" },
+  { name: "Google Drive", icon: "📁" },
+];
 
 const steps = [
   {
     number: "1",
-    title: "Browse",
-    description: "Find integrations for your industry and workflow",
+    title: "Connect",
+    description:
+      "Plug in your data sources through our dashboard or let our team configure custom connections",
   },
   {
     number: "2",
-    title: "Install",
-    description: "Follow our step-by-step guide — no coding required",
+    title: "Configure",
+    description:
+      "Set access controls, choose which data to expose, and define how your AI assistant interacts with it",
   },
   {
     number: "3",
-    title: "Use",
-    description: "Ask Claude to work with your connected apps",
+    title: "Deploy",
+    description:
+      "Your MCP servers go live on our managed infrastructure — use them with Claude, or any MCP-compatible AI",
   },
 ];
 ---
 
-<BaseLayout title="MCP Integration Marketplace for Claude">
+<BaseLayout title="Get Your Data AI-Ready — MCP Gateway & Integration Services">
   <!-- Hero -->
   <section class="relative overflow-hidden border-b">
-    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36">
+    <div
+      class="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent/60 to-transparent"
+    >
+    </div>
+    <div
+      class="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32 lg:py-40"
+    >
       <div class="mx-auto max-w-3xl text-center">
         <span
-          class="mb-4 inline-block rounded-full border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"
+          class="fade-in-up mb-4 inline-block rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary"
         >
-          Open Source MCP Integrations
+          MCP Gateway + Integration Services + SaaS
         </span>
-        <h1 class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-          Unlock Claude's full potential
-          <span class="block text-muted-foreground">with integrations</span>
+        <h1
+          class="fade-in-up-delay-1 font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+        >
+          Get your data
+          <span class="text-primary">AI&#8209;ready</span>
         </h1>
-        <p class="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-          Most people only use Claude for basic chat. Connect it to Slack,
-          Google Drive, Salesforce, and more — and it becomes a real work
-          assistant. No coding required.
+        <p
+          class="fade-in-up-delay-2 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
+        >
+          DataToRAG bridges the gap between your internal data and AI
+          assistants. Whether you want to self-serve or need hands-on
+          engineering help, we make your databases, APIs, and tools accessible
+          to Claude and other AI platforms through MCP.
         </p>
         <div
-          class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          class="fade-in-up-delay-3 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <a
             href="/integrations"
             class="inline-flex h-11 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Browse Integrations
+            Start Connecting
           </a>
           <a
-            href="/guides/what-is-mcp"
+            href="/contact"
             class="inline-flex h-11 items-center rounded-md border px-6 text-sm font-medium transition-colors hover:bg-accent"
           >
-            What is MCP?
+            Talk to Our Team
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- What is MCP -->
-  <section class="border-b py-16 sm:py-20">
+  <!-- Three Pillars -->
+  <section class="border-b py-16 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-          What is MCP?
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          One platform, three ways to connect
         </h2>
-        <p class="mt-4 text-muted-foreground">
-          <strong>MCP (Model Context Protocol)</strong> lets Claude connect to the
-          apps you already use. Think of it like installing apps on your phone — your
-          phone works fine without them, but they make it way more useful. MCP integrations
-          do the same for Claude.
+        <p class="mt-3 text-muted-foreground leading-relaxed">
+          From self-serve connectors to fully custom integrations, DataToRAG
+          meets you where you are.
         </p>
       </div>
-      <div class="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-3">
-        <div class="rounded-lg border bg-card p-6 text-center">
-          <div class="text-3xl">📧</div>
-          <h3 class="mt-3 font-semibold">Read your emails</h3>
-          <p class="mt-1 text-sm text-muted-foreground">
-            Claude can check your inbox and draft replies
-          </p>
-        </div>
-        <div class="rounded-lg border bg-card p-6 text-center">
-          <div class="text-3xl">📁</div>
-          <h3 class="mt-3 font-semibold">Search your docs</h3>
-          <p class="mt-1 text-sm text-muted-foreground">
-            Ask questions about files in Google Drive
-          </p>
-        </div>
-        <div class="rounded-lg border bg-card p-6 text-center">
-          <div class="text-3xl">☁️</div>
-          <h3 class="mt-3 font-semibold">Manage your CRM</h3>
-          <p class="mt-1 text-sm text-muted-foreground">
-            Query Salesforce contacts and deals by asking
-          </p>
-        </div>
+      <div class="mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-3">
+        {
+          pillars.map((pillar) => (
+            <div class="rounded-lg border bg-card p-6 transition-shadow hover:shadow-md">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">{pillar.icon}</span>
+                <span class="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                  {pillar.tag}
+                </span>
+              </div>
+              <h3 class="mt-4 font-display text-lg font-semibold">
+                {pillar.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {pillar.description}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <!-- Featured Integrations -->
-  <section class="border-b py-16 sm:py-20">
+  <!-- Pre-built Connectors -->
+  <section class="border-b bg-muted/30 py-16 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="flex items-end justify-between">
         <div>
-          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-            Popular Integrations
+          <h2
+            class="font-display text-2xl font-bold tracking-tight sm:text-3xl"
+          >
+            Pre-built connectors
           </h2>
           <p class="mt-2 text-muted-foreground">
-            Get started with the most popular MCP integrations
+            Connect popular tools in minutes — no engineering required
           </p>
         </div>
         <a
           href="/integrations"
-          class="hidden text-sm font-medium text-primary hover:underline sm:block"
+          class="hidden text-sm font-medium text-primary hover:text-primary/80 sm:block"
         >
           View all →
         </a>
@@ -152,22 +187,112 @@ const steps = [
       </div>
       <a
         href="/integrations"
-        class="mt-6 block text-center text-sm font-medium text-primary hover:underline sm:hidden"
+        class="mt-6 block text-center text-sm font-medium text-primary hover:text-primary/80 sm:hidden"
       >
-        View all integrations →
+        View all connectors →
       </a>
     </div>
   </section>
 
-  <!-- Industry Use Cases -->
-  <section class="border-b py-16 sm:py-20">
+  <!-- How It Works -->
+  <section class="border-b py-16 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-          See what's possible for your industry
+        <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          How it works
         </h2>
         <p class="mt-2 text-muted-foreground">
-          Real examples of how teams in your field use Claude with integrations
+          From data source to AI-ready in three steps
+        </p>
+      </div>
+      <div class="mx-auto mt-12 grid max-w-4xl gap-8 sm:grid-cols-3">
+        {
+          steps.map((step) => (
+            <div class="text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
+                {step.number}
+              </div>
+              <h3 class="mt-4 font-display text-lg font-semibold">
+                {step.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {step.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Integrations -->
+  <section class="border-b py-16 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-3xl rounded-lg border bg-card p-8 sm:p-12">
+        <div class="mx-auto max-w-2xl text-center">
+          <span
+            class="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+          >
+            Custom Engineering
+          </span>
+          <h2
+            class="font-display text-2xl font-bold tracking-tight sm:text-3xl"
+          >
+            Need something built for your stack?
+          </h2>
+          <p class="mt-4 text-muted-foreground leading-relaxed">
+            Our team builds custom MCP servers for proprietary databases,
+            internal APIs, and legacy systems. We handle the engineering so your
+            team can focus on using AI — not plumbing data.
+          </p>
+          <ul class="mx-auto mt-6 grid max-w-md gap-2 text-left text-sm">
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 text-primary">✓</span>
+              <span>Custom connectors for internal databases and APIs</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 text-primary">✓</span>
+              <span>SSO, RBAC, and enterprise access controls</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 text-primary">✓</span>
+              <span>Hosted on our managed infrastructure or yours</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 text-primary">✓</span>
+              <span>Ongoing maintenance and support</span>
+            </li>
+          </ul>
+          <div
+            class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          >
+            <a
+              href="/contact"
+              class="inline-flex h-10 items-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Schedule a Consultation
+            </a>
+            <a
+              href="/guides"
+              class="inline-flex h-10 items-center rounded-md border px-5 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              Read the Docs
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Use Cases -->
+  <section class="border-b py-16 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          Built for your industry
+        </h2>
+        <p class="mt-2 text-muted-foreground">
+          See how teams use DataToRAG to make their data work with AI
         </p>
       </div>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -175,9 +300,9 @@ const steps = [
           useCases.map((uc) => (
             <a
               href={`/use-cases/${uc.id}`}
-              class="group rounded-lg border bg-card p-6 transition-colors hover:border-primary/30 hover:bg-accent/50"
+              class="group rounded-lg border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-md"
             >
-              <h3 class="text-lg font-semibold group-hover:text-primary">
+              <h3 class="font-display text-lg font-semibold group-hover:text-primary">
                 {uc.data.title}
               </h3>
               <p class="mt-2 text-sm text-muted-foreground">
@@ -193,129 +318,57 @@ const steps = [
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="border-b py-16 sm:py-20">
+  <!-- Open Source -->
+  <section class="border-b bg-muted/30 py-16 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-          How it works
+        <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          Open source at the core
         </h2>
-        <p class="mt-2 text-muted-foreground">
-          Three simple steps. No coding required.
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          Every connector is open source. Fork them, contribute improvements, or
+          use them as a starting point for custom integrations. Our managed
+          platform adds hosting, monitoring, and enterprise features on top.
         </p>
-      </div>
-      <div class="mx-auto mt-10 grid max-w-3xl gap-8 sm:grid-cols-3">
-        {
-          steps.map((step) => (
-            <div class="text-center">
-              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
-                {step.number}
-              </div>
-              <h3 class="mt-4 text-lg font-semibold">{step.title}</h3>
-              <p class="mt-1 text-sm text-muted-foreground">
-                {step.description}
-              </p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- For Developers -->
-  <section class="border-b py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div
-        class="mx-auto max-w-3xl rounded-lg border bg-card p-8 text-center sm:p-12"
-      >
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-          For Developers
-        </h2>
-        <p class="mt-4 text-muted-foreground">
-          Every integration is open source. Fork them, contribute improvements,
-          or use them as templates to build your own custom MCP extensions.
-        </p>
-        <div
-          class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row"
-        >
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex h-10 items-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            View on GitHub
-          </a>
-          <a
-            href="/guides"
-            class="inline-flex h-10 items-center rounded-md border px-5 text-sm font-medium transition-colors hover:bg-accent"
-          >
-            Read the Docs
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Latest Guides -->
-  <section class="border-b py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex items-end justify-between">
-        <div>
-          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-            Latest Guides
-          </h2>
-          <p class="mt-2 text-muted-foreground">
-            Learn what's possible and how to get started
-          </p>
-        </div>
         <a
-          href="/guides"
-          class="hidden text-sm font-medium text-primary hover:underline sm:block"
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex h-10 items-center rounded-md border px-5 text-sm font-medium transition-colors hover:bg-accent"
         >
-          View all →
+          View on GitHub
         </a>
-      </div>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          latestGuides.map((guide) => (
-            <a
-              href={`/guides/${guide.id}`}
-              class="group rounded-lg border bg-card p-5 transition-colors hover:border-primary/30 hover:bg-accent/50"
-            >
-              <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                {guide.data.category}
-              </span>
-              <h3 class="mt-2 font-semibold group-hover:text-primary">
-                {guide.data.title}
-              </h3>
-              <p class="mt-1 text-sm text-muted-foreground line-clamp-2">
-                {guide.data.description}
-              </p>
-            </a>
-          ))
-        }
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="py-16 sm:py-20">
+  <section class="py-16 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-          Ready to unlock Claude's full potential?
+        <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          Ready to get your data AI&#8209;ready?
         </h2>
-        <p class="mt-4 text-muted-foreground">
-          Browse our integration marketplace and set up your first connection in
-          minutes. No coding experience needed.
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          Start with a pre-built connector or talk to our team about a custom
+          integration. Either way, you'll be up and running fast.
         </p>
-        <a
-          href="/integrations"
-          class="mt-6 inline-flex h-11 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        <div
+          class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          Browse Integrations
-        </a>
+          <a
+            href="/integrations"
+            class="inline-flex h-11 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Browse Connectors
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex h-11 items-center rounded-md border px-6 text-sm font-medium transition-colors hover:bg-accent"
+          >
+            Talk to Our Team
+          </a>
+        </div>
       </div>
     </div>
   </section>

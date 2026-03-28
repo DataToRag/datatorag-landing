@@ -29,7 +29,7 @@ const {
 <a
   href={`/integrations/${id}`}
   class:list={[
-    "group rounded-lg border bg-card transition-colors hover:border-primary/30 hover:bg-accent/50",
+    "integration-card group rounded-lg border bg-card transition-all hover:border-primary/30 hover:shadow-md",
     compact ? "p-4" : "p-5",
   ]}
   data-category={showDataAttrs ? category : undefined}
@@ -42,7 +42,9 @@ const {
       )
     }
     <div class="min-w-0">
-      <h3 class="font-semibold group-hover:text-primary">{name}</h3>
+      <h3 class="font-display font-semibold group-hover:text-primary">
+        {name}
+      </h3>
       <p
         class:list={[
           "mt-1 text-muted-foreground line-clamp-2",
